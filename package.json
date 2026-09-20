@@ -1,0 +1,36 @@
+{
+  "name": "disaster-training-monitor",
+  "version": "1.0.0",
+  "description": "Real-Time Monitoring System for Disaster Management Trainings — Academic Prototype",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "type-check": "turbo run type-check",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "db:migrate": "pnpm --filter api prisma migrate deploy",
+    "db:seed": "pnpm --filter api db:seed",
+    "db:studio": "pnpm --filter api prisma studio",
+    "db:reset": "pnpm --filter api prisma migrate reset"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.12.1"
+  }
+}

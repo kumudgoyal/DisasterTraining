@@ -1,0 +1,8 @@
+
+> api@1.0.0 dev /Users/nitinverma/Developer/DisasterManagement/services/api
+> ts-node-dev --respawn --transpile-only src/server.ts
+
+[INFO] 16:51:54 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.9.3)
+🚀 Server running in development mode
+👉 API available at http://0.0.0.0:4000/api/v1
+📡 Socket.IO server ready

@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgis/postgis:15-3.4-alpine
+    container_name: dtm_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: disaster_training_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/scripts/enable-postgis.sql:/docker-entrypoint-initdb.d/01-enable-postgis.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d disaster_training_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Optional: pgAdmin for database inspection during development
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: dtm_pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    profiles:
+      - tools  # Only starts with: docker-compose --profile tools up
+
+volumes:
+  postgres_data:
+    driver: local

@@ -1,0 +1,438 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [postgis]
+}
+
+enum Role {
+  SUPER_ADMIN
+  SDMA
+  ATI
+  NGO
+  REVIEWER
+  NDMA_VIEWER
+}
+
+enum OrgType {
+  GOVERNMENT
+  NGO
+  PRIVATE
+  ACADEMIC
+  OTHER
+}
+
+enum TrainingStatus {
+  DRAFT
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum SubmissionStatus {
+  DRAFT
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+}
+
+enum Severity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum AlertStatus {
+  OPEN
+  RESOLVED
+}
+
+enum NotificationType {
+  INFO
+  WARNING
+  ALERT
+  REPORT
+}
+
+enum ReportType {
+  SUMMARY
+  COVERAGE
+  ATTENDANCE
+  IMPACT
+}
+
+enum ReportFormat {
+  PDF
+  EXCEL
+  CSV
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+}
+
+model User {
+  id           String       @id @default(uuid()) @db.Uuid
+  name         String
+  email        String       @unique
+  passwordHash String       @map("password_hash")
+  phone        String?
+  role         Role
+  orgId        String?      @map("org_id") @db.Uuid
+  isActive     Boolean      @default(true) @map("is_active")
+  lastLogin    DateTime?    @map("last_login")
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt @map("updated_at")
+  
+  organization Organization? @relation(fields: [orgId], references: [id])
+  trainings    Training[]
+  attendance   Attendance[]
+  notifications Notification[]
+  reports      Report[]
+  auditLogs    AuditLog[]
+  resolvedAlerts Alert[]     @relation("ResolvedAlerts")
+
+  @@map("users")
+}
+
+model Organization {
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String   @unique
+  type         OrgType
+  state        String?
+  district     String?
+  contactEmail String?  @map("contact_email")
+  contactPhone String?  @map("contact_phone")
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  users        User[]
+  trainings    Training[]
+  participants Participant[]
+
+  @@map("organizations")
+}
+
+model State {
+  id           Int      @id @default(autoincrement())
+  name         String   @unique
+  code         String   @unique
+  districts    District[]
+  trainings    Training[]
+  participants Participant[]
+
+  @@map("states")
+}
+
+model District {
+  id           Int      @id @default(autoincrement())
+  name         String
+  stateId      Int      @map("state_id")
+  state        State    @relation(fields: [stateId], references: [id])
+  
+  // Stored as WKT (Well Known Text) string for Prisma, managed via raw SQL for true spatial queries
+  // Since Prisma doesn't natively support PostGIS types fully without raw SQL
+  // Alternative is Unsupported("geometry(Point, 4326)") but it causes migration issues sometimes
+  centroid     Unsupported("geometry(Point, 4326)")?
+  
+  trainings    Training[]
+  participants Participant[]
+  alerts       Alert[]
+
+  @@map("districts")
+}
+
+model TrainingType {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  isActive    Boolean  @default(true) @map("is_active")
+  trainings   Training[]
+
+  @@map("training_types")
+}
+
+model TrainingTheme {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  colorCode String?  @map("color_code")
+  isActive  Boolean  @default(true) @map("is_active")
+  trainings Training[]
+
+  @@map("training_themes")
+}
+
+model Training {
+  id               String           @id @default(uuid()) @db.Uuid
+  title            String
+  description      String?
+  typeId           Int              @map("type_id")
+  themeId          Int              @map("theme_id")
+  orgId            String           @map("org_id") @db.Uuid
+  createdBy        String           @map("created_by") @db.Uuid
+  trainerName      String?          @map("trainer_name")
+  startDate        DateTime         @map("start_date") @db.Date
+  endDate          DateTime         @map("end_date") @db.Date
+  venue            String?
+  stateId          Int              @map("state_id")
+  districtId       Int              @map("district_id")
+  address          String?
+  
+  // PostGIS location point
+  location         Unsupported("geography(Point, 4326)")?
+  
+  capacity         Int
+  status           TrainingStatus   @default(DRAFT)
+  submissionStatus SubmissionStatus @default(DRAFT) @map("submission_status")
+  objectives       String?
+  createdAt        DateTime         @default(now()) @map("created_at")
+  updatedAt        DateTime         @updatedAt @map("updated_at")
+
+  type             TrainingType     @relation(fields: [typeId], references: [id])
+  theme            TrainingTheme    @relation(fields: [themeId], references: [id])
+  organization     Organization     @relation(fields: [orgId], references: [id])
+  creator          User             @relation(fields: [createdBy], references: [id])
+  state            State            @relation(fields: [stateId], references: [id])
+  district         District         @relation(fields: [districtId], references: [id])
+  
+  participants     TrainingParticipant[]
+  attendance       Attendance[]
+  preAssessments   PreAssessment[]
+  postAssessments  PostAssessment[]
+  impactAssessment ImpactAssessment?
+  alerts           Alert[]
+
+  @@map("trainings")
+}
+
+model Participant {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String
+  email       String?
+  phone       String?
+  gender      Gender?
+  age         Int?
+  designation String?
+  orgId       String?  @map("org_id") @db.Uuid
+  stateId     Int?     @map("state_id")
+  districtId  Int?     @map("district_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  organization Organization? @relation(fields: [orgId], references: [id])
+  state        State?        @relation(fields: [stateId], references: [id])
+  district     District?     @relation(fields: [districtId], references: [id])
+  
+  trainings    TrainingParticipant[]
+  attendance   Attendance[]
+  preAssessments PreAssessment[]
+  postAssessments PostAssessment[]
+
+  @@map("participants")
+}
+
+model TrainingParticipant {
+  id           String   @id @default(uuid()) @db.Uuid
+  trainingId   String   @map("training_id") @db.Uuid
+  participantId String  @map("participant_id") @db.Uuid
+  enrolledAt   DateTime @default(now()) @map("enrolled_at")
+  notes        String?
+
+  training     Training    @relation(fields: [trainingId], references: [id])
+  participant  Participant @relation(fields: [participantId], references: [id])
+
+  @@unique([trainingId, participantId])
+  @@map("training_participants")
+}
+
+model Attendance {
+  id            String           @id @default(uuid()) @db.Uuid
+  trainingId    String           @map("training_id") @db.Uuid
+  participantId String           @map("participant_id") @db.Uuid
+  attendanceDate DateTime        @map("attendance_date") @db.Date
+  status        AttendanceStatus
+  remarks       String?
+  markedBy      String           @map("marked_by") @db.Uuid
+  markedAt      DateTime         @default(now()) @map("marked_at")
+
+  training      Training    @relation(fields: [trainingId], references: [id])
+  participant   Participant @relation(fields: [participantId], references: [id])
+  marker        User        @relation(fields: [markedBy], references: [id])
+
+  @@unique([trainingId, participantId, attendanceDate])
+  @@map("attendance")
+}
+
+model PreAssessment {
+  id                String   @id @default(uuid()) @db.Uuid
+  trainingId        String   @map("training_id") @db.Uuid
+  participantId     String   @map("participant_id") @db.Uuid
+  knowledgeScore    Float    @map("knowledge_score")
+  preparednessScore Float    @map("preparedness_score")
+  confidenceScore   Float    @map("confidence_score")
+  overallScore      Float    @map("overall_score")
+  assessedAt        DateTime @default(now()) @map("assessed_at")
+
+  training          Training    @relation(fields: [trainingId], references: [id])
+  participant       Participant @relation(fields: [participantId], references: [id])
+
+  @@unique([trainingId, participantId])
+  @@map("pre_assessments")
+}
+
+model PostAssessment {
+  id                String   @id @default(uuid()) @db.Uuid
+  trainingId        String   @map("training_id") @db.Uuid
+  participantId     String   @map("participant_id") @db.Uuid
+  knowledgeScore    Float    @map("knowledge_score")
+  preparednessScore Float    @map("preparedness_score")
+  confidenceScore   Float    @map("confidence_score")
+  overallScore      Float    @map("overall_score")
+  feedback          String?
+  assessedAt        DateTime @default(now()) @map("assessed_at")
+
+  training          Training    @relation(fields: [trainingId], references: [id])
+  participant       Participant @relation(fields: [participantId], references: [id])
+
+  @@unique([trainingId, participantId])
+  @@map("post_assessments")
+}
+
+model ImpactAssessment {
+  id                         String   @id @default(uuid()) @db.Uuid
+  trainingId                 String   @unique @map("training_id") @db.Uuid
+  avgKnowledgeImprovement    Float    @map("avg_knowledge_improvement")
+  avgPreparednessImprovement Float    @map("avg_preparedness_improvement")
+  avgConfidenceImprovement   Float    @map("avg_confidence_improvement")
+  avgOverallImprovement      Float    @map("avg_overall_improvement")
+  impactScore                Float    @map("impact_score")
+  participantsAssessed       Int      @map("participants_assessed")
+  calculatedAt               DateTime @default(now()) @map("calculated_at")
+
+  training                   Training @relation(fields: [trainingId], references: [id])
+
+  @@map("impact_assessments")
+}
+
+model AlertRule {
+  id         Int      @id @default(autoincrement())
+  name       String   @unique
+  ruleType   String   @map("rule_type")
+  conditions Json     @db.JsonB
+  severity   Severity
+  isActive   Boolean  @default(true) @map("is_active")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("alert_rules")
+}
+
+model Alert {
+  id         String      @id @default(uuid()) @db.Uuid
+  ruleId     Int         @map("rule_id")
+  severity   Severity
+  message    String
+  trainingId String?     @map("training_id") @db.Uuid
+  districtId Int?        @map("district_id")
+  status     AlertStatus @default(OPEN)
+  resolvedBy String?     @map("resolved_by") @db.Uuid
+  resolvedAt DateTime?   @map("resolved_at")
+  createdAt  DateTime    @default(now()) @map("created_at")
+
+  training   Training?   @relation(fields: [trainingId], references: [id])
+  district   District?   @relation(fields: [districtId], references: [id])
+  resolver   User?       @relation("ResolvedAlerts", fields: [resolvedBy], references: [id])
+
+  @@map("alerts")
+}
+
+model Notification {
+  id        String           @id @default(uuid()) @db.Uuid
+  userId    String           @map("user_id") @db.Uuid
+  title     String
+  message   String
+  type      NotificationType
+  refId     String?          @map("ref_id")
+  refType   String?          @map("ref_type")
+  isRead    Boolean          @default(false) @map("is_read")
+  createdAt DateTime         @default(now()) @map("created_at")
+
+  user      User             @relation(fields: [userId], references: [id])
+
+  @@map("notifications")
+}
+
+model Report {
+  id          String       @id @default(uuid()) @db.Uuid
+  title       String
+  reportType  ReportType   @map("report_type")
+  filters     Json?        @db.JsonB
+  filePath    String       @map("file_path")
+  format      ReportFormat
+  generatedBy String       @map("generated_by") @db.Uuid
+  generatedAt DateTime     @default(now()) @map("generated_at")
+
+  generator   User         @relation(fields: [generatedBy], references: [id])
+
+  @@map("reports")
+}
+
+model AuditLog {
+  id        String      @id @default(uuid()) @db.Uuid
+  userId    String?     @map("user_id") @db.Uuid
+  role      String?
+  action    AuditAction
+  module    String
+  recordId  String?     @map("record_id")
+  oldValue  Json?       @map("old_value") @db.JsonB
+  newValue  Json?       @map("new_value") @db.JsonB
+  ipAddress String?     @map("ip_address") // inet type doesn't map directly, string is fine
+  createdAt DateTime    @default(now()) @map("created_at")
+
+  user      User?       @relation(fields: [userId], references: [id])
+
+  @@map("audit_logs")
+}
+
+model ApiClient {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String
+  apiKeyHash  String   @map("api_key_hash")
+  scopes      Json     @db.JsonB
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("api_clients")
+}
+
+model ApiAccessLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  clientId   String?  @map("client_id") @db.Uuid
+  endpoint   String
+  method     String
+  statusCode Int      @map("status_code")
+  ipAddress  String?  @map("ip_address")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("api_access_logs")
+}
