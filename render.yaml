@@ -3,7 +3,7 @@ services:
     name: disaster-training-api
     env: node
     plan: free
-    buildCommand: pnpm install --no-frozen-lockfile && pnpm --filter api exec prisma generate && pnpm --filter api exec prisma migrate deploy && pnpm --filter api db:seed
+    buildCommand: pnpm install --no-frozen-lockfile && pnpm --filter api exec prisma generate && pnpm --filter api exec prisma db push --accept-data-loss && pnpm --filter api db:seed
     startCommand: pnpm --filter api start
     envVars:
       - key: NODE_ENV
