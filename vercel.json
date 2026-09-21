@@ -1,4 +1,5 @@
 {
+  "name": "disaster-training",
   "version": 2,
   "builds": [
     {
