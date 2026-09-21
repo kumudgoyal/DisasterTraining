@@ -3,7 +3,7 @@ services:
     name: disaster-training-api
     env: node
     plan: free
-    buildCommand: pnpm install && pnpm --filter api build
+    buildCommand: pnpm install && pnpm --filter api exec prisma generate && pnpm --filter api exec prisma migrate deploy && pnpm --filter api db:seed
     startCommand: pnpm --filter api start
     envVars:
       - key: NODE_ENV
