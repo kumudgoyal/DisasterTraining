@@ -191,14 +191,8 @@ async function main() {
     const state = createdStates.find(s => s.code === d.stateCode);
     if (state) {
       const dist = await prisma.district.create({
-        data: { name: d.name, stateId: state.id }
+        data: { name: d.name, stateId: state.id, latitude: d.lat, longitude: d.lng }
       });
-      // Raw SQL for spatial data
-      await prisma.$executeRawUnsafe(`
-        UPDATE districts 
-        SET centroid = ST_SetSRID(ST_MakePoint($1, $2), 4326) 
-        WHERE id = $3
-      `, d.lng, d.lat, dist.id);
       
       createdDistricts.push({ ...dist, code: d.stateCode });
     }
@@ -311,15 +305,11 @@ async function main() {
         status: t.status,
         stateId: state.id,
         districtId: district.id,
-        venue: `${t.city} Center`
+        venue: `${t.city} Center`,
+        latitude: t.lat,
+        longitude: t.lng
       }
     });
-
-    await prisma.$executeRawUnsafe(`
-      UPDATE trainings 
-      SET location = ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography 
-      WHERE id = $3::uuid
-    `, t.lng, t.lat, training.id);
     
     createdTrainings.push(training);
   }

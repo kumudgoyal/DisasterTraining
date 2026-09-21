@@ -1,5 +1,14 @@
 import { prisma } from '../config/database';
-import { GeoFilter } from './analytics.service';
+
+export interface GeoFilter {
+  stateId?: number;
+  districtId?: number;
+  orgId?: string;
+  typeId?: number;
+  startDate?: string;
+  endDate?: string;
+  status?: string;
+}
 
 export interface MapMarker {
   id: string;
@@ -13,50 +22,68 @@ export interface MapMarker {
 
 export class GisService {
   static async getTrainingMarkers(filters: GeoFilter): Promise<MapMarker[]> {
-    const conditions = ['t.location IS NOT NULL'];
-    const params: any[] = [];
+    const where: any = {
+      latitude: { not: null },
+      longitude: { not: null },
+    };
 
-    if (filters.stateId) { params.push(filters.stateId); conditions.push(`t.state_id = $${params.length}`); }
-    if (filters.districtId) { params.push(filters.districtId); conditions.push(`t.district_id = $${params.length}`); }
-    if (filters.orgId) { params.push(filters.orgId); conditions.push(`t.org_id = $${params.length}::uuid`); }
-    if (filters.typeId) { params.push(filters.typeId); conditions.push(`t.type_id = $${params.length}`); }
-    if (filters.startDate) { params.push(new Date(filters.startDate)); conditions.push(`t.start_date >= $${params.length}::date`); }
-    if (filters.endDate) { params.push(new Date(filters.endDate)); conditions.push(`t.start_date <= $${params.length}::date`); }
+    if (filters.stateId) where.stateId = filters.stateId;
+    if (filters.districtId) where.districtId = filters.districtId;
+    if (filters.orgId) where.orgId = filters.orgId;
+    if (filters.typeId) where.typeId = filters.typeId;
+    if (filters.startDate) where.startDate = { gte: new Date(filters.startDate) };
+    if (filters.endDate) where.startDate = { ...where.startDate, lte: new Date(filters.endDate) };
 
-    const whereClause = conditions.join(' AND ');
+    const trainings = await prisma.training.findMany({
+      where,
+      select: {
+        id: true,
+        title: true,
+        latitude: true,
+        longitude: true,
+        status: true,
+        typeId: true,
+        capacity: true,
+      },
+    });
 
-    const query = `
-      SELECT 
-        t.id, t.title, ST_Y(t.location::geometry) as latitude, ST_X(t.location::geometry) as longitude, 
-        t.status, t.type_id as "typeId", t.capacity
-      FROM trainings t
-      WHERE ${whereClause}
-    `;
-
-    const result: any[] = await prisma.$queryRawUnsafe(query, ...params);
-    return result;
+    return trainings
+      .filter((t: any) => t.latitude && t.longitude)
+      .map((t: any) => ({
+        id: t.id,
+        title: t.title,
+        latitude: t.latitude!,
+        longitude: t.longitude!,
+        status: t.status,
+        typeId: t.typeId,
+        capacity: t.capacity,
+      }));
   }
 
   static async getHeatmapData(filters: GeoFilter) {
-    const conditions = ['t.location IS NOT NULL'];
-    const params: any[] = [];
+    const where: any = {
+      latitude: { not: null },
+      longitude: { not: null },
+    };
 
-    if (filters.stateId) { params.push(filters.stateId); conditions.push(`t.state_id = $${params.length}`); }
-    if (filters.districtId) { params.push(filters.districtId); conditions.push(`t.district_id = $${params.length}`); }
-    if (filters.orgId) { params.push(filters.orgId); conditions.push(`t.org_id = $${params.length}::uuid`); }
-    
-    const whereClause = conditions.join(' AND ');
+    if (filters.stateId) where.stateId = filters.stateId;
+    if (filters.districtId) where.districtId = filters.districtId;
+    if (filters.orgId) where.orgId = filters.orgId;
 
-    const query = `
-      SELECT 
-        ST_Y(t.location::geometry) as latitude, 
-        ST_X(t.location::geometry) as longitude, 
-        (SELECT COUNT(*) FROM training_participants tp WHERE tp.training_id = t.id)::int as intensity
-      FROM trainings t
-      WHERE ${whereClause}
-    `;
+    const trainings = await prisma.training.findMany({
+      where,
+      select: {
+        latitude: true,
+        longitude: true,
+        _count: { select: { participants: true } },
+      },
+    });
 
-    return prisma.$queryRawUnsafe(query, ...params);
+    return trainings.map((t: any) => ({
+      latitude: t.latitude,
+      longitude: t.longitude,
+      intensity: t._count.participants,
+    }));
   }
 
   static async getCoverage(level: 'state' | 'district', filters: GeoFilter) {
@@ -68,35 +95,41 @@ export class GisService {
     const groups = await prisma.training.groupBy({
       by: [byField],
       where,
-      _count: { id: true }
+      _count: { id: true },
     });
 
     return groups.map((g: any) => ({
       id: g[byField],
-      count: g._count.id
+      count: g._count.id,
     }));
   }
 
   static async getNearbyTrainings(lat: number, lng: number, radiusKm: number, filters: GeoFilter) {
-    const radiusMeters = radiusKm * 1000;
-    const conditions = [];
-    const params: any[] = [lng, lat, radiusMeters];
+    // Simple distance calculation using Haversine approximation
+    // 1 degree of latitude ≈ 111km
+    const latDelta = radiusKm / 111;
+    const lngDelta = radiusKm / (111 * Math.cos((lat * Math.PI) / 180));
 
-    conditions.push(`ST_DWithin(t.location, ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography, $3)`);
+    const where: any = {
+      latitude: { gte: lat - latDelta, lte: lat + latDelta },
+      longitude: { gte: lng - lngDelta, lte: lng + lngDelta },
+    };
 
-    if (filters.status) { params.push(filters.status); conditions.push(`t.status = $${params.length}`); }
-    if (filters.typeId) { params.push(filters.typeId); conditions.push(`t.type_id = $${params.length}`); }
+    if (filters.status) where.status = filters.status;
+    if (filters.typeId) where.typeId = filters.typeId;
 
-    const whereClause = conditions.join(' AND ');
+    const trainings = await prisma.training.findMany({
+      where,
+      select: {
+        id: true,
+        title: true,
+        latitude: true,
+        longitude: true,
+        status: true,
+        capacity: true,
+      },
+    });
 
-    const query = `
-      SELECT 
-        t.id, t.title, ST_Y(t.location::geometry) as latitude, ST_X(t.location::geometry) as longitude, 
-        t.status, t.capacity
-      FROM trainings t
-      WHERE ${whereClause}
-    `;
-
-    return prisma.$queryRawUnsafe(query, ...params);
+    return trainings;
   }
 }

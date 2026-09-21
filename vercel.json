@@ -1,11 +1,7 @@
 {
-  "name": "disaster-training",
   "version": 2,
   "buildCommand": "pnpm --filter web build",
-  "builds": [
-    {
-      "src": "apps/web/package.json",
-      "use": "@vercel/next"
-    }
-  ]
+  "outputDirectory": "apps/web/.next",
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "framework": "nextjs"
 }

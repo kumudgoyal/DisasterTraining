@@ -156,7 +156,8 @@ model District {
   stateId      Int      @map("state_id")
   state        State    @relation(fields: [stateId], references: [id])
   
-  centroid     Unsupported("geometry(Point, 4326)")?
+  latitude     Float?
+  longitude    Float?
   
   trainings    Training[]
   participants Participant[]
@@ -217,7 +218,8 @@ model Training {
   districtId       Int              @map("district_id")
   address          String?
   
-  location         Unsupported("geography(Point, 4326)")?
+  latitude         Float?
+  longitude        Float?
   
   capacity         Int
   status           TrainingStatus   @default(DRAFT)
