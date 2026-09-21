@@ -1,4 +1,4 @@
-import prisma from '../config/database';
+import { prisma } from '../config/database';
 import { createPaginatedResponse } from '../utils/pagination';
 
 export class AuditService {

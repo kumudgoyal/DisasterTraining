@@ -1,5 +1,5 @@
-import prisma from '../config/database';
-import { AnalyticsFilters } from './analytics.service';
+import { prisma } from '../config/database';
+import { GeoFilter } from './analytics.service';
 
 export interface MapMarker {
   id: string;
@@ -12,7 +12,7 @@ export interface MapMarker {
 }
 
 export class GisService {
-  static async getTrainingMarkers(filters: AnalyticsFilters): Promise<MapMarker[]> {
+  static async getTrainingMarkers(filters: GeoFilter): Promise<MapMarker[]> {
     const conditions = ['t.location IS NOT NULL'];
     const params: any[] = [];
 
@@ -37,7 +37,7 @@ export class GisService {
     return result;
   }
 
-  static async getHeatmapData(filters: AnalyticsFilters) {
+  static async getHeatmapData(filters: GeoFilter) {
     const conditions = ['t.location IS NOT NULL'];
     const params: any[] = [];
 
@@ -59,7 +59,7 @@ export class GisService {
     return prisma.$queryRawUnsafe(query, ...params);
   }
 
-  static async getCoverage(level: 'state' | 'district', filters: AnalyticsFilters) {
+  static async getCoverage(level: 'state' | 'district', filters: GeoFilter) {
     const byField = level === 'state' ? 'stateId' : 'districtId';
     const where: any = {};
     if (filters.stateId) where.stateId = filters.stateId;
@@ -71,13 +71,13 @@ export class GisService {
       _count: { id: true }
     });
 
-    return groups.map(g => ({
+    return groups.map((g: any) => ({
       id: g[byField],
       count: g._count.id
     }));
   }
 
-  static async getNearbyTrainings(lat: number, lng: number, radiusKm: number, filters: AnalyticsFilters) {
+  static async getNearbyTrainings(lat: number, lng: number, radiusKm: number, filters: GeoFilter) {
     const radiusMeters = radiusKm * 1000;
     const conditions = [];
     const params: any[] = [lng, lat, radiusMeters];

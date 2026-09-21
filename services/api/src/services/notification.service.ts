@@ -1,4 +1,4 @@
-import prisma from '../config/database';
+import { prisma } from '../config/database';
 import { emitToUser } from '../utils/socket';
 import { createPaginatedResponse } from '../utils/pagination';
 

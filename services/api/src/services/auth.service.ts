@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import * as argon2 from 'argon2';
-import prisma from '../config/database';
+import { prisma } from '../config/database';
 import { env } from '../config/env';
 import { notFound, unauthorized, forbidden, badRequest, conflict } from '../utils/errors';
 import { createAuditLog } from '../middleware/audit';
@@ -40,13 +40,13 @@ export class AuthService {
     const accessToken = jwt.sign(
       { userId: user.id, role: user.role, orgId: user.orgId },
       env.JWT_SECRET,
-      { expiresIn: env.JWT_EXPIRES_IN }
+      { expiresIn: env.JWT_EXPIRES_IN as any }
     );
 
     const refreshToken = jwt.sign(
       { userId: user.id },
       env.JWT_REFRESH_SECRET,
-      { expiresIn: env.JWT_REFRESH_EXPIRES_IN }
+      { expiresIn: env.JWT_REFRESH_EXPIRES_IN as any }
     );
 
     const { passwordHash, ...userWithoutPassword } = user;
@@ -83,13 +83,13 @@ export class AuthService {
     const accessToken = jwt.sign(
       { userId: user.id, role: user.role, orgId: user.orgId },
       env.JWT_SECRET,
-      { expiresIn: env.JWT_EXPIRES_IN }
+      { expiresIn: env.JWT_EXPIRES_IN as any }
     );
 
     const refreshToken = jwt.sign(
       { userId: user.id },
       env.JWT_REFRESH_SECRET,
-      { expiresIn: env.JWT_REFRESH_EXPIRES_IN }
+      { expiresIn: env.JWT_REFRESH_EXPIRES_IN as any }
     );
 
     return {
@@ -111,7 +111,7 @@ export class AuthService {
       const accessToken = jwt.sign(
         { userId: user.id, role: user.role, orgId: user.orgId },
         env.JWT_SECRET,
-        { expiresIn: env.JWT_EXPIRES_IN }
+        { expiresIn: env.JWT_EXPIRES_IN as any }
       );
 
       return { accessToken };

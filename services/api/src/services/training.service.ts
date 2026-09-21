@@ -1,4 +1,4 @@
-import prisma from '../config/database';
+import { prisma } from '../config/database';
 import { notFound, badRequest } from '../utils/errors';
 import { NotificationService } from './notification.service';
 import { Prisma } from '@prisma/client';
@@ -218,10 +218,10 @@ export class TrainingService {
     });
 
     // Calculate Impact Assessment
-    const preMap = new Map(training.preAssessments.map(p => [p.participantId, p]));
-    const paired = training.postAssessments.map(post => {
+    const preMap = new Map(training.preAssessments.map((p: any) => [p.participantId, p]));
+    const paired = training.postAssessments.map((post: any) => {
       return { post, pre: preMap.get(post.participantId) };
-    }).filter(p => p.pre);
+    }).filter((p: any) => p.pre);
 
     if (paired.length > 0) {
       let knImp = 0, prImp = 0, cnImp = 0, ovImp = 0;

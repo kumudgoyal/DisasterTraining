@@ -1,4 +1,4 @@
-import prisma from '../config/database';
+import { prisma } from '../config/database';
 import fs from 'fs';
 import path from 'path';
 import PDFDocument from 'pdfkit';

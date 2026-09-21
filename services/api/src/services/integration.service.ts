@@ -1,4 +1,4 @@
-import prisma from '../config/database';
+import { prisma } from '../config/database';
 import crypto from 'crypto';
 import * as argon2 from 'argon2';
 import { notFound, badRequest } from '../utils/errors';
@@ -99,7 +99,7 @@ export class IntegrationService {
       orderBy: { createdAt: 'desc' }
     });
     
-    return keys.map(k => ({
+    return keys.map((k: any) => ({
       id: k.id,
       name: k.name,
       isActive: k.isActive,
