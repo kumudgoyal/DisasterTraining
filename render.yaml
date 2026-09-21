@@ -19,6 +19,14 @@ services:
         generateValue: true
       - key: CORS_ORIGIN
         value: "*" # Update this with Vercel URL later
+      - key: NDMA_API_URL
+        value: "" # Put your NDMA API URL here in Render Dashboard
+      - key: NDMA_API_KEY
+        value: "" # Put your NDMA API Key here in Render Dashboard
+      - key: STATE_API_URL
+        value: "" # Put your State API URL here in Render Dashboard
+      - key: STATE_API_KEY
+        value: "" # Put your State API Key here in Render Dashboard
 
 databases:
   - name: disaster-training-db
