@@ -23,5 +23,4 @@ services:
 databases:
   - name: disaster-training-db
     databaseName: disaster_training_db
-    user: postgres
     plan: free
