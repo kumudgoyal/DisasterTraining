@@ -1,36 +1,20 @@
-import type { Metadata } from "next";
-import { Inter, Inter_Tight } from "next/font/google";
-import "./globals.css";
-import { AppShell } from "@/components/layout/AppShell";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { Providers } from './providers';
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const interTight = Inter_Tight({
-  subsets: ["latin"],
-  variable: "--font-tight",
-  weight: ["500", "700"],
-  display: "swap",
-});
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "DisasterTrain Monitor — NDMA",
-  description: "Real-Time Monitoring System for Disaster Management Trainings",
+  title: 'Disaster Training Monitor',
+  description: 'Real-Time Monitoring System for Disaster Management Trainings',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${interTight.variable}`}>
+    <html lang="en">
       <body className={inter.className}>
-        <AppShell>{children}</AppShell>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

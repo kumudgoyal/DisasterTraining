@@ -1,17 +1,10 @@
 {
   "name": "@disaster/validation",
   "version": "1.0.0",
-  "private": true,
   "main": "src/index.ts",
   "types": "src/index.ts",
-  "scripts": {
-    "lint": "eslint \"src/**/*.ts*\"",
-    "type-check": "tsc --noEmit"
-  },
+  "license": "MIT",
   "dependencies": {
     "zod": "^3.22.4"
-  },
-  "devDependencies": {
-    "typescript": "^5.4.5"
   }
 }

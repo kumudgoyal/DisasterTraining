@@ -1,0 +1,40 @@
+import { Router } from 'express';
+import authRoutes from './auth';
+import userRoutes from './users';
+import organizationRoutes from './organizations';
+import trainingRoutes from './trainings';
+import participantRoutes from './participants';
+import sessionRoutes from './sessions';
+import attendanceRoutes from './attendance';
+import assessmentRoutes from './assessments';
+import analyticsRoutes from './analytics';
+import gisRoutes from './gis';
+import reportRoutes from './reports';
+import notificationRoutes from './notifications';
+import alertRoutes from './alerts';
+import auditRoutes from './audit';
+import integrationRoutes from './integrations';
+import uploadRoutes from './upload';
+import referenceRoutes from './reference';
+
+const router = Router();
+
+router.use('/auth', authRoutes);
+router.use('/users', userRoutes);
+router.use('/organizations', organizationRoutes);
+router.use('/trainings', trainingRoutes);
+router.use('/participants', participantRoutes);
+router.use('/sessions', sessionRoutes);
+router.use('/attendance', attendanceRoutes);
+router.use('/assessments', assessmentRoutes);
+router.use('/analytics', analyticsRoutes);
+router.use('/gis', gisRoutes);
+router.use('/reports', reportRoutes);
+router.use('/notifications', notificationRoutes);
+router.use('/alerts', alertRoutes);
+router.use('/audit', auditRoutes);
+router.use('/integrations', integrationRoutes);
+router.use('/upload', uploadRoutes);
+router.use('/reference', referenceRoutes);
+
+export default router;

@@ -1,16 +1,21 @@
-import React from "react";
+"use client";
+import ProtectedLayout from "@/components/layout/ProtectedLayout";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function AttendancePage() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "calc(20 * var(--u))", height: "100%", justifyContent: "center", alignItems: "center" }}>
-      <div className="glass-card" style={{ padding: "calc(40 * var(--u))", textAlign: "center", animation: "popIn .58s cubic-bezier(.16,1,.3,1) both" }}>
-        <h1 style={{ fontSize: "calc(32 * var(--u))", fontWeight: 700, color: "#fff" }}>
-          Attendance
-        </h1>
-        <p style={{ marginTop: "calc(10 * var(--u))", fontSize: "calc(14 * var(--u))", color: "rgba(255,255,255,.7)" }}>
-          This section is currently under construction.
-        </p>
+    <ProtectedLayout>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900">Attendance Management</h1>
+          <p className="text-gray-500">Track participant attendance for active sessions</p>
+        </div>
+        <Card>
+          <CardContent className="p-12 text-center text-gray-500">
+            <p>Select a training from the active trainings list to manage attendance.</p>
+          </CardContent>
+        </Card>
       </div>
-    </div>
+    </ProtectedLayout>
   );
 }

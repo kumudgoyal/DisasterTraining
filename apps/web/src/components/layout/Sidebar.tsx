@@ -1,218 +1,91 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
+import Link from "next/Link";
 import { usePathname } from "next/navigation";
-import {
-  LayoutDashboard, Map, Users, CheckSquare, Activity,
-  BarChart3, FileText, Bell, Building2, Settings, UserCog,
-  LogOut, Shield, ChevronDown, ChevronRight,
+import { useAuth } from "@/lib/auth";
+import { cn } from "@/lib/utils";
+import { 
+  LayoutDashboard, 
+  GraduationCap, 
+  Map as MapIcon, 
+  BarChart3, 
+  FileText, 
+  BellRing, 
+  AlertTriangle,
+  Building2,
+  Users,
+  ShieldCheck,
+  Settings
 } from "lucide-react";
 
-const NAV_SECTIONS = [
-  {
-    label: "Overview",
-    items: [
-      { label: "Dashboard",     href: "/",              icon: LayoutDashboard },
-      { label: "Map & GIS",     href: "/map",           icon: Map },
-    ],
-  },
-  {
-    label: "Operations",
-    items: [
-      { label: "Trainings",     href: "/trainings",     icon: CheckSquare },
-      { label: "Participants",  href: "/participants",  icon: Users },
-      { label: "Impact",        href: "/impact",        icon: Activity },
-    ],
-  },
-  {
-    label: "Analytics",
-    items: [
-      { label: "Analytics",     href: "/analytics",     icon: BarChart3 },
-      { label: "Reports",       href: "/reports",       icon: FileText },
-    ],
-  },
-  {
-    label: "System",
-    items: [
-      { label: "Alerts",        href: "/alerts",        icon: Bell },
-      { label: "Organizations", href: "/organizations", icon: Building2 },
-      { label: "Users",         href: "/users",         icon: UserCog },
-      { label: "Settings",      href: "/settings",      icon: Settings },
-    ],
-  },
-];
-
-interface SidebarProps {
-  isOpen?: boolean;
-  setIsOpen?: (v: boolean) => void;
-}
-
-export function Sidebar({ isOpen = false, setIsOpen }: SidebarProps) {
+export default function Sidebar() {
   const pathname = usePathname();
-  const close = () => setIsOpen?.(false);
+  const { user } = useAuth();
+  
+  const isAdmin = user?.role === 'ADMIN';
+  const isOrgAdmin = user?.role === 'ORGANIZATION_ADMIN' || isAdmin;
+
+  const navItems = [
+    { href: "/", label: "Dashboard", icon: <LayoutDashboard className="h-5 w-5" /> },
+    { href: "/trainings", label: "Trainings", icon: <GraduationCap className="h-5 w-5" /> },
+    { href: "/map", label: "GIS Map", icon: <MapIcon className="h-5 w-5" /> },
+    { href: "/analytics", label: "Analytics", icon: <BarChart3 className="h-5 w-5" /> },
+    { href: "/impact", label: "Impact", icon: <ShieldCheck className="h-5 w-5" /> },
+    { href: "/reports", label: "Reports", icon: <FileText className="h-5 w-5" /> },
+    { href: "/alerts", label: "Alerts", icon: <AlertTriangle className="h-5 w-5" /> },
+  ];
+
+  if (isOrgAdmin) {
+    navItems.push(
+      { href: "/organizations", label: "Organizations", icon: <Building2 className="h-5 w-5" /> },
+      { href: "/participants", label: "Participants", icon: <Users className="h-5 w-5" /> }
+    );
+  }
+
+  if (isAdmin) {
+    navItems.push(
+      { href: "/users", label: "Users & Roles", icon: <Settings className="h-5 w-5" /> }
+    );
+  }
 
   return (
-    <>
-      {isOpen && (
-        <div className="fixed inset-0 z-30 bg-black/60 md:hidden" onClick={close} />
-      )}
-
-      <aside
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          bottom: 0,
-          width: "calc(220 * var(--u))",
-          zIndex: 40,
-          display: "flex",
-          flexDirection: "column",
-          background: "rgba(6,12,24,0.88)",
-          backdropFilter: "blur(28px) saturate(150%)",
-          WebkitBackdropFilter: "blur(28px) saturate(150%)",
-          borderRight: "1px solid rgba(255,255,255,0.07)",
-          animation: "slideL .70s cubic-bezier(.16,1,.3,1) .05s both",
-        }}
-      >
-        {/* Brand */}
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "calc(10 * var(--u))",
-          padding: "calc(18 * var(--u)) calc(18 * var(--u)) calc(14 * var(--u))",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
-          flexShrink: 0,
-        }}>
-          <div style={{
-            width: "calc(30 * var(--u))",
-            height: "calc(30 * var(--u))",
-            borderRadius: "calc(8 * var(--u))",
-            background: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexShrink: 0,
-            boxShadow: "0 0 12px rgba(59,130,246,0.4)",
-          }}>
-            <Shield style={{ width: "calc(15 * var(--u))", height: "calc(15 * var(--u))", color: "#fff" }} />
-          </div>
-          <div>
-            <p style={{ fontSize: "calc(13.5 * var(--u))", fontWeight: 700, color: "#fff", lineHeight: 1.15, letterSpacing: "-0.01em" }}>NDMA Portal</p>
-            <p style={{ fontSize: "calc(10 * var(--u))", color: "rgba(255,255,255,0.38)", marginTop: "calc(1 * var(--u))", lineHeight: 1 }}>Disaster Training Monitor</p>
-          </div>
-        </div>
-
-        {/* Nav */}
-        <nav style={{ flex: 1, overflowY: "auto", padding: "calc(10 * var(--u)) calc(10 * var(--u))" }} className="glass-rail">
-          {NAV_SECTIONS.map((section, sIdx) => (
-            <div key={section.label} style={{ marginBottom: "calc(18 * var(--u))" }}>
-              <p style={{
-                fontSize: "calc(10 * var(--u))",
-                fontWeight: 600,
-                letterSpacing: "0.09em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.28)",
-                padding: "0 calc(8 * var(--u)) calc(5 * var(--u))",
-                userSelect: "none",
-              }}>
-                {section.label}
-              </p>
-              {section.items.map((item) => {
-                const isActive = pathname === item.href;
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={close}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "calc(9 * var(--u))",
-                      padding: "calc(7.5 * var(--u)) calc(9 * var(--u))",
-                      borderRadius: "calc(7 * var(--u))",
-                      background: isActive ? "rgba(59,130,246,0.12)" : "transparent",
-                      border: isActive ? "1px solid rgba(59,130,246,0.22)" : "1px solid transparent",
-                      color: isActive ? "#fff" : "rgba(255,255,255,0.5)",
-                      textDecoration: "none",
-                      transition: "all 0.14s",
-                      marginBottom: "calc(1 * var(--u))",
-                      fontSize: "calc(13 * var(--u))",
-                      fontWeight: isActive ? 500 : 400,
-                      lineHeight: 1,
-                    }}
-                    onMouseEnter={e => {
-                      if (!isActive) {
-                        const el = e.currentTarget as HTMLAnchorElement;
-                        el.style.background = "rgba(255,255,255,0.05)";
-                        el.style.color = "rgba(255,255,255,0.80)";
-                      }
-                    }}
-                    onMouseLeave={e => {
-                      if (!isActive) {
-                        const el = e.currentTarget as HTMLAnchorElement;
-                        el.style.background = "transparent";
-                        el.style.color = "rgba(255,255,255,0.5)";
-                      }
-                    }}
-                  >
-                    <Icon style={{ width: "calc(14 * var(--u))", height: "calc(14 * var(--u))", flexShrink: 0 }} />
-                    <span style={{ flex: 1 }}>{item.label}</span>
-                    {isActive && (
-                      <span style={{
-                        width: "calc(6 * var(--u))",
-                        height: "calc(6 * var(--u))",
-                        borderRadius: "50%",
-                        background: "#3b82f6",
-                        boxShadow: "0 0 6px #3b82f6",
-                        flexShrink: 0,
-                      }} />
-                    )}
-                  </Link>
-                );
-              })}
-            </div>
-          ))}
+    <aside className="hidden w-64 flex-col border-r bg-[#0f172a] text-slate-300 md:flex">
+      <div className="flex h-16 items-center px-6 border-b border-slate-800 bg-[#0a0f1d]">
+        <ShieldCheck className="h-6 w-6 text-blue-400 mr-2" />
+        <span className="text-lg font-bold text-white tracking-wide">DTM System</span>
+      </div>
+      
+      <div className="flex-1 overflow-y-auto py-4">
+        <nav className="space-y-1 px-3">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  isActive 
+                    ? "bg-blue-600/10 text-blue-400" 
+                    : "hover:bg-slate-800 hover:text-white"
+                )}
+              >
+                <span className="mr-3">{item.icon}</span>
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
-
-        {/* User footer */}
-        <div style={{
-          padding: "calc(10 * var(--u)) calc(10 * var(--u))",
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-          flexShrink: 0,
-        }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "calc(9 * var(--u))",
-              padding: "calc(8 * var(--u)) calc(9 * var(--u))",
-              borderRadius: "calc(7 * var(--u))",
-              cursor: "pointer",
-              transition: "background 0.14s",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.05)")}
-            onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-          >
-            <div style={{
-              width: "calc(28 * var(--u))",
-              height: "calc(28 * var(--u))",
-              borderRadius: "50%",
-              background: "rgba(99,102,241,0.65)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              flexShrink: 0,
-            }}>
-              <span style={{ fontSize: "calc(10 * var(--u))", fontWeight: 700, color: "#fff" }}>SA</span>
-            </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <p style={{ fontSize: "calc(12 * var(--u))", fontWeight: 600, color: "#fff", lineHeight: 1.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>Super Admin</p>
-              <p style={{ fontSize: "calc(10 * var(--u))", color: "rgba(255,255,255,0.35)", lineHeight: 1.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>admin@ndma.gov.in</p>
-            </div>
-            <LogOut style={{ width: "calc(13 * var(--u))", height: "calc(13 * var(--u))", color: "rgba(255,255,255,0.3)", flexShrink: 0 }} />
+      </div>
+      
+      <div className="p-4 border-t border-slate-800 bg-[#0a0f1d]">
+        <div className="flex items-center">
+          <div className="ml-3">
+            <p className="text-sm font-medium text-white">{user?.name || 'User'}</p>
+            <p className="text-xs text-slate-400 truncate w-40">{user?.role?.replace('_', ' ') || 'Guest'}</p>
           </div>
         </div>
-      </aside>
-    </>
+      </div>
+    </aside>
   );
 }

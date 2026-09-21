@@ -8,3 +8,11 @@ build/
 .turbo/
 coverage/
 .DS_Store
+Thumbs.db
+desktop.ini
+*.log
+pnpm-debug.log*
+uploads/
+storage/
+.vscode/
+.idea/
