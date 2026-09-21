@@ -21,7 +21,7 @@ export const changePasswordSchema = z.object({
 });
 
 // Training schemas
-export const createTrainingSchema = z.object({
+const baseTrainingSchema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters').max(200),
   description: z.string().max(2000).optional().or(z.literal('')),
   typeId: z.coerce.number().int().positive('Training type is required'),
@@ -38,9 +38,11 @@ export const createTrainingSchema = z.object({
   longitude: z.coerce.number().min(-180).max(180).optional(),
   capacity: z.coerce.number().int().positive('Capacity must be positive'),
   objectives: z.string().max(2000).optional().or(z.literal('')),
-}).refine(data => new Date(data.endDate) >= new Date(data.startDate), { message: 'End date must be after start date', path: ['endDate'] });
+});
 
-export const updateTrainingSchema = createTrainingSchema.partial();
+export const createTrainingSchema = baseTrainingSchema.refine(data => new Date(data.endDate) >= new Date(data.startDate), { message: 'End date must be after start date', path: ['endDate'] });
+
+export const updateTrainingSchema = baseTrainingSchema.partial();
 
 // Participant schemas
 export const createParticipantSchema = z.object({
