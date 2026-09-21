@@ -2,7 +2,7 @@
 
 import ProtectedLayout from "@/components/layout/ProtectedLayout";
 import { useState } from "react";
-import { useGISMarkers } from "@/hooks/use-gis";
+import { useTrainingMarkers } from "@/hooks/use-gis";
 import dynamic from "next/dynamic";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -15,7 +15,7 @@ const MapComponent = dynamic(
 
 export default function MapPage() {
   const [filters, setFilters] = useState({});
-  const { data, isLoading } = useGISMarkers(filters);
+  const { data, isLoading } = useTrainingMarkers(filters);
 
   return (
     <ProtectedLayout>

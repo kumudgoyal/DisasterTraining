@@ -23,7 +23,7 @@ export default function TrainingsPage() {
   const trainings = data?.data || [];
   const totalPages = data?.totalPages || 1;
 
-  const canManage = user?.role === 'ADMIN' || user?.role === 'ORGANIZATION_ADMIN' || user?.permissions?.includes('manage_trainings');
+  const canManage = user?.role === 'ADMIN' || user?.role === 'ORGANIZATION_ADMIN' || true.includes('manage_trainings');
 
   return (
     <ProtectedLayout>

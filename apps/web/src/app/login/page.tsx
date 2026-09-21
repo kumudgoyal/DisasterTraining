@@ -34,7 +34,7 @@ export default function LoginPage() {
   const onSubmit = async (values: z.infer<typeof loginSchema>) => {
     try {
       setError("");
-      await login(values.email, values.password);
+      await login({ email: values.email, password: values.password });
       router.push("/");
     } catch (err: any) {
       setError(err.message || "Invalid credentials. Please try again.");

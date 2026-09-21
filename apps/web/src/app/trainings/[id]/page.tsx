@@ -52,7 +52,7 @@ export default function TrainingDetailPage() {
                 {training.status}
               </Badge>
             </div>
-            <p className="text-gray-500 mt-1">{training.organization?.name} • {training.district}, {training.state}</p>
+            <p className="text-gray-500 mt-1">{training.organizationName.name} • {training.districtName}, {training.stateName}</p>
           </div>
           <div className="flex gap-2">
             <Button variant="outline" onClick={() => router.push('/trainings')}>Back</Button>

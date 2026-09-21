@@ -33,7 +33,7 @@ const schema = z.object({
 export default function NewTrainingPage() {
   const router = useRouter();
   const [error, setError] = useState("");
-  const { createTraining } = useTrainings();
+  const { mutateAsync: createTraining } = useCreateTraining();
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
