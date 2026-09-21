@@ -9,7 +9,7 @@
     "lint": "eslint \"src/**/*.ts\"",
     "type-check": "tsc --noEmit",
     "db:migrate": "prisma migrate dev",
-    "db:seed": "ts-node database/seed/index.ts",
+    "db:seed": "ts-node --transpile-only database/seed/index.ts",
     "db:studio": "prisma studio"
   },
   "dependencies": {
