@@ -32,7 +32,7 @@
     "socket.io": "^4.7.5",
     "prisma": "^5.12.1",
     "ts-node": "^10.9.2",
-    "typescript": "^7.0.2",
+    "typescript": "^5.4.5",
     "winston": "^3.13.0",
     "zod": "^3.22.4"
   },
