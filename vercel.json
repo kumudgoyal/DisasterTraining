@@ -1,6 +1,7 @@
 {
   "name": "disaster-training",
   "version": 2,
+  "buildCommand": "pnpm --filter web build",
   "builds": [
     {
       "src": "apps/web/package.json",
