@@ -9,7 +9,7 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useTrainings } from "@/hooks/use-trainings";
+import { useTrainings, useCreateTraining } from "@/hooks/use-trainings";
 
 const schema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters"),
