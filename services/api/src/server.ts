@@ -4,7 +4,7 @@ import { env } from './config/env';
 import { connectDatabase, disconnectDatabase } from './config/database';
 import { initializeSocket } from './utils/socket';
 import { logger } from './utils/logger';
-import * as alertService from './services/alert.service';
+import { AlertService } from './services/alert.service';
 import cron from 'node-cron';
 
 async function main() {
@@ -22,7 +22,7 @@ async function main() {
   cron.schedule('*/15 * * * *', async () => {
     logger.info('Running scheduled alert check...');
     try {
-      await alertService.checkAndCreateAlerts();
+      await AlertService.checkAndCreateAlerts();
       logger.info('Alert check completed');
     } catch (error) {
       logger.error('Alert check failed', { error: (error as Error).message });
