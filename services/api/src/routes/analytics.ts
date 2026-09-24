@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import * as analyticsService from '../services/analytics.service';
+import { AnalyticsService } from '../services/analytics.service';
 import { authenticate } from '../middleware/auth';
 
 const router = Router();
@@ -10,32 +10,32 @@ const asyncHandler = (fn: (req: Request, res: Response, next: NextFunction) => P
 router.use(authenticate);
 
 router.get('/dashboard', asyncHandler(async (req: Request, res: Response) => {
-  const stats = await analyticsService.getDashboardStats(req.query);
+  const stats = await AnalyticsService.getDashboardStats(req.query);
   res.json(stats);
 }));
 
 router.get('/trends', asyncHandler(async (req: Request, res: Response) => {
-  const trends = await analyticsService.getTrainingTrends(req.query);
+  const trends = await AnalyticsService.getTrainingTrends(req.query);
   res.json(trends);
 }));
 
 router.get('/categories', asyncHandler(async (req: Request, res: Response) => {
-  const categories = await analyticsService.getCategoryDistribution(req.query);
+  const categories = await AnalyticsService.getCategoryDistribution(req.query);
   res.json(categories);
 }));
 
 router.get('/coverage/states', asyncHandler(async (req: Request, res: Response) => {
-  const coverage = await analyticsService.getStateCoverage(req.query);
+  const coverage = await AnalyticsService.getStateCoverage(req.query);
   res.json(coverage);
 }));
 
 router.get('/coverage/districts', asyncHandler(async (req: Request, res: Response) => {
-  const coverage = await analyticsService.getDistrictCoverage(req.query);
+  const coverage = await AnalyticsService.getDistrictCoverage(req.query);
   res.json(coverage);
 }));
 
 router.get('/impact', asyncHandler(async (req: Request, res: Response) => {
-  const impact = await analyticsService.getImpactMetrics(req.query);
+  const impact = await AnalyticsService.getImpactMetrics(req.query);
   res.json(impact);
 }));
 
