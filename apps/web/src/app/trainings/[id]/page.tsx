@@ -4,10 +4,27 @@ import ProtectedLayout from "@/components/layout/ProtectedLayout";
 import { useParams, useRouter } from "next/navigation";
 import { useTraining } from "@/hooks/use-trainings";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { format } from "date-fns";
 import { useState } from "react";
+
+const mockParticipants = [
+  { id: 1, name: "Rahul Sharma", role: "First Responder", organization: "SDRF", email: "rahul.s@example.com", status: "Enrolled" },
+  { id: 2, name: "Priya Patel", role: "Medical Staff", organization: "Red Cross", email: "priya.p@example.com", status: "Completed" },
+  { id: 3, name: "Amit Kumar", role: "Volunteer", organization: "Civil Defense", email: "amit.k@example.com", status: "Enrolled" },
+  { id: 4, name: "Sneha Desai", role: "Coordinator", organization: "NDMA", email: "sneha.d@example.com", status: "Enrolled" },
+  { id: 5, name: "Vikram Singh", role: "Logistics Officer", organization: "SDRF", email: "vikram.s@example.com", status: "Pending" },
+];
+
+const mockAttendance = mockParticipants.map(p => ({
+  id: p.id,
+  participantName: p.name,
+  role: p.role,
+  status: p.id % 4 === 0 ? "Absent" : "Present"
+}));
 
 export default function TrainingDetailPage() {
   const params = useParams();
@@ -35,7 +52,7 @@ export default function TrainingDetailPage() {
     );
   }
 
-  const tabs = ["overview", "participants", "sessions", "attendance", "assessments", "materials", "feedback"];
+  const tabs = ["overview", "participants", "attendance", "assessment", "impact", "documents", "activity"];
 
   return (
     <ProtectedLayout>
@@ -52,7 +69,7 @@ export default function TrainingDetailPage() {
                 {training.status}
               </Badge>
             </div>
-            <p className="text-gray-500 mt-1">{training.organizationName.name} • {training.districtName}, {training.stateName}</p>
+            <p className="text-gray-500 mt-1">{training.organizationName?.name || 'Unknown Organization'} • {training.districtName}, {training.stateName}</p>
           </div>
           <div className="flex gap-2">
             <Button variant="outline" onClick={() => router.push('/trainings')}>Back</Button>
@@ -129,13 +146,189 @@ export default function TrainingDetailPage() {
           </div>
         )}
 
-        {activeTab !== 'overview' && (
+        {activeTab === 'participants' && (
           <Card>
-            <CardContent className="p-12 text-center text-gray-500">
-              <p className="capitalize">{activeTab} management coming soon.</p>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <div>
+                <CardTitle>Participants</CardTitle>
+                <CardDescription>Manage and view training participants.</CardDescription>
+              </div>
+              <Button>Add Participant</Button>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Role</TableHead>
+                    <TableHead>Organization</TableHead>
+                    <TableHead>Email</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {mockParticipants.map((p) => (
+                    <TableRow key={p.id}>
+                      <TableCell className="font-medium">{p.name}</TableCell>
+                      <TableCell>{p.role}</TableCell>
+                      <TableCell>{p.organization}</TableCell>
+                      <TableCell>{p.email}</TableCell>
+                      <TableCell>
+                        <Badge variant={p.status === "Completed" ? "default" : p.status === "Enrolled" ? "secondary" : "outline"}>
+                          {p.status}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="ghost" size="sm">Edit</Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </CardContent>
           </Card>
         )}
+
+        {activeTab === 'attendance' && (
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-gray-500">Overall Attendance</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">42/50 Present</div>
+                  <p className="text-xs text-gray-500 mt-1">84% attendance rate</p>
+                  <Progress value={84} className="mt-3 h-2" />
+                </CardContent>
+              </Card>
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle>Mark Attendance</CardTitle>
+                <CardDescription>Date: {format(new Date(), 'MMM d, yyyy')}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Participant</TableHead>
+                      <TableHead>Role</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead className="text-right">Action</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {mockAttendance.map((a) => (
+                      <TableRow key={a.id}>
+                        <TableCell className="font-medium">{a.participantName}</TableCell>
+                        <TableCell>{a.role}</TableCell>
+                        <TableCell>
+                          <Badge variant={a.status === "Present" ? "default" : "destructive"}>
+                            {a.status}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <Button variant="outline" size="sm" className="mr-2">Mark Present</Button>
+                          <Button variant="outline" size="sm">Mark Absent</Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {activeTab === 'assessment' && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Pre-training Assessment</CardTitle>
+                <CardDescription>Average scores before the training</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-4xl font-bold text-gray-700">52%</div>
+                <Progress value={52} className="mt-4 h-3" />
+                <p className="mt-4 text-sm text-gray-500">Based on 45 participants</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle>Post-training Assessment</CardTitle>
+                <CardDescription>Average scores after the training</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-4xl font-bold text-green-600">81%</div>
+                <Progress value={81} className="mt-4 h-3 [&>div]:bg-green-600" />
+                <p className="mt-4 text-sm text-green-600 font-medium">Improvement: +29 points</p>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {activeTab === 'impact' && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Training Impact</CardTitle>
+              <CardDescription>Long term assessment of knowledge retention</CardDescription>
+            </CardHeader>
+            <CardContent className="h-64 flex items-center justify-center text-gray-500">
+              <div className="text-center">
+                <p>Impact assessment data will be available 3 months post-training.</p>
+                <Button variant="outline" className="mt-4">Schedule Impact Survey</Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {activeTab === 'documents' && (
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <div>
+                <CardTitle>Training Documents</CardTitle>
+                <CardDescription>Materials, presentations, and resources.</CardDescription>
+              </div>
+              <Button variant="outline">Upload Document</Button>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center py-8 text-gray-500">
+                No documents have been uploaded yet.
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {activeTab === 'activity' && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Activity Log</CardTitle>
+              <CardDescription>Recent actions and changes to this training.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex gap-4 items-start">
+                  <div className="w-2 h-2 mt-2 rounded-full bg-blue-500" />
+                  <div>
+                    <p className="text-sm font-medium">Training scheduled</p>
+                    <p className="text-xs text-gray-500">Oct 24, 2026 by Admin</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-start">
+                  <div className="w-2 h-2 mt-2 rounded-full bg-blue-500" />
+                  <div>
+                    <p className="text-sm font-medium">5 participants added</p>
+                    <p className="text-xs text-gray-500">Oct 25, 2026 by Coordinator</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
       </div>
     </ProtectedLayout>
   );
