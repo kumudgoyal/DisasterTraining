@@ -105,10 +105,14 @@ export default function LoginPage() {
           <div className="mt-8 pt-6 border-t border-slate-100">
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Demo Credentials</p>
             <div className="grid grid-cols-2 gap-2 text-xs text-slate-600 bg-slate-50 p-3 rounded-md">
-              <div><span className="font-medium text-slate-900">Admin:</span> admin@ndma.gov.in</div>
-              <div><span className="font-medium text-slate-900">Pass:</span> admin123</div>
-              <div><span className="font-medium text-slate-900">Org:</span> org@ndrf.gov.in</div>
-              <div><span className="font-medium text-slate-900">Pass:</span> org123</div>
+              <div><span className="font-medium text-slate-900">Admin:</span> admin@disastermonitor.gov.in</div>
+              <div><span className="font-medium text-slate-900">Pass:</span> Admin@123</div>
+              <div><span className="font-medium text-slate-900">SDMA:</span> sdma@disastermonitor.gov.in</div>
+              <div><span className="font-medium text-slate-900">Pass:</span> SDMA@123</div>
+              <div><span className="font-medium text-slate-900">NGO:</span> ngo@disastermonitor.gov.in</div>
+              <div><span className="font-medium text-slate-900">Pass:</span> NGO@123</div>
+              <div><span className="font-medium text-slate-900">Field:</span> field@disastermonitor.gov.in</div>
+              <div><span className="font-medium text-slate-900">Pass:</span> Field@123</div>
             </div>
           </div>
         </CardContent>
