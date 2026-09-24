@@ -3,13 +3,14 @@
 import ProtectedLayout from "@/components/layout/ProtectedLayout";
 import { useAuth } from "@/lib/auth";
 import { Bell, LogOut, User, Settings } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useNotifications } from "@/hooks/use-notifications";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 export default function Topbar() {
   const { user, logout } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
   const { data } = useNotifications();
   
   const unreadCount = data?.data?.filter((n: any) => !n.read)?.length || 0;
@@ -25,6 +26,10 @@ export default function Topbar() {
         <span className="text-lg font-bold text-blue-900">DTM</span>
       </div>
       
+      <div className="hidden md:flex items-center text-sm text-gray-500">
+        <span className="capitalize">{pathname === '/' ? 'Home' : pathname.split('/').filter(Boolean).join(' / ').replace(/-/g, ' ')}</span>
+      </div>
+
       <div className="flex flex-1 items-center justify-end space-x-4">
         <button 
           onClick={() => router.push('/notifications')}

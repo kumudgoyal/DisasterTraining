@@ -27,7 +27,7 @@ export default function LoginPage() {
   });
 
   if (isAuthenticated) {
-    router.push("/");
+    router.push("/dashboard");
     return null;
   }
 
@@ -35,7 +35,7 @@ export default function LoginPage() {
     try {
       setError("");
       await login({ email: values.email, password: values.password });
-      router.push("/");
+      router.push("/dashboard");
     } catch (err: any) {
       setError(err.message || "Invalid credentials. Please try again.");
     }
@@ -101,6 +101,16 @@ export default function LoginPage() {
               {form.formState.isSubmitting ? "Authenticating..." : "Secure Login"}
             </Button>
           </form>
+          
+          <div className="mt-8 pt-6 border-t border-slate-100">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Demo Credentials</p>
+            <div className="grid grid-cols-2 gap-2 text-xs text-slate-600 bg-slate-50 p-3 rounded-md">
+              <div><span className="font-medium text-slate-900">Admin:</span> admin@ndma.gov.in</div>
+              <div><span className="font-medium text-slate-900">Pass:</span> admin123</div>
+              <div><span className="font-medium text-slate-900">Org:</span> org@ndrf.gov.in</div>
+              <div><span className="font-medium text-slate-900">Pass:</span> org123</div>
+            </div>
+          </div>
         </CardContent>
       </Card>
     </div>

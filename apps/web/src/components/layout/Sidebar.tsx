@@ -26,27 +26,21 @@ export default function Sidebar() {
   const isOrgAdmin = user?.role === 'ORGANIZATION_ADMIN' || isAdmin;
 
   const navItems = [
-    { href: "/", label: "Dashboard", icon: <LayoutDashboard className="h-5 w-5" /> },
+    { href: "/dashboard", label: "Dashboard", icon: <LayoutDashboard className="h-5 w-5" /> },
+    { href: "/map", label: "Live Monitoring (Map)", icon: <MapIcon className="h-5 w-5" /> },
     { href: "/trainings", label: "Trainings", icon: <GraduationCap className="h-5 w-5" /> },
-    { href: "/map", label: "GIS Map", icon: <MapIcon className="h-5 w-5" /> },
+    { href: "/participants", label: "Participants", icon: <Users className="h-5 w-5" /> },
+    { href: "/attendance", label: "Attendance", icon: <Users className="h-5 w-5" /> }, // could use UserCheck
+    { href: "/impact", label: "Impact Assessment", icon: <ShieldCheck className="h-5 w-5" /> },
+    { href: "/map-gis", label: "GIS Map", icon: <MapIcon className="h-5 w-5" /> },
     { href: "/analytics", label: "Analytics", icon: <BarChart3 className="h-5 w-5" /> },
-    { href: "/impact", label: "Impact", icon: <ShieldCheck className="h-5 w-5" /> },
     { href: "/reports", label: "Reports", icon: <FileText className="h-5 w-5" /> },
-    { href: "/alerts", label: "Alerts", icon: <AlertTriangle className="h-5 w-5" /> },
+    { href: "/users", label: "Users", icon: <Users className="h-5 w-5" /> },
+    { href: "/organizations", label: "Organizations", icon: <Building2 className="h-5 w-5" /> },
+    { href: "/notifications", label: "Notifications", icon: <BellRing className="h-5 w-5" /> },
+    { href: "/audit-logs", label: "Audit Logs", icon: <FileText className="h-5 w-5" /> },
+    { href: "/settings", label: "Settings", icon: <Settings className="h-5 w-5" /> },
   ];
-
-  if (isOrgAdmin) {
-    navItems.push(
-      { href: "/organizations", label: "Organizations", icon: <Building2 className="h-5 w-5" /> },
-      { href: "/participants", label: "Participants", icon: <Users className="h-5 w-5" /> }
-    );
-  }
-
-  if (isAdmin) {
-    navItems.push(
-      { href: "/users", label: "Users & Roles", icon: <Settings className="h-5 w-5" /> }
-    );
-  }
 
   return (
     <aside className="hidden w-64 flex-col border-r bg-[#0f172a] text-slate-300 md:flex">
