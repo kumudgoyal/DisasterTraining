@@ -219,15 +219,13 @@ async function main() {
 
   console.log('8. Creating Users...');
   const users = [
-    { name: 'Admin', email: 'admin@disaster-training.gov.in', role: Role.SUPER_ADMIN, orgId: findOrg('[SEED] NDMA Headquarters')?.id },
-    { name: 'NDMA Admin', email: 'ndma@disaster-training.gov.in', role: Role.NDMA_ADMIN, orgId: findOrg('[SEED] NDMA Headquarters')?.id },
-    { name: 'SDMA User', email: 'sdma.mh@gov.in', role: Role.SDMA, orgId: findOrg('[SEED] Maharashtra SDMA')?.id },
-    { name: 'ATI User', email: 'ati@gov.in', role: Role.ATI, orgId: findOrg('[SEED] National Institute of Disaster Management')?.id },
-    { name: 'NGO User', email: 'ngo@redcross.in', role: Role.NGO, orgId: findOrg('[SEED] Red Cross India')?.id },
-    { name: 'Trainer', email: 'trainer@disaster-training.gov.in', role: Role.TRAINER, orgId: findOrg('[SEED] NDMA Headquarters')?.id },
-    { name: 'Reviewer', email: 'reviewer@disaster-training.gov.in', role: Role.REVIEWER, orgId: findOrg('[SEED] NDMA Headquarters')?.id },
-    { name: 'Data Entry', email: 'dataentry@disaster-training.gov.in', role: Role.DATA_ENTRY_OPERATOR, orgId: findOrg('[SEED] NDMA Headquarters')?.id },
-    { name: 'Viewer', email: 'viewer@disaster-training.gov.in', role: Role.NDMA_VIEWER, orgId: findOrg('[SEED] NDMA Headquarters')?.id }
+    { name: 'Admin', email: 'admin@disastermonitor.gov.in', password: 'Admin@123', role: Role.SUPER_ADMIN, orgId: findOrg('[SEED] NDMA Headquarters')?.id },
+    { name: 'SDMA Officer', email: 'sdma@disastermonitor.gov.in', password: 'SDMA@123', role: Role.SDMA, orgId: findOrg('[SEED] Maharashtra SDMA')?.id },
+    { name: 'NGO User', email: 'ngo@disastermonitor.gov.in', password: 'NGO@123', role: Role.NGO, orgId: findOrg('[SEED] Red Cross India')?.id },
+    { name: 'Field Officer', email: 'field@disastermonitor.gov.in', password: 'Field@123', role: Role.DATA_ENTRY_OPERATOR, orgId: findOrg('[SEED] NDMA Headquarters')?.id },
+    // Keep some internal users for seed relations
+    { name: 'Trainer', email: 'trainer@disaster-training.gov.in', password: 'Password123!', role: Role.TRAINER, orgId: findOrg('[SEED] NDMA Headquarters')?.id },
+    { name: 'Reviewer', email: 'reviewer@disaster-training.gov.in', password: 'Password123!', role: Role.REVIEWER, orgId: findOrg('[SEED] NDMA Headquarters')?.id }
   ];
 
   const createdUsers = [];
@@ -236,7 +234,7 @@ async function main() {
       data: {
         name: u.name,
         email: u.email,
-        passwordHash,
+        passwordHash: await argon2.hash(u.password),
         role: u.role,
         ...(u.orgId && { orgId: u.orgId })
       }
