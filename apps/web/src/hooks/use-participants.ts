@@ -6,7 +6,7 @@ export function useParticipants(trainingId: string) {
     queryKey: ['participants', trainingId],
     queryFn: async () => {
       const { data } = await api.get(`/participants/training/${trainingId}`);
-      return data.data; // Assuming paginated response format
+      return data.data || data; // Assuming paginated response format
     },
     enabled: !!trainingId,
   });
@@ -30,7 +30,7 @@ export function useAttendance(trainingId: string) {
     queryKey: ['attendance', trainingId],
     queryFn: async () => {
       const { data } = await api.get(`/attendance/training/${trainingId}`);
-      return data.data; 
+      return data.data || data; 
     },
     enabled: !!trainingId,
   });
@@ -56,7 +56,7 @@ export function useAssessments(trainingId: string) {
     queryKey: ['assessments', trainingId],
     queryFn: async () => {
       const { data } = await api.get(`/assessments/training/${trainingId}/summary`);
-      return data.data;
+      return data.data || data;
     },
     enabled: !!trainingId,
   });

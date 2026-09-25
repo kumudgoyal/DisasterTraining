@@ -8,7 +8,7 @@ export function useTrainingMarkers(filters?: GeoFilter) {
     queryKey: ['map-markers', filters],
     queryFn: async () => {
       const { data } = await api.get('/gis/trainings', { params: filters });
-      return data.data as MapMarker[];
+      return data.data || data;
     },
   });
 }
@@ -18,7 +18,7 @@ export function useHeatmapData(filters?: GeoFilter) {
     queryKey: ['heatmap', filters],
     queryFn: async () => {
       const { data } = await api.get('/gis/heatmap', { params: filters });
-      return data.data as HeatmapPoint[];
+      return data.data || data;
     },
   });
 }
@@ -28,7 +28,7 @@ export function useGisCoverage(level: 'state' | 'district', filters?: GeoFilter)
     queryKey: ['gis-coverage', level, filters],
     queryFn: async () => {
       const { data } = await api.get('/gis/coverage', { params: { level, ...filters } });
-      return data.data;
+      return data.data || data;
     },
   });
 }
@@ -38,7 +38,7 @@ export function useNearbyTrainings(params?: NearbyQuery & GeoFilter) {
     queryKey: ['nearby-trainings', params],
     queryFn: async () => {
       const { data } = await api.get('/gis/nearby', { params });
-      return data.data as MapMarker[];
+      return data.data || data;
     },
     enabled: !!(params?.latitude && params?.longitude),
   });

@@ -18,7 +18,7 @@ export function useTraining(id: string) {
     queryKey: ['training', id],
     queryFn: async () => {
       const { data } = await api.get(`/trainings/${id}`);
-      return data.data as TrainingDetail;
+      return data.data || data;
     },
     enabled: !!id,
   });
@@ -29,7 +29,7 @@ export function useCreateTraining() {
   return useMutation({
     mutationFn: async (body: CreateTrainingRequest) => {
       const { data } = await api.post('/trainings', body);
-      return data.data;
+      return data.data || data;
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ['trainings'] }),
   });
@@ -40,7 +40,7 @@ export function useUpdateTraining() {
   return useMutation({
     mutationFn: async ({ id, ...body }: CreateTrainingRequest & { id: string }) => {
       const { data } = await api.put(`/trainings/${id}`, body);
-      return data.data;
+      return data.data || data;
     },
     onSuccess: (_, vars) => {
       qc.invalidateQueries({ queryKey: ['trainings'] });
@@ -54,7 +54,7 @@ export function useSubmitTraining() {
   return useMutation({
     mutationFn: async (id: string) => {
       const { data } = await api.post(`/trainings/${id}/submit`);
-      return data.data;
+      return data.data || data;
     },
     onSuccess: (_, id) => {
       qc.invalidateQueries({ queryKey: ['trainings'] });
@@ -68,7 +68,7 @@ export function useReviewTraining() {
   return useMutation({
     mutationFn: async ({ id, action, comments }: { id: string; action: 'approve' | 'reject'; comments?: string }) => {
       const { data } = await api.post(`/trainings/${id}/review`, { action, comments });
-      return data.data;
+      return data.data || data;
     },
     onSuccess: (_, vars) => {
       qc.invalidateQueries({ queryKey: ['trainings'] });
@@ -82,7 +82,7 @@ export function useCompleteTraining() {
   return useMutation({
     mutationFn: async (id: string) => {
       const { data } = await api.post(`/trainings/${id}/complete`);
-      return data.data;
+      return data.data || data;
     },
     onSuccess: (_, id) => {
       qc.invalidateQueries({ queryKey: ['trainings'] });
