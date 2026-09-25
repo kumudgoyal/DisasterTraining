@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { NotificationService } from '../services/notification.service';
 import { authenticate } from '../middleware/auth';
+import { parsePagination } from '../utils/pagination';
 
 const router = Router();
 
@@ -11,7 +12,7 @@ router.use(authenticate);
 
 router.get('/', asyncHandler(async (req: Request, res: Response) => {
   // @ts-ignore
-  const notifications = await NotificationService.getUserNotifications(req.user.userId, req.query);
+  const notifications = await NotificationService.getUserNotifications(req.user.userId, req.query, parsePagination(req.query));
   res.json(notifications);
 }));
 

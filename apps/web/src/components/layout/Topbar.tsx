@@ -16,8 +16,7 @@ export default function Topbar() {
   const unreadCount = data?.data?.filter((n: any) => !n.read)?.length || 0;
 
   const handleLogout = async () => {
-    await logout();
-    router.push('/login');
+    logout();
   };
 
   return (
