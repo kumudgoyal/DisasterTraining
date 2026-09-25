@@ -22,7 +22,13 @@ api.interceptors.request.use((config) => {
 
 // Response interceptor: handle 401
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // Normalize response if the backend didn't wrap it
+    if (response.data && typeof response.data === 'object' && response.data.success === undefined) {
+      response.data = { success: true, data: response.data };
+    }
+    return response;
+  },
   (error) => {
     if (error.response?.status === 401 && typeof window !== 'undefined') {
       localStorage.removeItem('accessToken');
