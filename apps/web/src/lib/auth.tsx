@@ -25,7 +25,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
     try {
       const { data } = await api.get('/auth/me');
-      setUser(data.data);
+      setUser(data.data && data.success !== undefined ? data.data : data);
     } catch {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
@@ -37,10 +37,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => { checkAuth(); }, [checkAuth]);
 
   const login = async (credentials: LoginRequest) => {
-    const { data } = await api.post<{ success: boolean; data: LoginResponse }>('/auth/login', credentials);
-    localStorage.setItem('accessToken', data.data.accessToken);
-    localStorage.setItem('refreshToken', data.data.refreshToken);
-    setUser(data.data.user);
+    const { data } = await api.post<any>('/auth/login', credentials);
+    const responseData = data.data && data.success !== undefined ? data.data : data;
+    localStorage.setItem('accessToken', responseData.accessToken);
+    localStorage.setItem('refreshToken', responseData.refreshToken);
+    setUser(responseData.user);
   };
 
   const logout = () => {
