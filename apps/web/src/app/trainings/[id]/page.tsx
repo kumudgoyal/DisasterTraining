@@ -3,6 +3,7 @@
 import ProtectedLayout from "@/components/layout/ProtectedLayout";
 import { useParams, useRouter } from "next/navigation";
 import { useTraining } from "@/hooks/use-trainings";
+import { useParticipants, useAttendance, useAssessments, useMarkAttendance } from "@/hooks/use-participants";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,26 +12,17 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { format } from "date-fns";
 import { useState } from "react";
 
-const mockParticipants = [
-  { id: 1, name: "Rahul Sharma", role: "First Responder", organization: "SDRF", email: "rahul.s@example.com", status: "Enrolled" },
-  { id: 2, name: "Priya Patel", role: "Medical Staff", organization: "Red Cross", email: "priya.p@example.com", status: "Completed" },
-  { id: 3, name: "Amit Kumar", role: "Volunteer", organization: "Civil Defense", email: "amit.k@example.com", status: "Enrolled" },
-  { id: 4, name: "Sneha Desai", role: "Coordinator", organization: "NDMA", email: "sneha.d@example.com", status: "Enrolled" },
-  { id: 5, name: "Vikram Singh", role: "Logistics Officer", organization: "SDRF", email: "vikram.s@example.com", status: "Pending" },
-];
-
-const mockAttendance = mockParticipants.map(p => ({
-  id: p.id,
-  participantName: p.name,
-  role: p.role,
-  status: p.id % 4 === 0 ? "Absent" : "Present"
-}));
-
 export default function TrainingDetailPage() {
   const params = useParams();
   const id = params.id as string;
   const router = useRouter();
+  
   const { data: training, isLoading } = useTraining(id);
+  const { data: participants, isLoading: loadingParticipants } = useParticipants(id);
+  const { data: attendance, isLoading: loadingAttendance } = useAttendance(id);
+  const { data: assessments, isLoading: loadingAssessments } = useAssessments(id);
+  const { mutateAsync: markAttendance } = useMarkAttendance();
+
   const [activeTab, setActiveTab] = useState("overview");
 
   if (isLoading) {
@@ -53,6 +45,16 @@ export default function TrainingDetailPage() {
   }
 
   const tabs = ["overview", "participants", "attendance", "assessment", "impact", "documents", "activity"];
+
+  // Helper calculation for attendance
+  const presentCount = attendance?.filter((a: any) => a.status === 'PRESENT').length || 0;
+  const totalCount = participants?.length || 0;
+  const attendanceRate = totalCount > 0 ? Math.round((presentCount / totalCount) * 100) : 0;
+
+  // Helper for assessments
+  const preScore = assessments?.pre?.avgScore || 0;
+  const postScore = assessments?.post?.avgScore || 0;
+  const improvement = postScore > 0 && preScore > 0 ? postScore - preScore : 0;
 
   return (
     <ProtectedLayout>
@@ -160,30 +162,30 @@ export default function TrainingDetailPage() {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Name</TableHead>
-                    <TableHead>Role</TableHead>
-                    <TableHead>Organization</TableHead>
+                    <TableHead>Gender</TableHead>
+                    <TableHead>Age</TableHead>
                     <TableHead>Email</TableHead>
-                    <TableHead>Status</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {mockParticipants.map((p) => (
-                    <TableRow key={p.id}>
-                      <TableCell className="font-medium">{p.name}</TableCell>
-                      <TableCell>{p.role}</TableCell>
-                      <TableCell>{p.organization}</TableCell>
-                      <TableCell>{p.email}</TableCell>
-                      <TableCell>
-                        <Badge variant={p.status === "Completed" ? "default" : p.status === "Enrolled" ? "secondary" : "outline"}>
-                          {p.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <Button variant="ghost" size="sm">Edit</Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {loadingParticipants ? (
+                    <TableRow><TableCell colSpan={5} className="text-center">Loading participants...</TableCell></TableRow>
+                  ) : participants?.length > 0 ? (
+                    participants.map((p: any) => (
+                      <TableRow key={p.id}>
+                        <TableCell className="font-medium">{p.name}</TableCell>
+                        <TableCell>{p.gender}</TableCell>
+                        <TableCell>{p.age}</TableCell>
+                        <TableCell>{p.email}</TableCell>
+                        <TableCell className="text-right">
+                          <Button variant="ghost" size="sm">Edit</Button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow><TableCell colSpan={5} className="text-center text-gray-500">No participants enrolled.</TableCell></TableRow>
+                  )}
                 </TableBody>
               </Table>
             </CardContent>
@@ -198,43 +200,62 @@ export default function TrainingDetailPage() {
                   <CardTitle className="text-sm font-medium text-gray-500">Overall Attendance</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">42/50 Present</div>
-                  <p className="text-xs text-gray-500 mt-1">84% attendance rate</p>
-                  <Progress value={84} className="mt-3 h-2" />
+                  <div className="text-2xl font-bold">{presentCount}/{totalCount} Present</div>
+                  <p className="text-xs text-gray-500 mt-1">{attendanceRate}% attendance rate</p>
+                  <Progress value={attendanceRate} className="mt-3 h-2" />
                 </CardContent>
               </Card>
             </div>
             <Card>
               <CardHeader>
                 <CardTitle>Mark Attendance</CardTitle>
-                <CardDescription>Date: {format(new Date(), 'MMM d, yyyy')}</CardDescription>
+                <CardDescription>Manage daily participant attendance.</CardDescription>
               </CardHeader>
               <CardContent>
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Participant</TableHead>
-                      <TableHead>Role</TableHead>
-                      <TableHead>Status</TableHead>
+                      <TableHead>Participant Name</TableHead>
+                      <TableHead>Email</TableHead>
+                      <TableHead>Current Status</TableHead>
                       <TableHead className="text-right">Action</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {mockAttendance.map((a) => (
-                      <TableRow key={a.id}>
-                        <TableCell className="font-medium">{a.participantName}</TableCell>
-                        <TableCell>{a.role}</TableCell>
-                        <TableCell>
-                          <Badge variant={a.status === "Present" ? "default" : "destructive"}>
-                            {a.status}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <Button variant="outline" size="sm" className="mr-2">Mark Present</Button>
-                          <Button variant="outline" size="sm">Mark Absent</Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                    {loadingParticipants || loadingAttendance ? (
+                       <TableRow><TableCell colSpan={4} className="text-center">Loading attendance data...</TableCell></TableRow>
+                    ) : participants?.length > 0 ? (
+                      participants.map((p: any) => {
+                        const rec = attendance?.find((a: any) => a.participantId === p.id);
+                        const status = rec ? rec.status : 'PENDING';
+                        return (
+                        <TableRow key={p.id}>
+                          <TableCell className="font-medium">{p.name}</TableCell>
+                          <TableCell>{p.email}</TableCell>
+                          <TableCell>
+                            <Badge variant={status === "PRESENT" ? "default" : status === "ABSENT" ? "destructive" : "secondary"}>
+                              {status}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <Button 
+                              variant="outline" size="sm" className="mr-2"
+                              onClick={() => markAttendance({ trainingId: id, participantId: p.id, status: 'PRESENT' })}
+                            >
+                              Mark Present
+                            </Button>
+                            <Button 
+                              variant="outline" size="sm"
+                              onClick={() => markAttendance({ trainingId: id, participantId: p.id, status: 'ABSENT' })}
+                            >
+                              Mark Absent
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      )})
+                    ) : (
+                       <TableRow><TableCell colSpan={4} className="text-center text-gray-500">No participants to mark.</TableCell></TableRow>
+                    )}
                   </TableBody>
                 </Table>
               </CardContent>
@@ -250,9 +271,12 @@ export default function TrainingDetailPage() {
                 <CardDescription>Average scores before the training</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-bold text-gray-700">52%</div>
-                <Progress value={52} className="mt-4 h-3" />
-                <p className="mt-4 text-sm text-gray-500">Based on 45 participants</p>
+                {loadingAssessments ? <div className="animate-pulse h-12 bg-gray-100 rounded w-1/2" /> : (
+                  <>
+                    <div className="text-4xl font-bold text-gray-700">{Math.round(preScore)}%</div>
+                    <Progress value={Math.round(preScore)} className="mt-4 h-3" />
+                  </>
+                )}
               </CardContent>
             </Card>
             
@@ -262,9 +286,13 @@ export default function TrainingDetailPage() {
                 <CardDescription>Average scores after the training</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-bold text-green-600">81%</div>
-                <Progress value={81} className="mt-4 h-3 [&>div]:bg-green-600" />
-                <p className="mt-4 text-sm text-green-600 font-medium">Improvement: +29 points</p>
+                {loadingAssessments ? <div className="animate-pulse h-12 bg-gray-100 rounded w-1/2" /> : (
+                  <>
+                    <div className="text-4xl font-bold text-green-600">{Math.round(postScore)}%</div>
+                    <Progress value={Math.round(postScore)} className="mt-4 h-3 [&>div]:bg-green-600" />
+                    {improvement > 0 && <p className="mt-4 text-sm text-green-600 font-medium">Improvement: +{Math.round(improvement)} points</p>}
+                  </>
+                )}
               </CardContent>
             </Card>
           </div>
@@ -315,13 +343,6 @@ export default function TrainingDetailPage() {
                   <div>
                     <p className="text-sm font-medium">Training scheduled</p>
                     <p className="text-xs text-gray-500">Oct 24, 2026 by Admin</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 items-start">
-                  <div className="w-2 h-2 mt-2 rounded-full bg-blue-500" />
-                  <div>
-                    <p className="text-sm font-medium">5 participants added</p>
-                    <p className="text-xs text-gray-500">Oct 25, 2026 by Coordinator</p>
                   </div>
                 </div>
               </div>
