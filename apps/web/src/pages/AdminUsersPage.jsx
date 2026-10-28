@@ -30,13 +30,16 @@ export default function AdminUsersPage() {
 
     api.get(`/admin/users?${params.toString()}`)
       .then((res) => {
-        if (res.success) {
-          setUsers(res.data.users);
-          setRoles(res.data.roles);
-          setOrgs(res.data.organizations);
+        if (res?.success && res.data) {
+          setUsers(Array.isArray(res.data) ? res.data : Array.isArray(res.data?.users) ? res.data.users : []);
+          if (Array.isArray(res.data?.roles)) setRoles(res.data.roles);
+          if (Array.isArray(res.data?.organizations)) setOrgs(res.data.organizations);
         }
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error('Failed to fetch users:', err);
+        setUsers([]);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -128,12 +131,12 @@ export default function AdminUsersPage() {
                 <tr>
                   <td colSpan={6} className="py-8 text-center text-slate-400">Loading user registry...</td>
                 </tr>
-              ) : users.length === 0 ? (
+              ) : !Array.isArray(users) || users.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="py-8 text-center text-slate-400">No users found.</td>
                 </tr>
               ) : (
-                users.map((u) => (
+                (users || []).map((u) => (
                   <tr key={u.id} className="hover:bg-slate-850/60 transition">
                     <td className="py-3.5 px-4">
                       <p className="font-bold text-slate-100">{u.full_name}</p>

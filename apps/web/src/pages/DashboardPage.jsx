@@ -36,18 +36,31 @@ export default function DashboardPage() {
   const fetchDashboardData = () => {
     setLoading(true);
     Promise.all([
-      api.get('/dashboard/kpis'),
-      api.get('/dashboard/activity-feed'),
-      api.get('/alerts/active'),
-      api.get('/incidents?limit=6'),
+      api.get('/dashboard/kpis').catch(() => ({ success: false })),
+      api.get('/dashboard/activity-feed').catch(() => ({ success: false })),
+      api.get('/alerts/active').catch(() => ({ success: false })),
+      api.get('/incidents?limit=6').catch(() => ({ success: false })),
     ])
       .then(([kpiRes, feedRes, alertRes, incidentRes]) => {
-        if (kpiRes.success) setKpis(kpiRes.data);
-        if (feedRes.success) setFeed(feedRes.data);
-        if (alertRes.success) setActiveAlerts(alertRes.data);
-        if (incidentRes.success) setRecentIncidents(incidentRes.data);
+        if (kpiRes?.success && kpiRes.data) setKpis(kpiRes.data);
+        if (feedRes?.success) {
+          setFeed(Array.isArray(feedRes.data) ? feedRes.data : []);
+        }
+        if (alertRes?.success) {
+          setActiveAlerts(Array.isArray(alertRes.data) ? alertRes.data : []);
+        }
+        if (incidentRes?.success) {
+          const incs = Array.isArray(incidentRes.data)
+            ? incidentRes.data
+            : Array.isArray(incidentRes.data?.incidents)
+            ? incidentRes.data.incidents
+            : [];
+          setRecentIncidents(incs);
+        }
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error('Failed to fetch dashboard data:', err);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -201,10 +214,10 @@ export default function DashboardPage() {
             </div>
 
             <div className="divide-y divide-slate-800 mt-2">
-              {recentIncidents.length === 0 ? (
+              {!Array.isArray(recentIncidents) || recentIncidents.length === 0 ? (
                 <p className="text-xs text-slate-400 py-6 text-center">No active disaster incidents reported.</p>
               ) : (
-                recentIncidents.map((inc) => (
+                (recentIncidents || []).map((inc) => (
                   <Link
                     key={inc.id}
                     to={`/incidents/${inc.id}`}
@@ -272,10 +285,10 @@ export default function DashboardPage() {
             </div>
 
             <div className="overflow-y-auto space-y-3 mt-3 pr-1 divide-y divide-slate-800/60">
-              {feed.length === 0 ? (
+              {!Array.isArray(feed) || feed.length === 0 ? (
                 <p className="text-xs text-slate-400 py-6 text-center">No recent activity logged.</p>
               ) : (
-                feed.map((item) => (
+                (feed || []).map((item) => (
                   <div key={item.id} className="pt-3 first:pt-0">
                     <div className="flex items-center justify-between text-[10px] text-slate-400">
                       <span className="font-semibold text-slate-300">{item.title}</span>

@@ -42,14 +42,16 @@ export default function TrainingPage() {
     if (districtFilter) params.append('district', districtFilter);
 
     Promise.all([
-      api.get(`/training?${params.toString()}`),
-      api.get('/training/analytics'),
+      api.get(`/training?${params.toString()}`).catch(() => ({ success: false })),
+      api.get('/training/analytics').catch(() => ({ success: false })),
     ])
       .then(([trainRes, analRes]) => {
-        if (trainRes.success) setTrainings(trainRes.data);
-        if (analRes.success) setAnalytics(analRes.data);
+        if (trainRes?.success) setTrainings(Array.isArray(trainRes.data) ? trainRes.data : []);
+        if (analRes?.success && analRes.data) setAnalytics(analRes.data);
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error('Failed to fetch training data:', err);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -153,10 +155,10 @@ export default function TrainingPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {loading ? (
             <div className="col-span-full py-12 text-center text-xs text-slate-400">Loading training registry...</div>
-          ) : trainings.length === 0 ? (
+          ) : !Array.isArray(trainings) || trainings.length === 0 ? (
             <div className="col-span-full py-12 text-center text-xs text-slate-400">No training activities recorded.</div>
           ) : (
-            trainings.map((tr) => (
+            (trainings || []).map((tr) => (
               <div
                 key={tr.id}
                 className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition shadow-lg space-y-3"

@@ -88,11 +88,21 @@ export default function MapPage() {
     setLoading(true);
     api.get('/gis/layers')
       .then((res) => {
-        if (res.success) {
-          setGisData(res.data);
+        if (res?.success && res.data) {
+          setGisData({
+            incidents: Array.isArray(res.data.incidents) ? res.data.incidents : [],
+            shelters: Array.isArray(res.data.shelters) ? res.data.shelters : [],
+            resources: Array.isArray(res.data.resources) ? res.data.resources : [],
+            teams: Array.isArray(res.data.teams) ? res.data.teams : [],
+            alerts: Array.isArray(res.data.alerts) ? res.data.alerts : [],
+            damage_reports: Array.isArray(res.data.damage_reports) ? res.data.damage_reports : [],
+            trainings: Array.isArray(res.data.trainings) ? res.data.trainings : [],
+          });
         }
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error('GIS layer fetch error:', err);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -101,7 +111,7 @@ export default function MapPage() {
   }, []);
 
   // Filtered incidents
-  const filteredIncidents = gisData.incidents.filter((inc) => {
+  const filteredIncidents = (Array.isArray(gisData?.incidents) ? gisData.incidents : []).filter((inc) => {
     if (severityFilter !== 'all' && inc.severity !== severityFilter) return false;
     if (typeFilter !== 'all' && inc.disaster_type !== typeFilter) return false;
     return true;
@@ -251,7 +261,7 @@ export default function MapPage() {
 
           {/* 1. Incident Markers */}
           {layers.incidents &&
-            filteredIncidents.map((inc) => {
+            (filteredIncidents || []).map((inc) => {
               const isCrit = inc.severity === 'critical';
               const icon = createCustomIcon(
                 inc.disaster_icon || DISASTER_ICONS[inc.disaster_type] || '⚠️',
@@ -294,7 +304,7 @@ export default function MapPage() {
 
           {/* 2. Shelter Markers */}
           {layers.shelters &&
-            gisData.shelters.map((s) => {
+            (gisData?.shelters || []).map((s) => {
               const occRate = s.occupancy_pct || 0;
               const colorHex = occRate >= 90 ? '#ef4444' : occRate >= 70 ? '#f97316' : '#10b981';
               const icon = createCustomIcon('🏠', colorHex);
@@ -338,7 +348,7 @@ export default function MapPage() {
 
           {/* 3. Response Teams */}
           {layers.teams &&
-            gisData.teams.map((t) => {
+            (gisData?.teams || []).map((t) => {
               const icon = createCustomIcon('🛡️', '#0284c7');
               return (
                 <Marker
@@ -360,7 +370,7 @@ export default function MapPage() {
 
           {/* 4. Resources */}
           {layers.resources &&
-            gisData.resources.map((r) => {
+            (gisData?.resources || []).map((r) => {
               const icon = createCustomIcon('📦', '#a855f7');
               return (
                 <Marker
@@ -382,7 +392,7 @@ export default function MapPage() {
 
           {/* 5. Alerts Radius Circles */}
           {layers.alerts &&
-            gisData.alerts.map((al) => {
+            (gisData?.alerts || []).map((al) => {
               const radiusMeters = (al.radius_km || 25) * 1000;
               const isCrit = al.severity === 'critical';
               return (
@@ -411,7 +421,7 @@ export default function MapPage() {
 
           {/* 6. Training Activities */}
           {layers.trainings &&
-            gisData.trainings.map((tr) => {
+            (gisData?.trainings || []).map((tr) => {
               const icon = createCustomIcon('🎓', '#6366f1');
               return (
                 <Marker

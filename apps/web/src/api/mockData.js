@@ -189,19 +189,32 @@ export function getInitialData() {
 }
 
 export function getStoredData() {
+  const init = getInitialData();
   const existing = localStorage.getItem('dmecs_mock_db');
   if (existing) {
     try {
-      return JSON.parse(existing);
+      const parsed = JSON.parse(existing);
+      if (parsed && typeof parsed === 'object') {
+        // Guarantee all arrays are present and non-null
+        for (const key of Object.keys(init)) {
+          if (!Array.isArray(parsed[key])) {
+            parsed[key] = init[key];
+          }
+        }
+        return parsed;
+      }
     } catch (e) {
-      console.error(e);
+      console.error('Error parsing stored mock db:', e);
     }
   }
-  const init = getInitialData();
   localStorage.setItem('dmecs_mock_db', JSON.stringify(init));
   return init;
 }
 
 export function saveStoredData(data) {
-  localStorage.setItem('dmecs_mock_db', JSON.stringify(data));
+  try {
+    localStorage.setItem('dmecs_mock_db', JSON.stringify(data));
+  } catch (e) {
+    console.error('Error saving stored mock db:', e);
+  }
 }

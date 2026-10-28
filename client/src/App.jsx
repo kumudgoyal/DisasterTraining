@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import ErrorBoundary from './components/common/ErrorBoundary';
 
 // Layouts
 import DashboardLayout from './layouts/DashboardLayout';
@@ -27,37 +28,39 @@ import PublicReportPage from './pages/PublicReportPage';
 
 export default function App() {
   return (
-    <Routes>
-      {/* Public citizen portal routes */}
-      <Route path="/public" element={<PublicLayout />}>
-        <Route index element={<PublicPage />} />
-        <Route path="report" element={<PublicReportPage />} />
-      </Route>
+    <ErrorBoundary>
+      <Routes>
+        {/* Public citizen portal routes */}
+        <Route path="/public" element={<PublicLayout />}>
+          <Route index element={<PublicPage />} />
+          <Route path="report" element={<PublicReportPage />} />
+        </Route>
 
-      {/* Auth */}
-      <Route path="/login" element={<LoginPage />} />
+        {/* Auth */}
+        <Route path="/login" element={<LoginPage />} />
 
-      {/* Protected EOC dashboard and operational routes */}
-      <Route path="/" element={<DashboardLayout />}>
-        <Route index element={<DashboardPage />} />
-        <Route path="map" element={<MapPage />} />
-        <Route path="incidents" element={<IncidentListPage />} />
-        <Route path="incidents/new" element={<IncidentCreatePage />} />
-        <Route path="incidents/:id" element={<IncidentDetailPage />} />
-        <Route path="field-report" element={<FieldReportPage />} />
-        <Route path="shelters" element={<ShelterPage />} />
-        <Route path="resources" element={<ResourcePage />} />
-        <Route path="alerts" element={<AlertPage />} />
-        <Route path="damage-assessment" element={<DamageAssessmentPage />} />
-        <Route path="training" element={<TrainingPage />} />
-        <Route path="analytics" element={<AnalyticsPage />} />
-        <Route path="organizations" element={<OrganizationPage />} />
-        <Route path="admin/users" element={<AdminUsersPage />} />
-        <Route path="admin/audit-log" element={<AuditLogPage />} />
-      </Route>
+        {/* Protected EOC dashboard and operational routes */}
+        <Route path="/" element={<DashboardLayout />}>
+          <Route index element={<DashboardPage />} />
+          <Route path="map" element={<MapPage />} />
+          <Route path="incidents" element={<IncidentListPage />} />
+          <Route path="incidents/new" element={<IncidentCreatePage />} />
+          <Route path="incidents/:id" element={<IncidentDetailPage />} />
+          <Route path="field-report" element={<FieldReportPage />} />
+          <Route path="shelters" element={<ShelterPage />} />
+          <Route path="resources" element={<ResourcePage />} />
+          <Route path="alerts" element={<AlertPage />} />
+          <Route path="damage-assessment" element={<DamageAssessmentPage />} />
+          <Route path="training" element={<TrainingPage />} />
+          <Route path="analytics" element={<AnalyticsPage />} />
+          <Route path="organizations" element={<OrganizationPage />} />
+          <Route path="admin/users" element={<AdminUsersPage />} />
+          <Route path="admin/audit-log" element={<AuditLogPage />} />
+        </Route>
 
-      {/* Fallback */}
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </ErrorBoundary>
   );
 }

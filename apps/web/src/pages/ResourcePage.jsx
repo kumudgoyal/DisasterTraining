@@ -35,14 +35,16 @@ export default function ResourcePage() {
     if (typeFilter) params.append('type', typeFilter);
 
     Promise.all([
-      api.get(`/resources?${params.toString()}`),
-      api.get('/resources/requests/all'),
+      api.get(`/resources?${params.toString()}`).catch(() => ({ success: false })),
+      api.get('/resources/requests/all').catch(() => ({ success: false })),
     ])
       .then(([resRes, reqRes]) => {
-        if (resRes.success) setResources(resRes.data);
-        if (reqRes.success) setRequests(reqRes.data);
+        if (resRes?.success) setResources(Array.isArray(resRes.data) ? resRes.data : []);
+        if (reqRes?.success) setRequests(Array.isArray(reqRes.data) ? reqRes.data : []);
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error('Failed to fetch resource data:', err);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -158,10 +160,10 @@ export default function ResourcePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {loading ? (
               <div className="col-span-full py-12 text-center text-xs text-slate-400">Loading resources...</div>
-            ) : filteredResources.length === 0 ? (
+            ) : !Array.isArray(filteredResources) || filteredResources.length === 0 ? (
               <div className="col-span-full py-12 text-center text-xs text-slate-400">No resources found.</div>
             ) : (
-              filteredResources.map((res) => (
+              (filteredResources || []).map((res) => (
                 <div
                   key={res.id}
                   className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition shadow-lg flex flex-col justify-between space-y-4"
@@ -222,11 +224,11 @@ export default function ResourcePage() {
             </div>
           </div>
 
-          {requests.length === 0 ? (
+          {!Array.isArray(requests) || requests.length === 0 ? (
             <p className="text-xs text-slate-400 py-8 text-center">No active resource requests.</p>
           ) : (
             <div className="divide-y divide-slate-800">
-              {requests.map((req) => (
+              {(requests || []).map((req) => (
                 <div key={req.id} className="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
                   <div className="space-y-1">
                     <div className="flex items-center space-x-2">

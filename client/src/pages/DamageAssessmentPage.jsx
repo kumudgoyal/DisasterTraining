@@ -43,9 +43,12 @@ export default function DamageAssessmentPage() {
 
     api.get(`/damage-reports?${params.toString()}`)
       .then((res) => {
-        if (res.success) setReports(res.data);
+        if (res?.success) setReports(Array.isArray(res.data) ? res.data : []);
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error('Failed to fetch damage reports:', err);
+        setReports([]);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -200,12 +203,12 @@ export default function DamageAssessmentPage() {
                 <tr>
                   <td colSpan={7} className="py-8 text-center text-slate-400">Loading damage assessment entries...</td>
                 </tr>
-              ) : reports.length === 0 ? (
+              ) : !Array.isArray(reports) || reports.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="py-8 text-center text-slate-400">No damage reports recorded under this filter.</td>
                 </tr>
               ) : (
-                reports.map((r) => (
+                (reports || []).map((r) => (
                   <tr key={r.id} className="hover:bg-slate-850/60 transition">
                     <td className="py-3.5 px-4 font-bold text-slate-200 capitalize">
                       {r.infrastructure_type}

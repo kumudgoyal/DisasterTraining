@@ -57,9 +57,12 @@ export default function ShelterPage() {
 
     api.get(`/shelters?${params.toString()}`)
       .then((res) => {
-        if (res.success) setShelters(res.data);
+        if (res?.success) setShelters(Array.isArray(res.data) ? res.data : []);
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error('Failed to fetch shelters:', err);
+        setShelters([]);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -204,10 +207,10 @@ export default function ShelterPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {loading ? (
           <div className="col-span-full py-12 text-center text-xs text-slate-400">Loading shelter facilities...</div>
-        ) : filteredShelters.length === 0 ? (
+        ) : !Array.isArray(filteredShelters) || filteredShelters.length === 0 ? (
           <div className="col-span-full py-12 text-center text-xs text-slate-400">No shelters match the search criteria.</div>
         ) : (
-          filteredShelters.map((s) => {
+          (filteredShelters || []).map((s) => {
             const occRate = s.capacity > 0 ? Math.round((s.current_occupancy / s.capacity) * 100) : 0;
             const available = Math.max(0, s.capacity - s.current_occupancy);
 

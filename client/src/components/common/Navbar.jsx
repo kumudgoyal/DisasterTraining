@@ -32,9 +32,14 @@ export default function Navbar() {
     if (user) {
       api.get('/notifications?limit=10')
         .then(res => {
-          if (res.success) {
-            setNotifications(res.data.notifications);
-            setUnreadCount(res.data.unread_count);
+          if (res?.success && res.data) {
+            const list = Array.isArray(res.data)
+              ? res.data
+              : Array.isArray(res.data.notifications)
+              ? res.data.notifications
+              : [];
+            setNotifications(list);
+            setUnreadCount(typeof res.data.unread_count === 'number' ? res.data.unread_count : list.filter(n => !n.is_read).length);
           }
         })
         .catch(console.error);
@@ -43,7 +48,7 @@ export default function Navbar() {
     // Fetch active alerts for ticker
     api.get('/alerts/active')
       .then(res => {
-        if (res.success) setActiveAlerts(res.data);
+        if (res?.success) setActiveAlerts(Array.isArray(res.data) ? res.data : []);
       })
       .catch(console.error);
   }, [user]);
@@ -193,10 +198,10 @@ export default function Navbar() {
                   )}
                 </div>
                 <div className="max-h-80 overflow-y-auto divide-y divide-slate-700/50">
-                  {notifications.length === 0 ? (
+                  {!Array.isArray(notifications) || notifications.length === 0 ? (
                     <p className="text-xs text-slate-400 text-center py-6">No notifications</p>
                   ) : (
-                    notifications.map((n) => (
+                    (notifications || []).map((n) => (
                       <div
                         key={n.id}
                         className={`p-3 text-xs transition ${n.is_read ? 'opacity-70 bg-slate-800/60' : 'bg-slate-800 font-medium'}`}

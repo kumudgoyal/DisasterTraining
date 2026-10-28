@@ -27,11 +27,14 @@ export default function LoginPage() {
   };
 
   const handleQuickLogin = (demo) => {
+    setError('');
+    setLoading(true);
     setEmail(demo.email);
     setPassword(demo.password);
     login(demo.email, demo.password)
       .then(() => navigate('/'))
-      .catch((err) => setError(err.error || 'Login failed'));
+      .catch((err) => setError(err.error || err.message || 'Login failed'))
+      .finally(() => setLoading(false));
   };
 
   return (

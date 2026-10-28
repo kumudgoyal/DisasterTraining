@@ -24,9 +24,12 @@ export default function OrganizationPage() {
     setLoading(true);
     api.get('/organizations')
       .then((res) => {
-        if (res.success) setOrgs(res.data);
+        if (res?.success) setOrgs(Array.isArray(res.data) ? res.data : []);
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error('Failed to fetch organizations:', err);
+        setOrgs([]);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -97,10 +100,10 @@ export default function OrganizationPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {loading ? (
           <div className="col-span-full py-12 text-center text-xs text-slate-400">Loading organizations...</div>
-        ) : filteredOrgs.length === 0 ? (
+        ) : !Array.isArray(filteredOrgs) || filteredOrgs.length === 0 ? (
           <div className="col-span-full py-12 text-center text-xs text-slate-400">No organizations match filter.</div>
         ) : (
-          filteredOrgs.map((org) => (
+          (filteredOrgs || []).map((org) => (
             <div
               key={org.id}
               className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition shadow-lg flex flex-col justify-between space-y-4"

@@ -22,9 +22,12 @@ export default function AuditLogPage() {
 
     api.get(`/admin/audit-logs?${params.toString()}`)
       .then((res) => {
-        if (res.success) setLogs(res.data);
+        if (res?.success) setLogs(Array.isArray(res.data) ? res.data : []);
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error('Failed to fetch audit logs:', err);
+        setLogs([]);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -72,12 +75,12 @@ export default function AuditLogPage() {
                 <tr>
                   <td colSpan={6} className="py-8 text-center text-slate-400 font-sans">Loading audit trail...</td>
                 </tr>
-              ) : logs.length === 0 ? (
+              ) : !Array.isArray(logs) || logs.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="py-8 text-center text-slate-400 font-sans">No audit events recorded.</td>
                 </tr>
               ) : (
-                logs.map((log) => (
+                (logs || []).map((log) => (
                   <tr key={log.id} className="hover:bg-slate-850/60 transition">
                     <td className="py-3.5 px-4">
                       <span className="font-bold text-blue-400 uppercase text-[11px] font-sans">

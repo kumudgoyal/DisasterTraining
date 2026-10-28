@@ -37,9 +37,12 @@ export default function AlertPage() {
     setLoading(true);
     api.get('/alerts')
       .then((res) => {
-        if (res.success) setAlerts(res.data);
+        if (res?.success) setAlerts(Array.isArray(res.data) ? res.data : []);
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error('Failed to fetch alerts:', err);
+        setAlerts([]);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -106,10 +109,10 @@ export default function AlertPage() {
       <div className="space-y-4">
         {loading ? (
           <div className="py-12 text-center text-xs text-slate-400">Loading active broadcasts...</div>
-        ) : alerts.length === 0 ? (
+        ) : !Array.isArray(alerts) || alerts.length === 0 ? (
           <div className="py-12 text-center text-xs text-slate-400">No active alerts issued.</div>
         ) : (
-          alerts.map((al) => {
+          (alerts || []).map((al) => {
             const isCritical = al.severity === 'critical';
             return (
               <div

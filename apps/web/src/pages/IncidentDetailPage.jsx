@@ -53,9 +53,21 @@ export default function IncidentDetailPage() {
     setLoading(true);
     api.get(`/incidents/${id}`)
       .then((res) => {
-        if (res.success) setIncident(res.data);
+        if (res?.success && res.data) {
+          const raw = res.data.incident || res.data;
+          setIncident({
+            ...raw,
+            updates: Array.isArray(raw.updates) ? raw.updates : (Array.isArray(res.data.updates) ? res.data.updates : []),
+            teams: Array.isArray(raw.teams) ? raw.teams : (Array.isArray(raw.assigned_teams) ? raw.assigned_teams : (Array.isArray(res.data.assigned_teams) ? res.data.assigned_teams : [])),
+            resourceRequests: Array.isArray(raw.resourceRequests) ? raw.resourceRequests : (Array.isArray(raw.requested_resources) ? raw.requested_resources : (Array.isArray(res.data.requested_resources) ? res.data.requested_resources : [])),
+            fieldReports: Array.isArray(raw.fieldReports) ? raw.fieldReports : (Array.isArray(raw.field_reports) ? raw.field_reports : (Array.isArray(res.data.field_reports) ? res.data.field_reports : [])),
+            damageReports: Array.isArray(raw.damageReports) ? raw.damageReports : (Array.isArray(raw.damage_reports) ? raw.damage_reports : (Array.isArray(res.data.damage_reports) ? res.data.damage_reports : [])),
+          });
+        }
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error('Failed to fetch incident:', err);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -350,7 +362,7 @@ export default function IncidentDetailPage() {
           </div>
 
           <div className="relative border-l border-slate-800 ml-4 space-y-6 py-2">
-            {incident.updates?.map((up) => (
+            {(incident.updates || []).map((up) => (
               <div key={up.id} className="relative pl-6">
                 <span className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-slate-900"></span>
                 <div className="text-xs text-slate-400 flex items-center space-x-2">
@@ -384,11 +396,11 @@ export default function IncidentDetailPage() {
             )}
           </div>
 
-          {incident.teams?.length === 0 ? (
+          {!Array.isArray(incident.teams) || incident.teams.length === 0 ? (
             <p className="text-xs text-slate-400 py-6 text-center">No response teams assigned to this incident yet.</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {incident.teams.map((tm) => (
+              {(incident.teams || []).map((tm) => (
                 <div key={tm.id} className="p-4 rounded-xl bg-slate-850 border border-slate-800 space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-sm text-slate-100">{tm.name}</span>
@@ -420,11 +432,11 @@ export default function IncidentDetailPage() {
             )}
           </div>
 
-          {incident.resourceRequests?.length === 0 ? (
+          {!Array.isArray(incident.resourceRequests) || incident.resourceRequests.length === 0 ? (
             <p className="text-xs text-slate-400 py-6 text-center">No resource requests filed.</p>
           ) : (
             <div className="divide-y divide-slate-800">
-              {incident.resourceRequests.map((req) => (
+              {(incident.resourceRequests || []).map((req) => (
                 <div key={req.id} className="py-3 flex items-center justify-between text-xs">
                   <div>
                     <span className="font-bold text-slate-200 capitalize">
@@ -460,11 +472,11 @@ export default function IncidentDetailPage() {
             </Link>
           </div>
 
-          {incident.fieldReports?.length === 0 ? (
+          {!Array.isArray(incident.fieldReports) || incident.fieldReports.length === 0 ? (
             <p className="text-xs text-slate-400 py-6 text-center">No field reports submitted for this incident.</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {incident.fieldReports.map((fr) => (
+              {(incident.fieldReports || []).map((fr) => (
                 <div key={fr.id} className="p-4 rounded-xl bg-slate-850 border border-slate-800 space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-xs font-bold text-blue-400">{fr.report_id}</span>
@@ -496,11 +508,11 @@ export default function IncidentDetailPage() {
             </Link>
           </div>
 
-          {incident.damageReports?.length === 0 ? (
+          {!Array.isArray(incident.damageReports) || incident.damageReports.length === 0 ? (
             <p className="text-xs text-slate-400 py-6 text-center">No damage reports linked.</p>
           ) : (
             <div className="divide-y divide-slate-800">
-              {incident.damageReports.map((dr) => (
+              {(incident.damageReports || []).map((dr) => (
                 <div key={dr.id} className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                   <div>
                     <span className="font-bold text-slate-200 capitalize">

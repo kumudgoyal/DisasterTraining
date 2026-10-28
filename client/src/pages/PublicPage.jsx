@@ -22,14 +22,16 @@ export default function PublicPage() {
 
   useEffect(() => {
     Promise.all([
-      api.get('/alerts/active'),
-      api.get('/shelters?status=active'),
+      api.get('/alerts/active').catch(() => ({ success: false })),
+      api.get('/shelters?status=active').catch(() => ({ success: false })),
     ])
       .then(([alertRes, shelterRes]) => {
-        if (alertRes.success) setAlerts(alertRes.data);
-        if (shelterRes.success) setShelters(shelterRes.data);
+        if (alertRes?.success) setAlerts(Array.isArray(alertRes.data) ? alertRes.data : []);
+        if (shelterRes?.success) setShelters(Array.isArray(shelterRes.data) ? shelterRes.data : []);
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error('Failed to fetch public alerts/shelters:', err);
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -102,13 +104,13 @@ export default function PublicPage() {
 
         {loading ? (
           <p className="text-xs text-slate-400 py-4">Checking live alerts...</p>
-        ) : alerts.length === 0 ? (
+        ) : !Array.isArray(alerts) || alerts.length === 0 ? (
           <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300">
             No active red or orange disaster warnings issued for the general public right now.
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {alerts.map((al) => (
+            {(alerts || []).map((al) => (
               <div key={al.id} className="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2 shadow-lg">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] uppercase font-bold text-red-400 font-mono">
@@ -136,7 +138,7 @@ export default function PublicPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {shelters.slice(0, 6).map((s) => (
+          {(Array.isArray(shelters) ? shelters : []).slice(0, 6).map((s) => (
             <div key={s.id} className="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-3 shadow-lg">
               <div>
                 <h3 className="font-bold text-sm text-slate-100">{s.name}</h3>

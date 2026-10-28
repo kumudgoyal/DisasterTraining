@@ -203,9 +203,12 @@ export async function handleMockRequest(config) {
     if (limit) list = list.slice(0, parseInt(limit));
     return {
       success: true,
-      data: {
-        incidents: list,
+      data: list,
+      pagination: {
+        page: 1,
+        limit: list.length,
         total: list.length,
+        pages: 1,
       },
     };
   }
