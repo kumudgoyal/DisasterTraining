@@ -9,21 +9,11 @@ export function SocketProvider({ children }) {
   const [liveEvents, setLiveEvents] = useState([]);
 
   useEffect(() => {
-    // In Vite dev, the proxy handles socket.io
-    const newSocket = io({
-      transports: ['websocket', 'polling'],
-      reconnectionAttempts: 10,
-    });
-
-    newSocket.on('connect', () => {
-      console.log('[Socket] Connected');
-      setConnected(true);
-    });
-
-    newSocket.on('disconnect', () => {
-      console.log('[Socket] Disconnected');
-      setConnected(false);
-    });
+    const isVercel =
+      typeof window !== 'undefined' &&
+      (window.location.hostname.includes('vercel.app') ||
+        window.location.hostname.includes('netlify.app') ||
+        window.location.hostname.includes('github.io'));
 
     // Universal event recorder for live ticker
     const registerEvent = (eventType, payload) => {
@@ -32,6 +22,56 @@ export function SocketProvider({ children }) {
         ...prev.slice(0, 49),
       ]);
     };
+
+    if (isVercel) {
+      // In-browser mock socket event bus for Vercel demo
+      setConnected(true);
+      const handleCustomEvent = (e) => {
+        if (e.detail?.type) {
+          registerEvent(e.detail.type, e.detail.payload);
+        }
+      };
+      window.addEventListener('dmecs:socket_event', handleCustomEvent);
+
+      const mockSocket = {
+        connected: true,
+        on: (event, cb) => {
+          const l = (e) => {
+            if (e.detail?.type === event) cb(e.detail.payload);
+          };
+          window.addEventListener('dmecs:socket_event', l);
+          return () => window.removeEventListener('dmecs:socket_event', l);
+        },
+        emit: (event, payload) => {
+          registerEvent(event, payload);
+        },
+        disconnect: () => {},
+      };
+      setSocket(mockSocket);
+
+      return () => {
+        window.removeEventListener('dmecs:socket_event', handleCustomEvent);
+      };
+    }
+
+    // Connect to real backend socket.io server
+    const newSocket = io({
+      transports: ['websocket', 'polling'],
+      reconnectionAttempts: 3,
+      timeout: 5000,
+    });
+
+    newSocket.on('connect', () => {
+      setConnected(true);
+    });
+
+    newSocket.on('disconnect', () => {
+      setConnected(false);
+    });
+
+    newSocket.on('connect_error', () => {
+      setConnected(false);
+    });
 
     newSocket.on('incident:created', (data) => registerEvent('incident:created', data));
     newSocket.on('incident:updated', (data) => registerEvent('incident:updated', data));
