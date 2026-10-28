@@ -1,9 +1,12 @@
 # Dependencies
 node_modules/
 client/node_modules/
+apps/web/node_modules/
 
 # Production Build
 client/dist/
+apps/web/dist/
+dist/
 
 # SQLite Database files
 *.sqlite3
