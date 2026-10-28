@@ -1,36 +1,30 @@
 {
-  "name": "disaster-training-monitor",
+  "name": "disaster-management-platform",
   "version": "1.0.0",
-  "description": "Real-Time Monitoring System for Disaster Management Trainings — Academic Prototype",
+  "description": "Real-Time Disaster Management & Emergency Coordination Platform",
   "private": true,
-  "packageManager": "pnpm@9.0.0",
-  "engines": {
-    "node": ">=20.0.0",
-    "pnpm": ">=9.0.0"
-  },
-  "workspaces": [
-    "apps/*",
-    "services/*",
-    "packages/*"
-  ],
   "scripts": {
-    "dev": "turbo run dev --parallel",
-    "build": "turbo run build",
-    "lint": "turbo run lint",
-    "test": "turbo run test",
-    "type-check": "turbo run type-check",
-    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
-    "db:migrate": "pnpm --filter api prisma migrate deploy",
-    "db:seed": "pnpm --filter api db:seed",
-    "db:studio": "pnpm --filter api prisma studio",
-    "db:reset": "pnpm --filter api prisma migrate reset"
-  },
-  "devDependencies": {
-    "prettier": "^3.2.5",
-    "turbo": "^2.0.0",
-    "typescript": "^5.4.5"
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && node index.js",
+    "client": "cd client && npx vite --host",
+    "db:migrate": "cd server && npx knex migrate:latest",
+    "db:seed": "cd server && npx knex seed:run",
+    "db:reset": "cd server && del /f dev.sqlite3 2>nul & npx knex migrate:latest && npx knex seed:run",
+    "setup": "npm install && cd client && npm install && cd .. && npm run db:migrate && npm run db:seed"
   },
   "dependencies": {
-    "@prisma/client": "^5.12.1"
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.7.0",
+    "concurrently": "^9.1.0",
+    "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
+    "express": "^4.21.1",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "knex": "^3.1.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "socket.io": "^4.8.1",
+    "uuid": "^11.0.3"
   }
 }
