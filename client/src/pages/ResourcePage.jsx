@@ -82,31 +82,33 @@ export default function ResourcePage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-slate-900 p-5 rounded-2xl border border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm">
         <div>
-          <h1 className="text-xl font-bold text-slate-100 flex items-center space-x-2">
-            <Truck className="w-5 h-5 text-indigo-400" />
+          <h1 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center space-x-2.5">
+            <span className="p-2 rounded-xl bg-indigo-50 text-indigo-600">
+              <Truck className="w-5 h-5" />
+            </span>
             <span>Resource & Asset Coordination</span>
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 mt-1.5 font-medium">
             Real-time logistical visibility: rescue boats, emergency food, ambulances, power generators, and medical packs.
           </p>
         </div>
 
         {/* Tab switch */}
-        <div className="flex items-center p-1 rounded-xl bg-slate-800 border border-slate-700/60 self-start sm:self-auto text-xs font-semibold">
+        <div className="flex items-center p-1 rounded-full bg-slate-100 border border-slate-200 self-start sm:self-auto text-xs font-semibold">
           <button
             onClick={() => setActiveTab('inventory')}
-            className={`px-3 py-1.5 rounded-lg transition ${
-              activeTab === 'inventory' ? 'bg-blue-600 text-white font-bold' : 'text-slate-400 hover:text-slate-200'
+            className={`px-4 py-1.5 rounded-full transition ${
+              activeTab === 'inventory' ? 'bg-slate-900 text-white font-bold shadow-sm' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             Asset Registry ({resources.length})
           </button>
           <button
             onClick={() => setActiveTab('requests')}
-            className={`px-3 py-1.5 rounded-lg transition ${
-              activeTab === 'requests' ? 'bg-blue-600 text-white font-bold' : 'text-slate-400 hover:text-slate-200'
+            className={`px-4 py-1.5 rounded-full transition ${
+              activeTab === 'requests' ? 'bg-slate-900 text-white font-bold shadow-sm' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             Pending Requests ({requests.filter((r) => r.status === 'pending').length})
@@ -117,15 +119,15 @@ export default function ResourcePage() {
       {/* Inventory View */}
       {activeTab === 'inventory' && (
         <div className="space-y-4">
-          <div className="bg-slate-900 p-4 rounded-xl border border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-sm flex flex-wrap items-center justify-between gap-3 text-xs">
             <div className="flex-1 min-w-[240px] relative">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
               <input
                 type="text"
                 placeholder="Search resource item, organization or depot location..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-lg pl-9 pr-3 py-2 text-xs focus:outline-none focus:border-blue-500"
+                className="w-full bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 rounded-xl pl-9 pr-3.5 py-2 text-xs focus:outline-none focus:border-slate-400 transition"
               />
             </div>
 
@@ -133,7 +135,7 @@ export default function ResourcePage() {
               <select
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
-                className="bg-slate-800 border border-slate-700 text-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none capitalize"
+                className="bg-slate-50 border border-slate-200 text-slate-800 font-semibold rounded-xl px-3.5 py-2 text-xs focus:outline-none capitalize"
               >
                 <option value="">All Categories</option>
                 <option value="boat">Rescue Boats</option>
@@ -150,59 +152,61 @@ export default function ResourcePage() {
               <button
                 onClick={fetchData}
                 disabled={loading}
-                className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition"
+                className="p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200 transition"
               >
-                <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+                <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-slate-900' : ''}`} />
               </button>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {loading ? (
-              <div className="col-span-full py-12 text-center text-xs text-slate-400">Loading resources...</div>
+              <div className="col-span-full py-12 text-center text-xs text-slate-400 font-medium">Loading resources...</div>
             ) : !Array.isArray(filteredResources) || filteredResources.length === 0 ? (
-              <div className="col-span-full py-12 text-center text-xs text-slate-400">No resources found.</div>
+              <div className="col-span-full py-12 text-center text-xs text-slate-500 bg-white rounded-3xl border border-slate-200/80 p-8">
+                No resources found.
+              </div>
             ) : (
               (filteredResources || []).map((res) => (
                 <div
                   key={res.id}
-                  className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition shadow-lg flex flex-col justify-between space-y-4"
+                  className="bg-white border border-slate-200/90 rounded-3xl p-5 hover:border-slate-300 hover:shadow-md transition shadow-sm flex flex-col justify-between space-y-4"
                 >
                   <div>
-                    <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+                    <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                       <div>
                         <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">
                           {res.type?.replace('_', ' ')}
                         </span>
-                        <h3 className="font-bold text-sm text-slate-100 mt-0.5">{res.name}</h3>
+                        <h3 className="font-bold text-sm text-slate-900 mt-0.5">{res.name}</h3>
                       </div>
                       <StatusBadge status={res.status} />
                     </div>
 
-                    <div className="mt-3 space-y-2 text-xs text-slate-300">
-                      <p className="text-[11px] text-slate-400 font-medium">
-                        Depot: <span className="text-slate-200">{res.location}</span>
+                    <div className="mt-3.5 space-y-2 text-xs text-slate-600">
+                      <p className="text-[11px] font-medium">
+                        Depot: <span className="text-slate-900 font-semibold">{res.location}</span>
                       </p>
-                      <p className="text-[11px] text-slate-400 font-medium">
-                        Owner: <span className="text-indigo-400">{res.organization_name || 'State Depot'}</span>
+                      <p className="text-[11px] font-medium">
+                        Owner: <span className="text-indigo-600 font-semibold">{res.organization_name || 'State Depot'}</span>
                       </p>
 
-                      <div className="grid grid-cols-2 gap-2 p-2 rounded-lg bg-slate-850 border border-slate-800 text-center mt-3">
+                      <div className="grid grid-cols-2 gap-2 p-2.5 rounded-2xl bg-slate-50 border border-slate-200/60 text-center mt-3">
                         <div>
-                          <p className="text-[10px] text-slate-400">Total Stock</p>
-                          <p className="text-base font-bold text-slate-200">{res.quantity}</p>
+                          <p className="text-[10px] text-slate-500 font-semibold">Total Stock</p>
+                          <p className="text-base font-bold text-slate-900">{res.quantity}</p>
                         </div>
                         <div>
-                          <p className="text-[10px] text-slate-400">Available</p>
-                          <p className={`text-base font-bold ${res.available_quantity > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                          <p className="text-[10px] text-slate-500 font-semibold">Available</p>
+                          <p className={`text-base font-bold ${res.available_quantity > 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                             {res.available_quantity}
                           </p>
                         </div>
                       </div>
 
                       {res.assigned_incident_title && (
-                        <p className="text-[11px] text-amber-400 mt-2">
-                          Deployed to: <span className="font-semibold">{res.assigned_incident_code} ({res.assigned_incident_title})</span>
+                        <p className="text-[11px] text-amber-700 font-medium mt-2 p-2 rounded-xl bg-amber-50 border border-amber-200/60">
+                          Deployed to: <span className="font-bold">{res.assigned_incident_code} ({res.assigned_incident_title})</span>
                         </p>
                       )}
                     </div>
@@ -216,37 +220,37 @@ export default function ResourcePage() {
 
       {/* Requests View */}
       {activeTab === 'requests' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="bg-white border border-slate-200/90 rounded-3xl p-6 shadow-sm space-y-4">
+          <div className="flex items-center justify-between pb-3.5 border-b border-slate-100">
             <div>
-              <h3 className="text-sm font-bold text-slate-100">Emergency Requisition Pipeline</h3>
-              <p className="text-xs text-slate-400">Field requisitions requiring EOC allocation and fulfillment.</p>
+              <h3 className="text-sm font-bold text-slate-900">Emergency Requisition Pipeline</h3>
+              <p className="text-xs text-slate-500 font-medium">Field requisitions requiring EOC allocation and fulfillment.</p>
             </div>
           </div>
 
           {!Array.isArray(requests) || requests.length === 0 ? (
-            <p className="text-xs text-slate-400 py-8 text-center">No active resource requests.</p>
+            <p className="text-xs text-slate-400 py-8 text-center font-medium">No active resource requests.</p>
           ) : (
-            <div className="divide-y divide-slate-800">
+            <div className="divide-y divide-slate-100">
               {(requests || []).map((req) => (
                 <div key={req.id} className="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
                   <div className="space-y-1">
                     <div className="flex items-center space-x-2">
-                      <span className="font-mono text-blue-400 font-bold">{req.incident_code}</span>
-                      <span className="text-slate-400">•</span>
-                      <span className="font-bold text-slate-200">{req.incident_title}</span>
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                        req.urgency === 'critical' ? 'bg-red-500/20 text-red-400' : 'bg-orange-500/20 text-orange-400'
+                      <span className="font-mono text-slate-900 font-bold">{req.incident_code}</span>
+                      <span className="text-slate-300">•</span>
+                      <span className="font-bold text-slate-900">{req.incident_title}</span>
+                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                        req.urgency === 'critical' ? 'bg-rose-50 text-rose-700 border border-rose-200' : 'bg-amber-50 text-amber-700 border border-amber-200'
                       }`}>
                         {req.urgency}
                       </span>
                     </div>
 
-                    <p className="text-slate-300 font-semibold text-sm capitalize">
+                    <p className="text-slate-900 font-bold text-sm capitalize">
                       Requires: {req.quantity}x {req.resource_type.replace('_', ' ')}
                     </p>
-                    <p className="text-[11px] text-slate-400">{req.description}</p>
-                    <p className="text-[10px] text-slate-500">
+                    <p className="text-[11px] text-slate-600 font-medium">{req.description}</p>
+                    <p className="text-[10px] text-slate-400">
                       Filed by: {req.requested_by_name || 'Field Officer'} on {new Date(req.created_at).toLocaleString()}
                     </p>
                   </div>
@@ -261,9 +265,9 @@ export default function ResourcePage() {
                           const matching = resources.find((r) => r.type === req.resource_type && r.available_quantity > 0);
                           if (matching) setAllocatingResourceId(matching.id);
                         }}
-                        className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-600/30 transition flex items-center space-x-1"
+                        className="px-4 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md transition flex items-center space-x-1.5"
                       >
-                        <SlidersHorizontal className="w-3.5 h-3.5" />
+                        <SlidersHorizontal className="w-3.5 h-3.5 text-indigo-400" />
                         <span>Allocate Asset</span>
                       </button>
                     )}
@@ -277,29 +281,29 @@ export default function ResourcePage() {
 
       {/* Allocation Modal */}
       {selectedRequest && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 space-y-4">
-            <h3 className="text-base font-bold text-slate-100">Fulfill Resource Requisition</h3>
-            <div className="p-3 bg-slate-850 rounded-lg text-xs space-y-1">
-              <p className="font-bold text-slate-200">{selectedRequest.incident_code}: {selectedRequest.incident_title}</p>
-              <p className="text-blue-400">Requirement: {selectedRequest.quantity}x {selectedRequest.resource_type}</p>
-              <p className="text-slate-400 text-[11px]">{selectedRequest.description}</p>
+        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+            <h3 className="text-base font-bold text-slate-900">Fulfill Resource Requisition</h3>
+            <div className="p-3.5 bg-slate-50 rounded-2xl border border-slate-200/60 text-xs space-y-1">
+              <p className="font-bold text-slate-900">{selectedRequest.incident_code}: {selectedRequest.incident_title}</p>
+              <p className="text-indigo-600 font-semibold">Requirement: {selectedRequest.quantity}x {selectedRequest.resource_type}</p>
+              <p className="text-slate-600 text-[11px]">{selectedRequest.description}</p>
             </div>
 
             <form onSubmit={handleAssignResource} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Select Matching Stock in Inventory
                 </label>
                 {matchingAvailableResources.length === 0 ? (
-                  <p className="text-xs text-red-400 py-2">
+                  <p className="text-xs text-rose-600 py-2 font-medium">
                     No available {selectedRequest.resource_type} items with stock &gt; 0 currently in registry.
                   </p>
                 ) : (
                   <select
                     value={allocatingResourceId}
                     onChange={(e) => setAllocatingResourceId(e.target.value)}
-                    className="w-full bg-slate-800 border border-slate-700 text-xs text-slate-100 rounded-lg p-2.5 focus:outline-none"
+                    className="w-full bg-slate-50 border border-slate-200 text-xs text-slate-900 rounded-xl p-2.5 focus:outline-none font-medium"
                   >
                     {matchingAvailableResources.map((r) => (
                       <option key={r.id} value={r.id}>
@@ -310,18 +314,18 @@ export default function ResourcePage() {
                 )}
               </div>
 
-              <div className="flex justify-end space-x-2 pt-2">
+              <div className="flex justify-end space-x-2 pt-2 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setSelectedRequest(null)}
-                  className="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold"
+                  className="px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={matchingAvailableResources.length === 0}
-                  className="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold disabled:opacity-50"
+                  className="px-5 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition shadow-sm disabled:opacity-40"
                 >
                   Confirm Dispatch
                 </button>

@@ -20,6 +20,7 @@ import {
   Info
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { createGpsPin } from '../utils/mapPins';
 
 // Custom DivIcons for Leaflet
 function createCustomIcon(emoji, bgHex, isCritical = false) {
@@ -83,6 +84,7 @@ export default function MapPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [flyTarget, setFlyTarget] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [mapStyle, setMapStyle] = useState('osm'); // 'osm' | 'satellite' | 'topo'
 
   const fetchGisLayers = () => {
     setLoading(true);
@@ -136,83 +138,73 @@ export default function MapPage() {
   const defaultCenter = [29.0588, 76.0856];
 
   return (
-    <div className="h-[calc(100vh-6rem)] flex flex-col space-y-3">
+    <div className="h-[calc(100vh-8rem)] flex flex-col space-y-4">
       {/* Control Toolbar */}
-      <div className="bg-slate-900 border border-slate-800 p-3 rounded-xl flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div className="bg-white border border-ink-100/80 p-4 rounded-3xl shadow-soft flex flex-wrap items-center justify-between gap-4 text-xs">
         {/* Layer Toggles */}
         <div className="flex items-center space-x-2 sm:space-x-4 overflow-x-auto py-1">
-          <span className="font-bold text-slate-400 flex items-center space-x-1 shrink-0">
-            <Layers className="w-3.5 h-3.5 text-blue-400" />
+          <span className="font-mono text-[10px] font-bold text-ink-400 uppercase tracking-wider flex items-center space-x-1 shrink-0">
+            <Layers className="w-3.5 h-3.5 text-ink-600" />
             <span>LAYERS:</span>
           </span>
 
-          <label className="flex items-center space-x-1.5 cursor-pointer shrink-0">
+          <label className="flex items-center space-x-2 cursor-pointer shrink-0 px-3 py-1.5 rounded-full bg-cream-50 hover:bg-cream-100 border border-ink-100/60 transition">
             <input
               type="checkbox"
               checked={layers.incidents}
               onChange={(e) => setLayers({ ...layers, incidents: e.target.checked })}
-              className="rounded bg-slate-800 border-slate-700 text-red-600 focus:ring-0"
+              className="rounded text-rose-600 focus:ring-0"
             />
-            <span className="text-slate-200">Disasters ({filteredIncidents.length})</span>
+            <span className="text-ink-800 font-semibold">Hazards ({filteredIncidents.length})</span>
           </label>
 
-          <label className="flex items-center space-x-1.5 cursor-pointer shrink-0">
+          <label className="flex items-center space-x-2 cursor-pointer shrink-0 px-3 py-1.5 rounded-full bg-cream-50 hover:bg-cream-100 border border-ink-100/60 transition">
             <input
               type="checkbox"
               checked={layers.shelters}
               onChange={(e) => setLayers({ ...layers, shelters: e.target.checked })}
-              className="rounded bg-slate-800 border-slate-700 text-blue-600 focus:ring-0"
+              className="rounded text-emerald-600 focus:ring-0"
             />
-            <span className="text-slate-200">Shelters ({gisData.shelters.length})</span>
+            <span className="text-ink-800 font-semibold">Shelters ({gisData.shelters.length})</span>
           </label>
 
-          <label className="flex items-center space-x-1.5 cursor-pointer shrink-0">
+          <label className="flex items-center space-x-2 cursor-pointer shrink-0 px-3 py-1.5 rounded-full bg-cream-50 hover:bg-cream-100 border border-ink-100/60 transition">
             <input
               type="checkbox"
               checked={layers.teams}
               onChange={(e) => setLayers({ ...layers, teams: e.target.checked })}
-              className="rounded bg-slate-800 border-slate-700 text-emerald-600 focus:ring-0"
+              className="rounded text-blue-600 focus:ring-0"
             />
-            <span className="text-slate-200">Response Teams ({gisData.teams.length})</span>
+            <span className="text-ink-800 font-semibold">Teams ({gisData.teams.length})</span>
           </label>
 
-          <label className="flex items-center space-x-1.5 cursor-pointer shrink-0">
+          <label className="flex items-center space-x-2 cursor-pointer shrink-0 px-3 py-1.5 rounded-full bg-cream-50 hover:bg-cream-100 border border-ink-100/60 transition">
             <input
               type="checkbox"
               checked={layers.resources}
               onChange={(e) => setLayers({ ...layers, resources: e.target.checked })}
-              className="rounded bg-slate-800 border-slate-700 text-purple-600 focus:ring-0"
+              className="rounded text-purple-600 focus:ring-0"
             />
-            <span className="text-slate-200">Assets ({gisData.resources.length})</span>
+            <span className="text-ink-800 font-semibold">Assets ({gisData.resources.length})</span>
           </label>
 
-          <label className="flex items-center space-x-1.5 cursor-pointer shrink-0">
+          <label className="flex items-center space-x-2 cursor-pointer shrink-0 px-3 py-1.5 rounded-full bg-cream-50 hover:bg-cream-100 border border-ink-100/60 transition">
             <input
               type="checkbox"
               checked={layers.alerts}
               onChange={(e) => setLayers({ ...layers, alerts: e.target.checked })}
-              className="rounded bg-slate-800 border-slate-700 text-amber-600 focus:ring-0"
+              className="rounded text-amber-600 focus:ring-0"
             />
-            <span className="text-slate-200">Alert Zones ({gisData.alerts.length})</span>
-          </label>
-
-          <label className="flex items-center space-x-1.5 cursor-pointer shrink-0">
-            <input
-              type="checkbox"
-              checked={layers.trainings}
-              onChange={(e) => setLayers({ ...layers, trainings: e.target.checked })}
-              className="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0"
-            />
-            <span className="text-slate-200">Drills ({gisData.trainings.length})</span>
+            <span className="text-ink-800 font-semibold">Alerts ({gisData.alerts.length})</span>
           </label>
         </div>
 
         {/* Filters & Search */}
-        <div className="flex items-center space-x-2 shrink-0">
+        <div className="flex items-center space-x-2.5 shrink-0">
           <select
             value={severityFilter}
             onChange={(e) => setSeverityFilter(e.target.value)}
-            className="bg-slate-800 border border-slate-700 text-slate-200 rounded-lg px-2.5 py-1.5 text-xs focus:outline-none"
+            className="bg-cream-50 border border-ink-100 text-ink-800 font-semibold rounded-full px-3.5 py-2 text-xs focus:outline-none"
           >
             <option value="all">All Severities</option>
             <option value="critical">🔴 Critical</option>
@@ -221,21 +213,32 @@ export default function MapPage() {
             <option value="low">🟢 Low</option>
           </select>
 
+          <select
+            value={mapStyle}
+            onChange={(e) => setMapStyle(e.target.value)}
+            className="bg-cream-50 border border-ink-100 text-ink-800 font-semibold rounded-full px-3.5 py-2 text-xs focus:outline-none"
+            title="Base Map Provider"
+          >
+            <option value="osm">🗺️ OpenStreetMap (Free)</option>
+            <option value="satellite">🛰️ ESRI Satellite (Free)</option>
+            <option value="topo">⛰️ OpenTopoMap (Free)</option>
+          </select>
+
           <form onSubmit={handleSearch} className="relative flex items-center">
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5" />
+            <Search className="w-3.5 h-3.5 text-ink-400 absolute left-3" />
             <input
               type="text"
               placeholder="Search district / incident..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-slate-800 border border-slate-700 text-slate-200 rounded-lg pl-8 pr-2 py-1.5 text-xs w-44 sm:w-56 focus:outline-none focus:border-blue-500"
+              className="bg-cream-50 border border-ink-100 text-ink-900 rounded-full pl-9 pr-3 py-2 text-xs w-44 sm:w-56 focus:outline-none focus:bg-white focus:border-ink-400"
             />
           </form>
 
           <button
             onClick={fetchGisLayers}
             disabled={loading}
-            className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700"
+            className="p-2 rounded-full bg-cream-50 hover:bg-cream-100 text-ink-600 border border-ink-100 shadow-sm"
             title="Refresh map layers"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
@@ -244,7 +247,7 @@ export default function MapPage() {
       </div>
 
       {/* Map Body & Side Detail Panel */}
-      <div className="flex-1 rounded-2xl overflow-hidden border border-slate-800 relative shadow-2xl flex">
+      <div className="flex-1 rounded-3xl overflow-hidden border border-ink-100/80 relative shadow-soft flex bg-white">
         <MapContainer
           center={defaultCenter}
           zoom={8}
@@ -253,21 +256,42 @@ export default function MapPage() {
         >
           {flyTarget && <FlyToLocation target={flyTarget} />}
 
-          {/* CartoDB Dark Matter Tiles for Emergency Operations Room Feel */}
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-          />
+          {/* 100% Free Tile Providers (No API Key Required) */}
+          {mapStyle === 'osm' && (
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              maxZoom={19}
+            />
+          )}
+
+          {mapStyle === 'satellite' && (
+            <TileLayer
+              attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+              url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+              maxZoom={18}
+            />
+          )}
+
+          {mapStyle === 'topo' && (
+            <TileLayer
+              attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>'
+              url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+              maxZoom={17}
+            />
+          )}
 
           {/* 1. Incident Markers */}
           {layers.incidents &&
             (filteredIncidents || []).map((inc) => {
               const isCrit = inc.severity === 'critical';
-              const icon = createCustomIcon(
-                inc.disaster_icon || DISASTER_ICONS[inc.disaster_type] || '⚠️',
-                SEVERITY_COLORS[inc.severity]?.hex || '#ef4444',
-                isCrit
-              );
+              const colorHex = SEVERITY_COLORS[inc.severity]?.hex || '#ef4444';
+              const icon = createGpsPin({
+                type: inc.disaster_type || 'Warning',
+                color: colorHex,
+                isCritical: isCrit,
+                size: isCrit ? 42 : 36,
+              });
 
               return (
                 <Marker
@@ -307,7 +331,12 @@ export default function MapPage() {
             (gisData?.shelters || []).map((s) => {
               const occRate = s.occupancy_pct || 0;
               const colorHex = occRate >= 90 ? '#ef4444' : occRate >= 70 ? '#f97316' : '#10b981';
-              const icon = createCustomIcon('🏠', colorHex);
+              const icon = createGpsPin({
+                type: 'Shelter',
+                color: colorHex,
+                badgeText: `${occRate}%`,
+                size: 36,
+              });
 
               return (
                 <Marker
@@ -349,7 +378,12 @@ export default function MapPage() {
           {/* 3. Response Teams */}
           {layers.teams &&
             (gisData?.teams || []).map((t) => {
-              const icon = createCustomIcon('🛡️', '#0284c7');
+              const icon = createGpsPin({
+                type: 'Team',
+                color: '#0284c7',
+                size: 36,
+              });
+
               return (
                 <Marker
                   key={`tm-${t.id}`}
@@ -371,7 +405,12 @@ export default function MapPage() {
           {/* 4. Resources */}
           {layers.resources &&
             (gisData?.resources || []).map((r) => {
-              const icon = createCustomIcon('📦', '#a855f7');
+              const icon = createGpsPin({
+                type: 'Resource',
+                color: '#a855f7',
+                size: 34,
+              });
+
               return (
                 <Marker
                   key={`rc-${r.id}`}
@@ -422,7 +461,11 @@ export default function MapPage() {
           {/* 6. Training Activities */}
           {layers.trainings &&
             (gisData?.trainings || []).map((tr) => {
-              const icon = createCustomIcon('🎓', '#6366f1');
+              const icon = createGpsPin({
+                type: 'Training',
+                color: '#6366f1',
+                size: 34,
+              });
               return (
                 <Marker
                   key={`tr-${tr.id}`}
@@ -442,23 +485,30 @@ export default function MapPage() {
         </MapContainer>
 
         {/* Legend Overlay */}
-        <div className="absolute bottom-4 left-4 z-[1000] bg-slate-900/90 backdrop-blur-md p-3 rounded-xl border border-slate-800 text-[11px] text-slate-300 shadow-xl pointer-events-auto space-y-1.5 hidden md:block">
-          <p className="font-bold text-slate-200 text-xs border-b border-slate-800 pb-1">GIS Map Legend</p>
-          <div className="flex items-center space-x-2">
-            <span className="w-3 h-3 rounded-full bg-red-600 animate-pulse"></span>
-            <span>Critical Incident (Flood, Fire, Collapse)</span>
+        <div className="absolute bottom-4 left-4 z-[1000] bg-slate-900/95 backdrop-blur-md p-3.5 rounded-xl border border-slate-700/80 text-[11px] text-slate-300 shadow-2xl pointer-events-auto space-y-2 hidden md:block max-w-[280px]">
+          <div className="flex items-center justify-between border-b border-slate-800 pb-1.5">
+            <p className="font-bold text-slate-100 text-xs tracking-wide">EOC Operations Legend</p>
+            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">GPS PINS</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <span className="w-3 h-3 rounded-full bg-orange-500"></span>
+          <div className="flex items-center space-x-2.5">
+            <span className="w-3.5 h-3.5 rounded-full bg-red-600 ring-2 ring-red-400 animate-pulse shrink-0"></span>
+            <span>Critical Hazard (Flood, Fire, Collapse)</span>
+          </div>
+          <div className="flex items-center space-x-2.5">
+            <span className="w-3.5 h-3.5 rounded-full bg-orange-500 ring-1 ring-orange-300 shrink-0"></span>
             <span>High Severity Disaster</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
-            <span>Safe Emergency Shelter</span>
+          <div className="flex items-center space-x-2.5">
+            <span className="w-3.5 h-3.5 rounded-full bg-emerald-500 ring-1 ring-emerald-300 shrink-0"></span>
+            <span>Emergency Relief Shelter (Occupancy %)</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <span className="w-3 h-3 rounded-full bg-blue-500"></span>
-            <span>NDRF/SDRF Response Team</span>
+          <div className="flex items-center space-x-2.5">
+            <span className="w-3.5 h-3.5 rounded-full bg-sky-500 ring-1 ring-sky-300 shrink-0"></span>
+            <span>NDRF / SDRF Strike Teams</span>
+          </div>
+          <div className="flex items-center space-x-2.5">
+            <span className="w-3.5 h-3.5 rounded-full bg-purple-500 ring-1 ring-purple-300 shrink-0"></span>
+            <span>Mobilized Disaster Relief Assets</span>
           </div>
         </div>
       </div>

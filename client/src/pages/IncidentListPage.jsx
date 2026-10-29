@@ -64,13 +64,15 @@ export default function IncidentListPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-slate-900 p-5 rounded-2xl border border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm">
         <div>
-          <h1 className="text-xl font-bold text-slate-100 flex items-center space-x-2">
-            <Flame className="w-5 h-5 text-red-500" />
+          <h1 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center space-x-2.5">
+            <span className="p-2 rounded-xl bg-rose-50 text-rose-600">
+              <Flame className="w-5 h-5" />
+            </span>
             <span>Incident Registry & Emergency Tracking</span>
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 mt-1.5 font-medium">
             Real-time multi-hazard log across all districts with severity categorization and response status.
           </p>
         </div>
@@ -78,24 +80,24 @@ export default function IncidentListPage() {
         {isAtLeast('Volunteer') && (
           <Link
             to="/incidents/new"
-            className="flex items-center space-x-1.5 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-lg shadow-red-600/30 transition self-start sm:self-auto"
+            className="flex items-center space-x-2 px-5 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md transition self-start sm:self-auto"
           >
-            <PlusCircle className="w-4 h-4" />
+            <PlusCircle className="w-4 h-4 text-rose-400" />
             <span>Report New Incident</span>
           </Link>
         )}
       </div>
 
       {/* Filter & Search Bar */}
-      <div className="bg-slate-900 p-4 rounded-xl border border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-sm flex flex-wrap items-center justify-between gap-3 text-xs">
         <form onSubmit={handleSearchSubmit} className="flex-1 min-w-[240px] relative">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
           <input
             type="text"
             placeholder="Search incident ID, title, or location..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-lg pl-9 pr-3 py-2 text-xs focus:outline-none focus:border-blue-500"
+            className="w-full bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 rounded-xl pl-9 pr-3.5 py-2 text-xs focus:outline-none focus:border-slate-400 transition"
           />
         </form>
 
@@ -103,7 +105,7 @@ export default function IncidentListPage() {
           <select
             value={severityFilter}
             onChange={(e) => setSeverityFilter(e.target.value)}
-            className="bg-slate-800 border border-slate-700 text-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none"
+            className="bg-slate-50 border border-slate-200 text-slate-800 font-semibold rounded-xl px-3.5 py-2 text-xs focus:outline-none"
           >
             <option value="">All Severities</option>
             <option value="critical">Critical</option>
@@ -115,7 +117,7 @@ export default function IncidentListPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-slate-800 border border-slate-700 text-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none"
+            className="bg-slate-50 border border-slate-200 text-slate-800 font-semibold rounded-xl px-3.5 py-2 text-xs focus:outline-none"
           >
             <option value="">All Statuses</option>
             <option value="reported">Reported</option>
@@ -128,10 +130,10 @@ export default function IncidentListPage() {
           <button
             onClick={fetchIncidents}
             disabled={loading}
-            className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition"
+            className="p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200 transition"
             title="Refresh list"
           >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-slate-900' : ''}`} />
           </button>
         </div>
       </div>
@@ -139,64 +141,66 @@ export default function IncidentListPage() {
       {/* Incident Grid Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {loading ? (
-          <div className="col-span-full py-12 text-center text-xs text-slate-400">Loading incident data...</div>
+          <div className="col-span-full py-12 text-center text-xs text-slate-400 font-medium">Loading incident data...</div>
         ) : !Array.isArray(incidents) || incidents.length === 0 ? (
-          <div className="col-span-full py-12 text-center text-xs text-slate-400">No incidents match the filters.</div>
+          <div className="col-span-full py-12 text-center text-xs text-slate-500 bg-white rounded-3xl border border-slate-200/80 p-8">
+            No incidents match the filters.
+          </div>
         ) : (
           (incidents || []).map((inc) => (
             <div
               key={inc.id}
-              className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition shadow-lg flex flex-col justify-between space-y-4"
+              className="bg-white border border-slate-200/90 rounded-3xl p-5 hover:border-slate-300 hover:shadow-md transition shadow-sm flex flex-col justify-between space-y-4"
             >
               <div>
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xl">{inc.disaster_icon || DISASTER_ICONS[inc.disaster_type] || '⚠️'}</span>
+                <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                  <div className="flex items-center space-x-2.5">
+                    <span className="text-xl p-1.5 rounded-xl bg-slate-50 border border-slate-100">{inc.disaster_icon || DISASTER_ICONS[inc.disaster_type] || '⚠️'}</span>
                     <div>
-                      <span className="font-mono text-xs font-bold text-blue-400">{inc.incident_id}</span>
-                      <p className="text-[10px] text-slate-400 uppercase font-semibold">{inc.disaster_type}</p>
+                      <span className="font-mono text-xs font-bold text-slate-900">{inc.incident_id}</span>
+                      <p className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">{inc.disaster_type}</p>
                     </div>
                   </div>
                   <SeverityBadge severity={inc.severity} />
                 </div>
 
-                <h3 className="font-bold text-sm text-slate-100 mt-3 line-clamp-1">{inc.title}</h3>
-                <p className="text-xs text-slate-400 mt-1 line-clamp-2">{inc.description}</p>
+                <h3 className="font-bold text-sm text-slate-900 mt-3 line-clamp-1">{inc.title}</h3>
+                <p className="text-xs text-slate-600 mt-1 line-clamp-2 leading-relaxed">{inc.description}</p>
 
-                <div className="mt-4 space-y-2 text-xs text-slate-300">
-                  <div className="flex items-center justify-between text-slate-400 text-[11px]">
-                    <span className="flex items-center space-x-1">
-                      <MapPin className="w-3.5 h-3.5 text-slate-500" />
-                      <span>{inc.location_name || 'Rohtak'}</span>
+                <div className="mt-4 space-y-2.5 text-xs text-slate-700">
+                  <div className="flex items-center justify-between text-slate-500 text-[11px] font-medium">
+                    <span className="flex items-center space-x-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                      <span className="font-semibold text-slate-700">{inc.location_name || 'Rohtak'}</span>
                     </span>
-                    <span className="flex items-center space-x-1">
-                      <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                    <span className="flex items-center space-x-1.5">
+                      <Calendar className="w-3.5 h-3.5 text-slate-400" />
                       <span>{new Date(inc.created_at).toLocaleDateString()}</span>
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-2 p-2 rounded-lg bg-slate-800/60 border border-slate-800 text-center">
+                  <div className="grid grid-cols-3 gap-2 p-2.5 rounded-2xl bg-slate-50 border border-slate-200/60 text-center">
                     <div>
-                      <p className="text-[10px] text-slate-400">Affected</p>
-                      <p className="font-bold text-slate-200">{inc.estimated_affected?.toLocaleString() || 0}</p>
+                      <p className="text-[10px] text-slate-500 font-semibold">Affected</p>
+                      <p className="font-bold text-slate-900">{inc.estimated_affected?.toLocaleString() || 0}</p>
                     </div>
                     <div>
-                      <p className="text-[10px] text-slate-400">Evacuated</p>
-                      <p className="font-bold text-emerald-400">{inc.evacuated?.toLocaleString() || 0}</p>
+                      <p className="text-[10px] text-slate-500 font-semibold">Evacuated</p>
+                      <p className="font-bold text-emerald-600">{inc.evacuated?.toLocaleString() || 0}</p>
                     </div>
                     <div>
-                      <p className="text-[10px] text-slate-400">Casualties</p>
-                      <p className="font-bold text-red-400">{inc.casualties || 0}</p>
+                      <p className="text-[10px] text-slate-500 font-semibold">Casualties</p>
+                      <p className="font-bold text-rose-600">{inc.casualties || 0}</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-slate-800 flex items-center justify-between">
+              <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
                 <StatusBadge status={inc.status} />
                 <Link
                   to={`/incidents/${inc.id}`}
-                  className="flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/30 text-xs font-semibold transition"
+                  className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-slate-50 hover:bg-slate-900 text-slate-700 hover:text-white border border-slate-200 text-xs font-semibold transition"
                 >
                   <Eye className="w-3.5 h-3.5" />
                   <span>View Console</span>

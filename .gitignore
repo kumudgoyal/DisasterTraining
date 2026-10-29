@@ -30,3 +30,11 @@ yarn-error.log*
 Thumbs.db
 .vscode/
 .idea/
+
+# Build caches & Next.js leftovers
+.turbo/
+.next/
+apps/web/.next/
+*.tsbuildinfo
+next-env.d.ts
+

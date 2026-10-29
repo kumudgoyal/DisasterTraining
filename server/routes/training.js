@@ -45,7 +45,7 @@ router.get('/analytics', authenticate, async (req, res) => {
 
     const byDisasterType = await db('training_programs')
       .leftJoin('disaster_types', 'training_programs.disaster_type_id', 'disaster_types.id')
-      .select(db.raw('COALESCE(disaster_types.name, "Multi-hazard / General") as type_name'))
+      .select(db.raw("COALESCE(disaster_types.name, 'Multi-hazard / General') as type_name"))
       .count('training_programs.id as count')
       .sum('training_programs.participants_count as participants')
       .groupBy('type_name');

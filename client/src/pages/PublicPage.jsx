@@ -14,6 +14,7 @@ import {
   HeartHandshake,
   CheckCircle2
 } from 'lucide-react';
+import LiveGpsMapWidget from '../components/map/LiveGpsMapWidget';
 
 export default function PublicPage() {
   const [alerts, setAlerts] = useState([]);
@@ -128,6 +129,11 @@ export default function PublicPage() {
             ))}
           </div>
         )}
+      </div>
+
+      {/* Live Operations & Safe Haven GPS Map */}
+      <div className="space-y-4">
+        <LiveGpsMapWidget className="h-96" />
       </div>
 
       {/* Safe Relief Shelters Locator */}

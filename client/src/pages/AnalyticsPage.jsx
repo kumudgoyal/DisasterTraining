@@ -79,84 +79,86 @@ export default function AnalyticsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-slate-900 p-5 rounded-2xl border border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm">
         <div>
-          <h1 className="text-xl font-bold text-slate-100 flex items-center space-x-2">
-            <BarChart3 className="w-5 h-5 text-blue-500" />
+          <h1 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center space-x-2.5">
+            <span className="p-2 rounded-xl bg-blue-50 text-blue-600">
+              <BarChart3 className="w-5 h-5" />
+            </span>
             <span>Disaster Intelligence & SITREP Reporting</span>
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 mt-1.5 font-medium">
             Aggregated metrics on response speed, cross-district casualty trends, logistical bottlenecks, and official SITREPs.
           </p>
         </div>
 
         <button
           onClick={printSitrep}
-          className="flex items-center space-x-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-600/30 transition self-start sm:self-auto"
+          className="flex items-center space-x-2 px-5 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md transition self-start sm:self-auto"
         >
-          <Printer className="w-4 h-4" />
+          <Printer className="w-4 h-4 text-blue-400" />
           <span>Export State SITREP</span>
         </button>
       </div>
 
       {/* Top 4 Impact Counters */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl">
-          <p className="text-[10px] uppercase font-bold text-slate-400">Evacuated to Safety</p>
-          <p className="text-2xl font-bold text-emerald-400 mt-1">
+        <div className="p-5 bg-white border border-slate-200/90 rounded-3xl shadow-sm">
+          <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Evacuated to Safety</p>
+          <p className="text-2xl font-black text-emerald-600 mt-1">
             {sitrep?.overview?.total_evacuated?.toLocaleString() || 0}
           </p>
-          <p className="text-xs text-slate-400 mt-0.5">Persons relocated</p>
+          <p className="text-xs text-slate-500 mt-0.5 font-medium">Persons relocated</p>
         </div>
 
-        <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl">
-          <p className="text-[10px] uppercase font-bold text-slate-400">Active Alert Coverage</p>
-          <p className="text-2xl font-bold text-amber-400 mt-1">
+        <div className="p-5 bg-white border border-slate-200/90 rounded-3xl shadow-sm">
+          <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Active Alert Coverage</p>
+          <p className="text-2xl font-black text-amber-600 mt-1">
             {sitrep?.overview?.active_alerts_count || 0}
           </p>
-          <p className="text-xs text-slate-400 mt-0.5">High-priority warnings</p>
+          <p className="text-xs text-slate-500 mt-0.5 font-medium">High-priority warnings</p>
         </div>
 
-        <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl">
-          <p className="text-[10px] uppercase font-bold text-slate-400">Response Forces</p>
-          <p className="text-2xl font-bold text-blue-400 mt-1">
+        <div className="p-5 bg-white border border-slate-200/90 rounded-3xl shadow-sm">
+          <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Response Forces</p>
+          <p className="text-2xl font-black text-blue-600 mt-1">
             {sitrep?.overview?.deployed_teams_count || 0}
           </p>
-          <p className="text-xs text-slate-400 mt-0.5">Battalions engaged</p>
+          <p className="text-xs text-slate-500 mt-0.5 font-medium">Battalions engaged</p>
         </div>
 
-        <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl">
-          <p className="text-[10px] uppercase font-bold text-slate-400">Casualty Count</p>
-          <p className="text-2xl font-bold text-red-400 mt-1">
+        <div className="p-5 bg-white border border-slate-200/90 rounded-3xl shadow-sm">
+          <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Casualty Count</p>
+          <p className="text-2xl font-black text-rose-600 mt-1">
             {sitrep?.overview?.total_casualties || 0}
           </p>
-          <p className="text-xs text-slate-400 mt-0.5">{sitrep?.overview?.total_injured || 0} Injured in care</p>
+          <p className="text-xs text-slate-500 mt-0.5 font-medium">{sitrep?.overview?.total_injured || 0} Injured in care</p>
         </div>
       </div>
 
       {/* Primary Analytics Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* 1. Incidents by Type */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-slate-100">Disaster Frequency by Hazard Type</h3>
+        <div className="bg-white border border-slate-200/90 rounded-3xl p-6 shadow-sm space-y-4">
+          <h3 className="text-sm font-bold text-slate-900">Disaster Frequency by Hazard Type</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={incidentAnalytics?.by_type || []} margin={{ top: 10, right: 10, left: -20, bottom: 20 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="disaster_type" stroke="#64748b" fontSize={11} angle={-25} textAnchor="end" />
-                <YAxis stroke="#64748b" fontSize={11} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="disaster_type" stroke="#94a3b8" fontSize={11} angle={-25} textAnchor="end" />
+                <YAxis stroke="#94a3b8" fontSize={11} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#f8fafc', borderRadius: 8, fontSize: 12 }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', color: '#0f172a', borderRadius: 12, fontSize: 12, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                 />
-                <Bar dataKey="count" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="count" fill="#0f172a" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* 2. Severity Breakdown */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-slate-100">Severity Distribution</h3>
+        <div className="bg-white border border-slate-200/90 rounded-3xl p-6 shadow-sm space-y-4">
+          <h3 className="text-sm font-bold text-slate-900">Severity Distribution</h3>
           <div className="h-64 flex items-center justify-center">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -174,7 +176,7 @@ export default function AnalyticsPage() {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#f8fafc', borderRadius: 8, fontSize: 12 }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', color: '#0f172a', borderRadius: 12, fontSize: 12, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -182,8 +184,8 @@ export default function AnalyticsPage() {
         </div>
 
         {/* 3. Infrastructure Damage Loss */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-slate-100">Economic Loss by Infrastructure Sector (in ₹ Crores)</h3>
+        <div className="bg-white border border-slate-200/90 rounded-3xl p-6 shadow-sm space-y-4">
+          <h3 className="text-sm font-bold text-slate-900">Economic Loss by Infrastructure Sector (in ₹ Crores)</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
@@ -193,21 +195,21 @@ export default function AnalyticsPage() {
                 }))}
                 margin={{ top: 10, right: 10, left: -10, bottom: 20 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="infrastructure_type" stroke="#64748b" fontSize={11} angle={-25} textAnchor="end" />
-                <YAxis stroke="#64748b" fontSize={11} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="infrastructure_type" stroke="#94a3b8" fontSize={11} angle={-25} textAnchor="end" />
+                <YAxis stroke="#94a3b8" fontSize={11} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#f8fafc', borderRadius: 8, fontSize: 12 }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', color: '#0f172a', borderRadius: 12, fontSize: 12, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                 />
-                <Bar dataKey="lossCr" name="Loss (₹ Cr)" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="lossCr" name="Loss (₹ Cr)" fill="#d97706" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* 4. Strike Team Readiness */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-slate-100">Response Team Deployment Status</h3>
+        <div className="bg-white border border-slate-200/90 rounded-3xl p-6 shadow-sm space-y-4">
+          <h3 className="text-sm font-bold text-slate-900">Response Team Deployment Status</h3>
           <div className="h-64 flex items-center justify-center">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -226,7 +228,7 @@ export default function AnalyticsPage() {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#f8fafc', borderRadius: 8, fontSize: 12 }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', color: '#0f172a', borderRadius: 12, fontSize: 12, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -235,40 +237,40 @@ export default function AnalyticsPage() {
       </div>
 
       {/* Official Situation Report (SITREP) Printable Section */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-4">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+      <div className="bg-white border border-slate-200/90 rounded-3xl p-6 shadow-sm space-y-4">
+        <div className="flex items-center justify-between pb-3.5 border-b border-slate-100">
           <div>
-            <span className="text-[10px] uppercase font-bold text-blue-400 font-mono tracking-wider">
+            <span className="text-[10px] uppercase font-bold text-blue-600 font-mono tracking-wider">
               OFFICIAL SITUATION REPORT (SITREP-HARYANA-2026)
             </span>
-            <h2 className="text-lg font-bold text-slate-100 mt-0.5">State Emergency Operations Bulletin</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-0.5">State Emergency Operations Bulletin</h2>
           </div>
-          <span className="text-xs text-slate-400">
+          <span className="text-xs text-slate-500 font-medium">
             Generated: {new Date(sitrep?.generated_at).toLocaleString()}
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
-          <div className="p-4 rounded-xl bg-slate-850 border border-slate-800 space-y-2">
-            <p className="font-bold text-slate-200 uppercase tracking-wider text-[11px] border-b border-slate-800 pb-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-700">
+          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 space-y-2">
+            <p className="font-bold text-slate-900 uppercase tracking-wider text-[11px] border-b border-slate-200/60 pb-1.5">
               Active Hazard Operations
             </p>
             {sitrep?.incidents?.slice(0, 4).map((inc) => (
-              <div key={inc.id} className="flex justify-between py-1">
-                <span>{inc.incident_id}: {inc.title}</span>
-                <span className="font-bold text-red-400">{inc.severity}</span>
+              <div key={inc.id} className="flex justify-between py-1 font-medium">
+                <span className="text-slate-800">{inc.incident_id}: {inc.title}</span>
+                <span className="font-bold text-rose-600 uppercase text-[10px]">{inc.severity}</span>
               </div>
             ))}
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-850 border border-slate-800 space-y-2">
-            <p className="font-bold text-slate-200 uppercase tracking-wider text-[11px] border-b border-slate-800 pb-1">
+          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 space-y-2">
+            <p className="font-bold text-slate-900 uppercase tracking-wider text-[11px] border-b border-slate-200/60 pb-1.5">
               Relief Shelters Status
             </p>
             {sitrep?.shelters?.slice(0, 4).map((sh) => (
-              <div key={sh.id} className="flex justify-between py-1">
-                <span>{sh.name} ({sh.district})</span>
-                <span className="font-bold text-emerald-400">{sh.current_occupancy}/{sh.capacity} ({sh.occupancy_rate}%)</span>
+              <div key={sh.id} className="flex justify-between py-1 font-medium">
+                <span className="text-slate-800">{sh.name} ({sh.district})</span>
+                <span className="font-bold text-emerald-600">{sh.current_occupancy}/{sh.capacity} ({sh.occupancy_rate}%)</span>
               </div>
             ))}
           </div>

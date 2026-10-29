@@ -4,42 +4,49 @@
 
 @layer base {
   body {
-    @apply bg-slate-900 text-slate-100 font-sans antialiased min-h-screen selection:bg-blue-600 selection:text-white;
+    background-color: #FAF8F5;
+    color: #111317;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-/* Custom scrollbars */
+/* Minimalist pill scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 3px;
+  background: #EAE5DB;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #CBD1DC;
 }
 
-/* Leaflet dark theme adjustments */
+/* Leaflet minimal theme adjustments */
 .leaflet-container {
   font-family: inherit;
-  background-color: #0b1120 !important;
+  background-color: #F5F2EB !important;
 }
 
 .leaflet-popup-content-wrapper {
-  background: #1e293b !important;
-  color: #f8fafc !important;
-  border-radius: 8px !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
-  border: 1px solid #334155 !important;
+  background: #FFFFFF !important;
+  color: #111317 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  padding: 4px !important;
 }
 
 .leaflet-popup-tip {
-  background: #1e293b !important;
+  background: #FFFFFF !important;
 }
 
 .pulse-marker {
@@ -58,3 +65,20 @@
     box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
   }
 }
+
+@keyframes tactical-radar-pulse {
+  0% {
+    transform: translateX(-50%) scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(-50%) scale(2.4);
+    opacity: 0;
+  }
+}
+
+.tactical-gps-pin:hover {
+  transform: translateY(-3px) scale(1.08);
+  transition: transform 0.15s ease-out;
+}
+

@@ -64,6 +64,25 @@ app.use('/api/gis', require('./routes/gis'));
 app.use('/api/reports', require('./routes/reports'));
 app.use('/api/notifications', require('./routes/notifications'));
 
+// Welcome & Root endpoint
+app.get('/', (req, res) => {
+  res.json({
+    name: 'Disaster Management & Emergency Coordination API',
+    status: 'online',
+    version: '1.0.0',
+    documentation: {
+      health: '/api/health',
+      auth: '/api/auth',
+      incidents: '/api/incidents',
+      alerts: '/api/alerts',
+      dashboard: '/api/dashboard',
+      shelters: '/api/shelters',
+      resources: '/api/resources',
+      training: '/api/training'
+    }
+  });
+});
+
 // Global health check
 app.get('/api/health', (req, res) => {
   res.json({
