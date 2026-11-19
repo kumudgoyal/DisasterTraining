@@ -13,7 +13,8 @@ import {
   Users, 
   ExternalLink,
   ChevronDown,
-  CheckCircle2
+  CheckCircle2,
+  Award
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -121,6 +122,15 @@ export default function Navbar() {
 
         {/* Right Actions */}
         <div className="flex items-center space-x-3">
+          {/* Project Objective & Team */}
+          <Link
+            to="/project-info"
+            className="hidden xl:flex items-center space-x-1.5 px-3.5 py-2 rounded-full text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100/80 border border-blue-200 transition shadow-sm"
+          >
+            <Award className="w-3.5 h-3.5 text-blue-600" />
+            <span>Objective & Team</span>
+          </Link>
+
           {/* Public Portal link */}
           <Link
             to="/public"

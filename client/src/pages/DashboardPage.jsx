@@ -20,7 +20,10 @@ import {
   MapPin,
   ArrowRight,
   RefreshCw,
-  BellRing
+  BellRing,
+  Award,
+  Target,
+  CheckCircle2
 } from 'lucide-react';
 import LiveGpsMapWidget from '../components/map/LiveGpsMapWidget';
 
@@ -166,6 +169,63 @@ export default function DashboardPage() {
           icon={Home}
           trend={kpis?.shelter_occupancy_pct > 80 ? 'Heavy' : 'Available'}
         />
+      </div>
+
+      {/* Project Objective & Team Deliverables Card */}
+      <div className="bg-gradient-to-r from-slate-900 via-slate-900 to-indigo-950 text-white p-6 sm:p-7 rounded-3xl border border-slate-800 shadow-md">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-3 max-w-3xl">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/20 text-blue-300 border border-blue-400/30 font-mono uppercase tracking-wider">
+                <Target className="w-3 h-3 text-blue-400" />
+                <span>Intermediate Project Objective</span>
+              </span>
+              <span className="inline-flex items-center space-x-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                <span>Fully Implemented Platform</span>
+              </span>
+            </div>
+
+            <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed">
+              <strong>Develop a robust, user-friendly digital platform (web-based + mobile interface) that:</strong>
+              <span className="block mt-1.5 text-slate-300 space-y-0.5">
+                <span className="block">• <strong>Enables real-time data entry & access</strong> for SDMAs, ATIs, and NGOs etc.</span>
+                <span className="block">• <strong>Integrates GIS mapping</strong> to visualize the spread of trainings.</span>
+                <span className="block">• <strong>Offers analytics dashboards</strong> for impact tracking, thematic coverage, and alerts.</span>
+                <span className="block">• <strong>Includes report generation</strong>, user access control, and notifications.</span>
+                <span className="block">• <strong>Can be integrated</strong> with existing NDMA and state-level systems.</span>
+              </span>
+            </p>
+
+            <div className="pt-2 border-t border-slate-800 flex flex-wrap items-center gap-2.5 text-xs">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 font-mono">
+                Team Members:
+              </span>
+              <span className="px-2.5 py-1 rounded-xl bg-white/10 text-white font-semibold text-xs border border-white/10">
+                Kumud Goyal <span className="text-slate-400 font-mono text-[10px]">(23BDA70133)</span>
+              </span>
+              <span className="px-2.5 py-1 rounded-xl bg-white/10 text-white font-semibold text-xs border border-white/10">
+                Hardik Manchanda <span className="text-slate-400 font-mono text-[10px]">(23BIS70002)</span>
+              </span>
+              <span className="px-2.5 py-1 rounded-xl bg-white/10 text-white font-semibold text-xs border border-white/10">
+                Nitin Verma <span className="text-slate-400 font-mono text-[10px]">(23IBD70002)</span>
+              </span>
+              <span className="px-2.5 py-1 rounded-xl bg-white/10 text-white font-semibold text-xs border border-white/10">
+                Sahil Kumar <span className="text-slate-400 font-mono text-[10px]">(23BIS70067)</span>
+              </span>
+            </div>
+          </div>
+
+          <div className="shrink-0 flex items-center">
+            <Link
+              to="/project-info"
+              className="px-5 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-500/20 transition flex items-center space-x-2"
+            >
+              <span>Explore Charter & Architecture</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Secondary KPI Bar (Warm Minimalist Pills) */}

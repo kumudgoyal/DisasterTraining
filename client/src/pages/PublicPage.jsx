@@ -12,7 +12,10 @@ import {
   FileEdit,
   ArrowRight,
   HeartHandshake,
-  CheckCircle2
+  CheckCircle2,
+  Target,
+  Users,
+  Award
 } from 'lucide-react';
 import LiveGpsMapWidget from '../components/map/LiveGpsMapWidget';
 
@@ -171,6 +174,71 @@ export default function PublicPage() {
               </p>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Institutional Project Objective & Engineering Team Charter */}
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+          <div className="space-y-1">
+            <div className="flex items-center space-x-2">
+              <Target className="w-5 h-5 text-blue-400" />
+              <span className="text-xs font-mono uppercase font-bold tracking-widest text-blue-300">
+                Project Accreditation
+              </span>
+            </div>
+            <h2 className="text-xl font-extrabold text-white">
+              Intermediate Project Objective & Engineering Deliverables
+            </h2>
+          </div>
+          <Link
+            to="/public/project-info"
+            className="px-4 py-2 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center space-x-1.5 transition self-start sm:self-auto"
+          >
+            <span>Read Full Charter</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+
+        <div className="p-4 sm:p-5 rounded-2xl bg-slate-950/60 border border-slate-800 text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
+          <p className="font-bold text-white mb-2">
+            Develop a robust, user-friendly digital platform (web-based + mobile interface) that:
+          </p>
+          <ul className="space-y-1.5 pl-2 text-slate-300">
+            <li>• <strong>Enables real-time data entry and access</strong> for SDMAs, ATIs, and NGOs etc.</li>
+            <li>• <strong>Integrates GIS mapping</strong> to visualize the spread of trainings.</li>
+            <li>• <strong>Offers analytics dashboards</strong> for impact tracking, thematic coverage, and alerts.</li>
+            <li>• <strong>Includes report generation</strong>, user access control, and notifications.</li>
+            <li>• <strong>Can be integrated</strong> with existing NDMA and state-level systems.</li>
+          </ul>
+        </div>
+
+        <div>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono block mb-3">
+            Core Project Engineering Team
+          </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+            <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-1">
+              <span className="font-extrabold text-white text-sm block">Kumud Goyal</span>
+              <span className="text-[11px] text-blue-400 font-mono font-semibold block">Roll: 23BDA70133</span>
+              <p className="text-[10px] text-slate-400">Lead Full-Stack Architect</p>
+            </div>
+            <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-1">
+              <span className="font-extrabold text-white text-sm block">Hardik Manchanda</span>
+              <span className="text-[11px] text-indigo-400 font-mono font-semibold block">Roll: 23BIS70002</span>
+              <p className="text-[10px] text-slate-400">GIS & Real-Time Engine</p>
+            </div>
+            <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-1">
+              <span className="font-extrabold text-white text-sm block">Nitin Verma</span>
+              <span className="text-[11px] text-purple-400 font-mono font-semibold block">Roll: 23IBD70002</span>
+              <p className="text-[10px] text-slate-400">UI/UX & Mobile Interface</p>
+            </div>
+            <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-1">
+              <span className="font-extrabold text-white text-sm block">Sahil Kumar</span>
+              <span className="text-[11px] text-emerald-400 font-mono font-semibold block">Roll: 23BIS70067</span>
+              <p className="text-[10px] text-slate-400">RBAC & NDMA Systems</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

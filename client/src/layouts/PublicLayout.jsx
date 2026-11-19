@@ -18,6 +18,12 @@ export default function PublicLayout() {
           </div>
 
           <div className="flex items-center space-x-3">
+            <Link
+              to="/public/project-info"
+              className="hidden sm:inline-block px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 text-xs font-semibold transition"
+            >
+              Project Objective & Team
+            </Link>
             <a
               href="tel:112"
               className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-lg shadow-red-600/30 transition"

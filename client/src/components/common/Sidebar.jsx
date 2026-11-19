@@ -14,7 +14,8 @@ import {
   BarChart3,
   Building2,
   Users,
-  ScrollText
+  ScrollText,
+  Award
 } from 'lucide-react';
 
 export default function Sidebar() {
@@ -32,6 +33,7 @@ export default function Sidebar() {
     { label: 'Preparedness Drills', path: '/training', icon: GraduationCap },
     { label: 'Analytics & SITREP', path: '/analytics', icon: BarChart3 },
     { label: 'Agencies Hub', path: '/organizations', icon: Building2 },
+    { label: 'Project Objective & Team', path: '/project-info', icon: Award },
     ...(isAtLeast('District Admin') ? [
       { label: 'User Directory', path: '/admin/users', icon: Users },
       { label: 'Audit Trail', path: '/admin/audit-log', icon: ScrollText },

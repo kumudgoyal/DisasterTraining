@@ -7,6 +7,28 @@ $$\text{Preparedness} \longrightarrow \text{Training} \longrightarrow \text{Earl
 
 ---
 
+## 🎯 Intermediate Project Objective
+
+> **Develop a robust, user-friendly digital platform (web-based + mobile interface) that:**
+> - • **Enables real-time data entry and access** for SDMAs, ATIs, and NGOs etc.
+> - • **Integrates GIS mapping** to visualize the spread of trainings.
+> - • **Offers analytics dashboards** for impact tracking, thematic coverage, and alerts.
+> - • **Includes report generation**, user access control, and notifications.
+> - • **Can be integrated** with existing NDMA and state-level systems.
+
+---
+
+## 👥 Core Project Team Members
+
+| Member Name | University Roll No | Architectural Role | Core Contributions |
+|---|---|---|---|
+| **Kumud Goyal** | `23BDA70133` | **Lead Full-Stack Architect & System Coordinator** | Platform architecture, API pipeline design, database modeling, multi-agency data workflows, Vercel/Render deployment |
+| **Hardik Manchanda** | `23BIS70002` | **GIS Systems, Real-Time Synchronization & EOC Analytics** | Leaflet GIS interactive map, training spread visualization, Recharts analytics, Socket.IO live sync, State SITREP generator |
+| **Nitin Verma** | `23IBD70002` | **Mobile Interface, UI/UX & Responsive Engineering** | Apple SF Pro design system, mobile field data entry interface, GPS capture & offline caching, tactical KPI dashboards |
+| **Sahil Kumar** | `23BIS70067` | **RBAC Security, Systems Integration & Audit Engine** | 8-tier RBAC access control, immutable security audit logs, NDMA/SDMA integration schemas, in-browser mock engine parity |
+
+---
+
 ## 🌐 Live Services
 
 - **Frontend Application (Vite + React + Tailwind):** [http://localhost:5173](http://localhost:5173)

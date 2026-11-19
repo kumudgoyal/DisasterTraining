@@ -25,6 +25,7 @@ import AdminUsersPage from './pages/AdminUsersPage';
 import AuditLogPage from './pages/AuditLogPage';
 import PublicPage from './pages/PublicPage';
 import PublicReportPage from './pages/PublicReportPage';
+import ProjectObjectivePage from './pages/ProjectObjectivePage';
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/public" element={<PublicLayout />}>
           <Route index element={<PublicPage />} />
           <Route path="report" element={<PublicReportPage />} />
+          <Route path="project-info" element={<ProjectObjectivePage />} />
         </Route>
 
         {/* Auth */}
@@ -54,6 +56,9 @@ export default function App() {
           <Route path="training" element={<TrainingPage />} />
           <Route path="analytics" element={<AnalyticsPage />} />
           <Route path="organizations" element={<OrganizationPage />} />
+          <Route path="project-info" element={<ProjectObjectivePage />} />
+          <Route path="objective" element={<ProjectObjectivePage />} />
+          <Route path="team" element={<ProjectObjectivePage />} />
           <Route path="admin/users" element={<AdminUsersPage />} />
           <Route path="admin/audit-log" element={<AuditLogPage />} />
         </Route>
