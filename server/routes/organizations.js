@@ -68,4 +68,45 @@ router.post('/', authenticate, requireMinRole('State Admin'), async (req, res) =
   }
 });
 
+// PUT /api/organizations/:id
+router.put('/:id', authenticate, requireMinRole('District Admin'), async (req, res) => {
+  try {
+    const { name, type, contact_email, contact_phone, address, operating_region, specializations, website } = req.body;
+    const exists = await db('organizations').where('id', req.params.id).first();
+    if (!exists) return res.status(404).json({ success: false, error: 'Organization not found' });
+
+    await db('organizations').where('id', req.params.id).update({
+      ...(name && { name }),
+      ...(type && { type }),
+      ...(contact_email !== undefined && { contact_email }),
+      ...(contact_phone !== undefined && { contact_phone }),
+      ...(address !== undefined && { address }),
+      ...(operating_region !== undefined && { operating_region }),
+      ...(specializations !== undefined && { specializations }),
+      ...(website !== undefined && { website }),
+      updated_at: new Date().toISOString()
+    });
+
+    const updated = await db('organizations').where('id', req.params.id).first();
+    res.json({ success: true, data: updated });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: 'Server error' });
+  }
+});
+
+// DELETE /api/organizations/:id
+router.delete('/:id', authenticate, requireMinRole('State Admin'), async (req, res) => {
+  try {
+    const exists = await db('organizations').where('id', req.params.id).first();
+    if (!exists) return res.status(404).json({ success: false, error: 'Organization not found' });
+
+    await db('organizations').where('id', req.params.id).update({ is_active: false });
+    res.json({ success: true, message: 'Organization deactivated successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: 'Server error' });
+  }
+});
+
 module.exports = router;

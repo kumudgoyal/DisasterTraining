@@ -743,7 +743,95 @@ export async function handleMockRequest(config) {
 
   // ---------------- ORGANIZATIONS ----------------
   if (path === '/organizations' && method === 'get') {
-    return { success: true, data: db.organizations };
+    let list = Array.isArray(db.organizations) ? [...db.organizations] : [];
+    const type = query.get('type');
+    const search = query.get('search');
+    const status = query.get('status');
+    const region = query.get('region');
+
+    if (type && type !== 'all') list = list.filter((o) => o.type === type);
+    if (status && status !== 'all') list = list.filter((o) => o.status === status);
+    if (region && region !== 'all') list = list.filter((o) => o.operating_region?.toLowerCase().includes(region.toLowerCase()));
+
+    if (search) {
+      const q = search.toLowerCase();
+      list = list.filter((o) =>
+        o.name?.toLowerCase().includes(q) ||
+        o.operating_region?.toLowerCase().includes(q) ||
+        o.specializations?.toLowerCase().includes(q) ||
+        o.nodal_officer?.toLowerCase().includes(q) ||
+        o.type?.toLowerCase().includes(q)
+      );
+    }
+    return { success: true, data: list };
+  }
+
+  const orgDetailMatch = path.match(/^\/organizations\/(\d+)$/);
+  if (orgDetailMatch && method === 'get') {
+    const orgId = parseInt(orgDetailMatch[1]);
+    const org = (db.organizations || []).find((o) => o.id === orgId);
+    if (!org) return { success: false, error: 'Organization not found' };
+    const teams = (db.response_teams || []).filter((t) => t.organization_name === org.name || t.organization_id === org.id);
+    const resources = (db.resources || []).filter((r) => r.organization_name === org.name);
+    const trainings = (db.training_programs || []).filter((t) => t.organization_name === org.name);
+    return { success: true, data: { ...org, teams, resources, trainings } };
+  }
+
+  if (path === '/organizations' && method === 'post') {
+    const user = getCurrentUser();
+    const newOrg = {
+      id: (db.organizations && db.organizations.length > 0) ? Math.max(...db.organizations.map((o) => o.id || 0)) + 1 : 1,
+      name: data.name,
+      type: data.type || 'ngo',
+      contact_email: data.contact_email || '',
+      contact_phone: data.contact_phone || '',
+      address: data.address || '',
+      operating_region: data.operating_region || 'Haryana',
+      specializations: data.specializations || 'Disaster Relief & Emergency Support',
+      website: data.website || '',
+      nodal_officer: data.nodal_officer || user?.full_name || 'Liaison Officer',
+      status: data.status || 'accredited',
+      established_year: parseInt(data.established_year) || new Date().getFullYear(),
+      teams_count: parseInt(data.teams_count) || 1,
+      resources_count: parseInt(data.resources_count) || 2,
+      training_count: parseInt(data.training_count) || 0,
+      is_active: true,
+      created_at: new Date().toISOString(),
+    };
+    if (!Array.isArray(db.organizations)) db.organizations = [];
+    db.organizations.unshift(newOrg);
+    saveStoredData(db);
+
+    emitMockSocketEvent('ORGANIZATION_REGISTERED', {
+      id: newOrg.id,
+      name: newOrg.name,
+      type: newOrg.type,
+      operating_region: newOrg.operating_region,
+    });
+
+    return { success: true, data: newOrg };
+  }
+
+  if (orgDetailMatch && method === 'put') {
+    const orgId = parseInt(orgDetailMatch[1]);
+    const idx = (db.organizations || []).findIndex((o) => o.id === orgId);
+    if (idx === -1) return { success: false, error: 'Organization not found' };
+
+    db.organizations[idx] = {
+      ...db.organizations[idx],
+      ...data,
+      id: orgId, // preserve id
+      updated_at: new Date().toISOString(),
+    };
+    saveStoredData(db);
+    return { success: true, data: db.organizations[idx] };
+  }
+
+  if (orgDetailMatch && method === 'delete') {
+    const orgId = parseInt(orgDetailMatch[1]);
+    db.organizations = (db.organizations || []).filter((o) => o.id !== orgId);
+    saveStoredData(db);
+    return { success: true, message: 'Organization unlinked successfully' };
   }
 
   // ---------------- NOTIFICATIONS ----------------
