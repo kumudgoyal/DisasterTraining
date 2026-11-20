@@ -202,16 +202,19 @@ export default function DashboardPage() {
                 Team Members:
               </span>
               <span className="px-2.5 py-1 rounded-xl bg-white/10 text-white font-semibold text-xs border border-white/10">
-                Kumud Goyal <span className="text-slate-400 font-mono text-[10px]">(23BDA70133)</span>
+                Hardik <span className="text-slate-400 font-mono text-[10px]">(23BIS70001)</span>
               </span>
               <span className="px-2.5 py-1 rounded-xl bg-white/10 text-white font-semibold text-xs border border-white/10">
-                Hardik Manchanda <span className="text-slate-400 font-mono text-[10px]">(23BIS70002)</span>
+                Kumud <span className="text-slate-400 font-mono text-[10px]">(23BDA70133)</span>
               </span>
               <span className="px-2.5 py-1 rounded-xl bg-white/10 text-white font-semibold text-xs border border-white/10">
-                Nitin Verma <span className="text-slate-400 font-mono text-[10px]">(23IBD70002)</span>
+                Neha <span className="text-slate-400 font-mono text-[10px]">(23BDA70128)</span>
               </span>
               <span className="px-2.5 py-1 rounded-xl bg-white/10 text-white font-semibold text-xs border border-white/10">
-                Sahil Kumar <span className="text-slate-400 font-mono text-[10px]">(23BIS70067)</span>
+                Nitin <span className="text-slate-400 font-mono text-[10px]">(23IBD70002)</span>
+              </span>
+              <span className="px-2.5 py-1 rounded-xl bg-white/10 text-white font-semibold text-xs border border-white/10">
+                Sahil <span className="text-slate-400 font-mono text-[10px]">(23BIS70008)</span>
               </span>
             </div>
           </div>

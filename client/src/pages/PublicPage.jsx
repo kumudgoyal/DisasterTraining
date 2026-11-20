@@ -215,28 +215,33 @@ export default function PublicPage() {
 
         <div>
           <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono block mb-3">
-            Core Project Engineering Team
+            Core Project Engineering Team (5 Contributors)
           </span>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-xs">
             <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-1">
-              <span className="font-extrabold text-white text-sm block">Kumud Goyal</span>
-              <span className="text-[11px] text-blue-400 font-mono font-semibold block">Roll: 23BDA70133</span>
-              <p className="text-[10px] text-slate-400">Lead Full-Stack Architect</p>
-            </div>
-            <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-1">
-              <span className="font-extrabold text-white text-sm block">Hardik Manchanda</span>
-              <span className="text-[11px] text-indigo-400 font-mono font-semibold block">Roll: 23BIS70002</span>
+              <span className="font-extrabold text-white text-sm block">Hardik</span>
+              <span className="text-[11px] text-indigo-400 font-mono font-semibold block">23BIS70001</span>
               <p className="text-[10px] text-slate-400">GIS & Real-Time Engine</p>
             </div>
             <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-1">
-              <span className="font-extrabold text-white text-sm block">Nitin Verma</span>
-              <span className="text-[11px] text-purple-400 font-mono font-semibold block">Roll: 23IBD70002</span>
+              <span className="font-extrabold text-white text-sm block">Kumud</span>
+              <span className="text-[11px] text-blue-400 font-mono font-semibold block">23BDA70133</span>
+              <p className="text-[10px] text-slate-400">Full-Stack Lead Architect</p>
+            </div>
+            <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-1">
+              <span className="font-extrabold text-white text-sm block">Neha</span>
+              <span className="text-[11px] text-rose-400 font-mono font-semibold block">23BDA70128</span>
+              <p className="text-[10px] text-slate-400">Thematic & Impact Analytics</p>
+            </div>
+            <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-1">
+              <span className="font-extrabold text-white text-sm block">Nitin</span>
+              <span className="text-[11px] text-purple-400 font-mono font-semibold block">23IBD70002</span>
               <p className="text-[10px] text-slate-400">UI/UX & Mobile Interface</p>
             </div>
             <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-1">
-              <span className="font-extrabold text-white text-sm block">Sahil Kumar</span>
-              <span className="text-[11px] text-emerald-400 font-mono font-semibold block">Roll: 23BIS70067</span>
-              <p className="text-[10px] text-slate-400">RBAC & NDMA Systems</p>
+              <span className="font-extrabold text-white text-sm block">Sahil</span>
+              <span className="text-[11px] text-emerald-400 font-mono font-semibold block">23BIS70008</span>
+              <p className="text-[10px] text-slate-400">RBAC & Systems Integration</p>
             </div>
           </div>
         </div>

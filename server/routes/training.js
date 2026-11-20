@@ -113,4 +113,73 @@ router.post('/', authenticate, requireMinRole('Volunteer'), async (req, res) => 
   }
 });
 
+// GET /api/training/national
+router.get('/national', (req, res) => {
+  try {
+    const data = require('../data/nationalTrainingData.json');
+    const { state, type, year, search } = req.query;
+    let list = [...data];
+
+    if (state && state !== 'all') list = list.filter((r) => r.state.toLowerCase() === state.toLowerCase());
+    if (type && type !== 'all') list = list.filter((r) => r.training_type.toLowerCase() === type.toLowerCase());
+    if (year && year !== 'all') list = list.filter((r) => String(r.year) === String(year));
+    if (search) {
+      const q = search.toLowerCase();
+      list = list.filter((r) => r.state.toLowerCase().includes(q) || r.training_type.toLowerCase().includes(q));
+    }
+
+    res.json({ success: true, data: list });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: 'Server error loading national data' });
+  }
+});
+
+// GET /api/training/national/analytics
+router.get('/national/analytics', (req, res) => {
+  try {
+    const list = require('../data/nationalTrainingData.json');
+    const totalTrained = list.reduce((s, r) => s + (r.count || 0), 0);
+    const stateMap = {};
+    const typeMap = {};
+    const yearMap = {};
+
+    list.forEach((r) => {
+      stateMap[r.state] = (stateMap[r.state] || 0) + (r.count || 0);
+      typeMap[r.training_type] = (typeMap[r.training_type] || 0) + (r.count || 0);
+      yearMap[r.year] = (yearMap[r.year] || 0) + (r.count || 0);
+    });
+
+    const topStates = Object.entries(stateMap)
+      .map(([state, trained]) => ({ state, trained }))
+      .sort((a, b) => b.trained - a.trained);
+
+    const byType = Object.entries(typeMap)
+      .map(([name, value]) => ({ name, value }))
+      .sort((a, b) => b.value - a.value);
+
+    const byYear = Object.entries(yearMap)
+      .map(([year, trained]) => ({ year: String(year), trained }))
+      .sort((a, b) => Number(a.year) - Number(b.year));
+
+    res.json({
+      success: true,
+      data: {
+        total_records: list.length,
+        total_trained: totalTrained,
+        total_states: Object.keys(stateMap).length,
+        top_states: topStates.slice(0, 10),
+        by_type: byType,
+        by_year: byYear,
+        source: 'National Platform for Disaster Risk Reduction (NPDRR) & NIDM',
+        citation: 'Jennifer Bussell, Sabhanz Diya. n.d. "Disaster Response Training in India, 2010-2015."',
+        portal_url: 'https://npdrr.nidm.gov.in/trainee?Length=7',
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: 'Server error loading national analytics' });
+  }
+});
+
 module.exports = router;

@@ -1,0 +1,3089 @@
+[
+  {
+    "id": 1,
+    "state": "Andaman & Nicobar Islands",
+    "training_type": "Cyclone",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 2,
+    "state": "Andaman & Nicobar Islands",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 1
+  },
+  {
+    "id": 3,
+    "state": "Andaman & Nicobar Islands",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 1
+  },
+  {
+    "id": 4,
+    "state": "Andaman & Nicobar Islands",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 9
+  },
+  {
+    "id": 5,
+    "state": "Andaman & Nicobar Islands",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 52
+  },
+  {
+    "id": 6,
+    "state": "Andaman & Nicobar Islands",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 8
+  },
+  {
+    "id": 7,
+    "state": "Andaman & Nicobar Islands",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 105
+  },
+  {
+    "id": 8,
+    "state": "Andaman & Nicobar Islands",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 6
+  },
+  {
+    "id": 9,
+    "state": "Andaman & Nicobar Islands",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 5
+  },
+  {
+    "id": 10,
+    "state": "Andaman & Nicobar Islands",
+    "training_type": "Tsunami",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 11,
+    "state": "Andhra Pradesh",
+    "training_type": "Cyclone",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 12,
+    "state": "Andhra Pradesh",
+    "training_type": "Cyclone",
+    "year": 2011,
+    "count": 86
+  },
+  {
+    "id": 13,
+    "state": "Andhra Pradesh",
+    "training_type": "Cyclone",
+    "year": 2013,
+    "count": 13
+  },
+  {
+    "id": 14,
+    "state": "Andhra Pradesh",
+    "training_type": "Drought",
+    "year": 2010,
+    "count": 1
+  },
+  {
+    "id": 15,
+    "state": "Andhra Pradesh",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 5
+  },
+  {
+    "id": 16,
+    "state": "Andhra Pradesh",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 2
+  },
+  {
+    "id": 17,
+    "state": "Andhra Pradesh",
+    "training_type": "Drought",
+    "year": 2014,
+    "count": 2
+  },
+  {
+    "id": 18,
+    "state": "Andhra Pradesh",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 25
+  },
+  {
+    "id": 19,
+    "state": "Andhra Pradesh",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 4
+  },
+  {
+    "id": 20,
+    "state": "Andhra Pradesh",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 8
+  },
+  {
+    "id": 21,
+    "state": "Andhra Pradesh",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 5
+  },
+  {
+    "id": 22,
+    "state": "Andhra Pradesh",
+    "training_type": "Flood",
+    "year": 2014,
+    "count": 4
+  },
+  {
+    "id": 23,
+    "state": "Andhra Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 86
+  },
+  {
+    "id": 24,
+    "state": "Andhra Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 85
+  },
+  {
+    "id": 25,
+    "state": "Andhra Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 64
+  },
+  {
+    "id": 26,
+    "state": "Andhra Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 60
+  },
+  {
+    "id": 27,
+    "state": "Andhra Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 55
+  },
+  {
+    "id": 28,
+    "state": "Andhra Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 5
+  },
+  {
+    "id": 29,
+    "state": "Andhra Pradesh",
+    "training_type": "Landslide",
+    "year": 2010,
+    "count": 6
+  },
+  {
+    "id": 30,
+    "state": "Andhra Pradesh",
+    "training_type": "Tsunami",
+    "year": 2010,
+    "count": 3
+  },
+  {
+    "id": 31,
+    "state": "Arunachal Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 52
+  },
+  {
+    "id": 32,
+    "state": "Arunachal Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 3
+  },
+  {
+    "id": 33,
+    "state": "Arunachal Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 2
+  },
+  {
+    "id": 34,
+    "state": "Arunachal Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 8
+  },
+  {
+    "id": 35,
+    "state": "Arunachal Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 14
+  },
+  {
+    "id": 36,
+    "state": "Arunachal Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 4
+  },
+  {
+    "id": 37,
+    "state": "Arunachal Pradesh",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 3
+  },
+  {
+    "id": 38,
+    "state": "Arunachal Pradesh",
+    "training_type": "Landslide",
+    "year": 2014,
+    "count": 1
+  },
+  {
+    "id": 39,
+    "state": "Arunachal Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 10
+  },
+  {
+    "id": 40,
+    "state": "Assam",
+    "training_type": "Earthquake",
+    "year": 2010,
+    "count": 19
+  },
+  {
+    "id": 41,
+    "state": "Assam",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 5
+  },
+  {
+    "id": 42,
+    "state": "Assam",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 3
+  },
+  {
+    "id": 43,
+    "state": "Assam",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 1
+  },
+  {
+    "id": 44,
+    "state": "Assam",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 123
+  },
+  {
+    "id": 45,
+    "state": "Assam",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 24
+  },
+  {
+    "id": 46,
+    "state": "Assam",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 44
+  },
+  {
+    "id": 47,
+    "state": "Assam",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 31
+  },
+  {
+    "id": 48,
+    "state": "Assam",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 44
+  },
+  {
+    "id": 49,
+    "state": "Assam",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 4
+  },
+  {
+    "id": 50,
+    "state": "Assam",
+    "training_type": "Landslide",
+    "year": 2014,
+    "count": 2
+  },
+  {
+    "id": 51,
+    "state": "Bihar",
+    "training_type": "Drought",
+    "year": 2010,
+    "count": 4
+  },
+  {
+    "id": 52,
+    "state": "Bihar",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 53,
+    "state": "Bihar",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 1
+  },
+  {
+    "id": 54,
+    "state": "Bihar",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 55,
+    "state": "Bihar",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 9
+  },
+  {
+    "id": 56,
+    "state": "Bihar",
+    "training_type": "Flood",
+    "year": 2014,
+    "count": 2
+  },
+  {
+    "id": 57,
+    "state": "Bihar",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 81
+  },
+  {
+    "id": 58,
+    "state": "Bihar",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 47
+  },
+  {
+    "id": 59,
+    "state": "Bihar",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 71
+  },
+  {
+    "id": 60,
+    "state": "Bihar",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 28
+  },
+  {
+    "id": 61,
+    "state": "Bihar",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 42
+  },
+  {
+    "id": 62,
+    "state": "Bihar",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 59
+  },
+  {
+    "id": 63,
+    "state": "Chhattisgarh",
+    "training_type": "Drought",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 64,
+    "state": "Chhattisgarh",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 3
+  },
+  {
+    "id": 65,
+    "state": "Chhattisgarh",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 1
+  },
+  {
+    "id": 66,
+    "state": "Chhattisgarh",
+    "training_type": "Earthquake",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 67,
+    "state": "Chhattisgarh",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 4
+  },
+  {
+    "id": 68,
+    "state": "Chhattisgarh",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 3
+  },
+  {
+    "id": 69,
+    "state": "Chhattisgarh",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 89
+  },
+  {
+    "id": 70,
+    "state": "Chhattisgarh",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 14
+  },
+  {
+    "id": 71,
+    "state": "Chhattisgarh",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 58
+  },
+  {
+    "id": 72,
+    "state": "Chhattisgarh",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 38
+  },
+  {
+    "id": 73,
+    "state": "Chhattisgarh",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 68
+  },
+  {
+    "id": 74,
+    "state": "Chhattisgarh",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 2
+  },
+  {
+    "id": 75,
+    "state": "Dadra & Nagar Haveli",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 1
+  },
+  {
+    "id": 76,
+    "state": "Dadra & Nagar Haveli",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 77,
+    "state": "Dadra & Nagar Haveli",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 2
+  },
+  {
+    "id": 78,
+    "state": "Dadra & Nagar Haveli",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 1
+  },
+  {
+    "id": 79,
+    "state": "Dadra & Nagar Haveli",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 2
+  },
+  {
+    "id": 80,
+    "state": "Daman & Diu",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 1
+  },
+  {
+    "id": 81,
+    "state": "Daman & Diu",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 9
+  },
+  {
+    "id": 82,
+    "state": "Delhi",
+    "training_type": "Drought",
+    "year": 2010,
+    "count": 42
+  },
+  {
+    "id": 83,
+    "state": "Delhi",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 1
+  },
+  {
+    "id": 84,
+    "state": "Delhi",
+    "training_type": "Drought",
+    "year": 2014,
+    "count": 1
+  },
+  {
+    "id": 85,
+    "state": "Delhi",
+    "training_type": "Earthquake",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 86,
+    "state": "Delhi",
+    "training_type": "Earthquake",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 87,
+    "state": "Delhi",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 43
+  },
+  {
+    "id": 88,
+    "state": "Delhi",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 89,
+    "state": "Delhi",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 2
+  },
+  {
+    "id": 90,
+    "state": "Delhi",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 2
+  },
+  {
+    "id": 91,
+    "state": "Delhi",
+    "training_type": "Flood",
+    "year": 2014,
+    "count": 1
+  },
+  {
+    "id": 92,
+    "state": "Delhi",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 1
+  },
+  {
+    "id": 93,
+    "state": "Delhi",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 267
+  },
+  {
+    "id": 94,
+    "state": "Delhi",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 120
+  },
+  {
+    "id": 95,
+    "state": "Delhi",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 431
+  },
+  {
+    "id": 96,
+    "state": "Delhi",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 258
+  },
+  {
+    "id": 97,
+    "state": "Delhi",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 419
+  },
+  {
+    "id": 98,
+    "state": "Delhi",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 30
+  },
+  {
+    "id": 99,
+    "state": "Delhi",
+    "training_type": "Landslide",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 100,
+    "state": "Delhi",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 8
+  },
+  {
+    "id": 101,
+    "state": "Delhi",
+    "training_type": "Landslide",
+    "year": 2014,
+    "count": 6
+  },
+  {
+    "id": 102,
+    "state": "Goa",
+    "training_type": "Cyclone",
+    "year": 2010,
+    "count": 4
+  },
+  {
+    "id": 103,
+    "state": "Goa",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 3
+  },
+  {
+    "id": 104,
+    "state": "Goa",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 4
+  },
+  {
+    "id": 105,
+    "state": "Goa",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 106,
+    "state": "Goa",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 1
+  },
+  {
+    "id": 107,
+    "state": "Goa",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 2
+  },
+  {
+    "id": 108,
+    "state": "Goa",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 15
+  },
+  {
+    "id": 109,
+    "state": "Goa",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 6
+  },
+  {
+    "id": 110,
+    "state": "Goa",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 9
+  },
+  {
+    "id": 111,
+    "state": "Goa",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 14
+  },
+  {
+    "id": 112,
+    "state": "Goa",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 10
+  },
+  {
+    "id": 113,
+    "state": "Goa",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 1
+  },
+  {
+    "id": 114,
+    "state": "Goa",
+    "training_type": "Landslide",
+    "year": 2010,
+    "count": 5
+  },
+  {
+    "id": 115,
+    "state": "Goa",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 4
+  },
+  {
+    "id": 116,
+    "state": "Gujarat",
+    "training_type": "Cyclone",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 117,
+    "state": "Gujarat",
+    "training_type": "Drought",
+    "year": 2014,
+    "count": 6
+  },
+  {
+    "id": 118,
+    "state": "Gujarat",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 119,
+    "state": "Gujarat",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 26
+  },
+  {
+    "id": 120,
+    "state": "Gujarat",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 26
+  },
+  {
+    "id": 121,
+    "state": "Gujarat",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 48
+  },
+  {
+    "id": 122,
+    "state": "Gujarat",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 77
+  },
+  {
+    "id": 123,
+    "state": "Gujarat",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 20
+  },
+  {
+    "id": 124,
+    "state": "Gujarat",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 99
+  },
+  {
+    "id": 125,
+    "state": "Gujarat",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 12
+  },
+  {
+    "id": 126,
+    "state": "Gujarat",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 3
+  },
+  {
+    "id": 127,
+    "state": "Gujarat",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 128,
+    "state": "Haryana",
+    "training_type": "Drought",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 129,
+    "state": "Haryana",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 130,
+    "state": "Haryana",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 4
+  },
+  {
+    "id": 131,
+    "state": "Haryana",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 14
+  },
+  {
+    "id": 132,
+    "state": "Haryana",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 133,
+    "state": "Haryana",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 2
+  },
+  {
+    "id": 134,
+    "state": "Haryana",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 5
+  },
+  {
+    "id": 135,
+    "state": "Haryana",
+    "training_type": "Flood",
+    "year": 2014,
+    "count": 7
+  },
+  {
+    "id": 136,
+    "state": "Haryana",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 3
+  },
+  {
+    "id": 137,
+    "state": "Haryana",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 85
+  },
+  {
+    "id": 138,
+    "state": "Haryana",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 31
+  },
+  {
+    "id": 139,
+    "state": "Haryana",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 61
+  },
+  {
+    "id": 140,
+    "state": "Haryana",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 39
+  },
+  {
+    "id": 141,
+    "state": "Haryana",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 38
+  },
+  {
+    "id": 142,
+    "state": "Haryana",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 9
+  },
+  {
+    "id": 143,
+    "state": "Haryana",
+    "training_type": "Landslide",
+    "year": 2010,
+    "count": 1
+  },
+  {
+    "id": 144,
+    "state": "Haryana",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 3
+  },
+  {
+    "id": 145,
+    "state": "Himachal Pradesh",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 8
+  },
+  {
+    "id": 146,
+    "state": "Himachal Pradesh",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 2
+  },
+  {
+    "id": 147,
+    "state": "Himachal Pradesh",
+    "training_type": "Earthquake",
+    "year": 2010,
+    "count": 28
+  },
+  {
+    "id": 148,
+    "state": "Himachal Pradesh",
+    "training_type": "Earthquake",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 149,
+    "state": "Himachal Pradesh",
+    "training_type": "Earthquake",
+    "year": 2012,
+    "count": 26
+  },
+  {
+    "id": 150,
+    "state": "Himachal Pradesh",
+    "training_type": "Earthquake",
+    "year": 2013,
+    "count": 39
+  },
+  {
+    "id": 151,
+    "state": "Himachal Pradesh",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 6
+  },
+  {
+    "id": 152,
+    "state": "Himachal Pradesh",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 26
+  },
+  {
+    "id": 153,
+    "state": "Himachal Pradesh",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 4
+  },
+  {
+    "id": 154,
+    "state": "Himachal Pradesh",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 4
+  },
+  {
+    "id": 155,
+    "state": "Himachal Pradesh",
+    "training_type": "Flood",
+    "year": 2014,
+    "count": 4
+  },
+  {
+    "id": 156,
+    "state": "Himachal Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 99
+  },
+  {
+    "id": 157,
+    "state": "Himachal Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 48
+  },
+  {
+    "id": 158,
+    "state": "Himachal Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 55
+  },
+  {
+    "id": 159,
+    "state": "Himachal Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 98
+  },
+  {
+    "id": 160,
+    "state": "Himachal Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 26
+  },
+  {
+    "id": 161,
+    "state": "Himachal Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 9
+  },
+  {
+    "id": 162,
+    "state": "Himachal Pradesh",
+    "training_type": "Landslide",
+    "year": 2010,
+    "count": 6
+  },
+  {
+    "id": 163,
+    "state": "Himachal Pradesh",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 6
+  },
+  {
+    "id": 164,
+    "state": "Himachal Pradesh",
+    "training_type": "Landslide",
+    "year": 2014,
+    "count": 29
+  },
+  {
+    "id": 165,
+    "state": "Jammu & Kashmir",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 1
+  },
+  {
+    "id": 166,
+    "state": "Jammu & Kashmir",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 7
+  },
+  {
+    "id": 167,
+    "state": "Jammu & Kashmir",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 16
+  },
+  {
+    "id": 168,
+    "state": "Jammu & Kashmir",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 26
+  },
+  {
+    "id": 169,
+    "state": "Jammu & Kashmir",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 11
+  },
+  {
+    "id": 170,
+    "state": "Jammu & Kashmir",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 21
+  },
+  {
+    "id": 171,
+    "state": "Jammu & Kashmir",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 26
+  },
+  {
+    "id": 172,
+    "state": "Jammu & Kashmir",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 6
+  },
+  {
+    "id": 173,
+    "state": "Jharkhand",
+    "training_type": "Drought",
+    "year": 2010,
+    "count": 1
+  },
+  {
+    "id": 174,
+    "state": "Jharkhand",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 175,
+    "state": "Jharkhand",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 1
+  },
+  {
+    "id": 176,
+    "state": "Jharkhand",
+    "training_type": "Drought",
+    "year": 2013,
+    "count": 17
+  },
+  {
+    "id": 177,
+    "state": "Jharkhand",
+    "training_type": "Earthquake",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 178,
+    "state": "Jharkhand",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 179,
+    "state": "Jharkhand",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 2
+  },
+  {
+    "id": 180,
+    "state": "Jharkhand",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 23
+  },
+  {
+    "id": 181,
+    "state": "Jharkhand",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 9
+  },
+  {
+    "id": 182,
+    "state": "Jharkhand",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 36
+  },
+  {
+    "id": 183,
+    "state": "Jharkhand",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 23
+  },
+  {
+    "id": 184,
+    "state": "Jharkhand",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 70
+  },
+  {
+    "id": 185,
+    "state": "Jharkhand",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 8
+  },
+  {
+    "id": 186,
+    "state": "Karnataka",
+    "training_type": "Cyclone",
+    "year": 2011,
+    "count": 7
+  },
+  {
+    "id": 187,
+    "state": "Karnataka",
+    "training_type": "Drought",
+    "year": 2010,
+    "count": 20
+  },
+  {
+    "id": 188,
+    "state": "Karnataka",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 189,
+    "state": "Karnataka",
+    "training_type": "Drought",
+    "year": 2014,
+    "count": 4
+  },
+  {
+    "id": 190,
+    "state": "Karnataka",
+    "training_type": "Drought",
+    "year": 2015,
+    "count": 26
+  },
+  {
+    "id": 191,
+    "state": "Karnataka",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 1
+  },
+  {
+    "id": 192,
+    "state": "Karnataka",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 193,
+    "state": "Karnataka",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 1
+  },
+  {
+    "id": 194,
+    "state": "Karnataka",
+    "training_type": "Flood",
+    "year": 2014,
+    "count": 3
+  },
+  {
+    "id": 195,
+    "state": "Karnataka",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 2
+  },
+  {
+    "id": 196,
+    "state": "Karnataka",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 58
+  },
+  {
+    "id": 197,
+    "state": "Karnataka",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 44
+  },
+  {
+    "id": 198,
+    "state": "Karnataka",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 85
+  },
+  {
+    "id": 199,
+    "state": "Karnataka",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 8
+  },
+  {
+    "id": 200,
+    "state": "Karnataka",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 24
+  },
+  {
+    "id": 201,
+    "state": "Karnataka",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 2
+  },
+  {
+    "id": 202,
+    "state": "Karnataka",
+    "training_type": "Landslide",
+    "year": 2010,
+    "count": 27
+  },
+  {
+    "id": 203,
+    "state": "Kerala",
+    "training_type": "Cyclone",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 204,
+    "state": "Kerala",
+    "training_type": "Cyclone",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 205,
+    "state": "Kerala",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 206,
+    "state": "Kerala",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 1
+  },
+  {
+    "id": 207,
+    "state": "Kerala",
+    "training_type": "Earthquake",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 208,
+    "state": "Kerala",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 5
+  },
+  {
+    "id": 209,
+    "state": "Kerala",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 2
+  },
+  {
+    "id": 210,
+    "state": "Kerala",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 37
+  },
+  {
+    "id": 211,
+    "state": "Kerala",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 35
+  },
+  {
+    "id": 212,
+    "state": "Kerala",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 12
+  },
+  {
+    "id": 213,
+    "state": "Kerala",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 14
+  },
+  {
+    "id": 214,
+    "state": "Kerala",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 1
+  },
+  {
+    "id": 215,
+    "state": "Kerala",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 43
+  },
+  {
+    "id": 216,
+    "state": "Kerala",
+    "training_type": "Landslide",
+    "year": 2010,
+    "count": 1
+  },
+  {
+    "id": 217,
+    "state": "Kerala",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 218,
+    "state": "Kerala",
+    "training_type": "Landslide",
+    "year": 2014,
+    "count": 1
+  },
+  {
+    "id": 219,
+    "state": "Kerala",
+    "training_type": "Tsunami",
+    "year": 2010,
+    "count": 1
+  },
+  {
+    "id": 220,
+    "state": "Lakshadweep",
+    "training_type": "Cyclone",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 221,
+    "state": "Lakshadweep",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 222,
+    "state": "Lakshadweep",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 8
+  },
+  {
+    "id": 223,
+    "state": "Lakshadweep",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 4
+  },
+  {
+    "id": 224,
+    "state": "Lakshadweep",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 11
+  },
+  {
+    "id": 225,
+    "state": "Lakshadweep",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 6
+  },
+  {
+    "id": 226,
+    "state": "Lakshadweep",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 2
+  },
+  {
+    "id": 227,
+    "state": "Lakshadweep",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 20
+  },
+  {
+    "id": 228,
+    "state": "Madhya Pradesh",
+    "training_type": "Drought",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 229,
+    "state": "Madhya Pradesh",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 29
+  },
+  {
+    "id": 230,
+    "state": "Madhya Pradesh",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 3
+  },
+  {
+    "id": 231,
+    "state": "Madhya Pradesh",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 3
+  },
+  {
+    "id": 232,
+    "state": "Madhya Pradesh",
+    "training_type": "Flood",
+    "year": 2014,
+    "count": 2
+  },
+  {
+    "id": 233,
+    "state": "Madhya Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 56
+  },
+  {
+    "id": 234,
+    "state": "Madhya Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 12
+  },
+  {
+    "id": 235,
+    "state": "Madhya Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 9
+  },
+  {
+    "id": 236,
+    "state": "Madhya Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 18
+  },
+  {
+    "id": 237,
+    "state": "Madhya Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 20
+  },
+  {
+    "id": 238,
+    "state": "Madhya Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 3
+  },
+  {
+    "id": 239,
+    "state": "Madhya Pradesh",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 240,
+    "state": "Madhya Pradesh",
+    "training_type": "Landslide",
+    "year": 2014,
+    "count": 1
+  },
+  {
+    "id": 241,
+    "state": "Maharashtra",
+    "training_type": "Cyclone",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 242,
+    "state": "Maharashtra",
+    "training_type": "Cyclone",
+    "year": 2011,
+    "count": 3
+  },
+  {
+    "id": 243,
+    "state": "Maharashtra",
+    "training_type": "Drought",
+    "year": 2010,
+    "count": 17
+  },
+  {
+    "id": 244,
+    "state": "Maharashtra",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 245,
+    "state": "Maharashtra",
+    "training_type": "Drought",
+    "year": 2014,
+    "count": 1
+  },
+  {
+    "id": 246,
+    "state": "Maharashtra",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 1
+  },
+  {
+    "id": 247,
+    "state": "Maharashtra",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 9
+  },
+  {
+    "id": 248,
+    "state": "Maharashtra",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 9
+  },
+  {
+    "id": 249,
+    "state": "Maharashtra",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 37
+  },
+  {
+    "id": 250,
+    "state": "Maharashtra",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 52
+  },
+  {
+    "id": 251,
+    "state": "Maharashtra",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 46
+  },
+  {
+    "id": 252,
+    "state": "Maharashtra",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 94
+  },
+  {
+    "id": 253,
+    "state": "Maharashtra",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 249
+  },
+  {
+    "id": 254,
+    "state": "Maharashtra",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 58
+  },
+  {
+    "id": 255,
+    "state": "Maharashtra",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 256,
+    "state": "Maharashtra",
+    "training_type": "Landslide",
+    "year": 2012,
+    "count": 20
+  },
+  {
+    "id": 257,
+    "state": "Manipur",
+    "training_type": "Earthquake",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 258,
+    "state": "Manipur",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 3
+  },
+  {
+    "id": 259,
+    "state": "Manipur",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 142
+  },
+  {
+    "id": 260,
+    "state": "Manipur",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 6
+  },
+  {
+    "id": 261,
+    "state": "Manipur",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 22
+  },
+  {
+    "id": 262,
+    "state": "Manipur",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 6
+  },
+  {
+    "id": 263,
+    "state": "Manipur",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 4
+  },
+  {
+    "id": 264,
+    "state": "Manipur",
+    "training_type": "Landslide",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 265,
+    "state": "Meghalaya",
+    "training_type": "Earthquake",
+    "year": 2010,
+    "count": 26
+  },
+  {
+    "id": 266,
+    "state": "Meghalaya",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 267,
+    "state": "Meghalaya",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 26
+  },
+  {
+    "id": 268,
+    "state": "Meghalaya",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 12
+  },
+  {
+    "id": 269,
+    "state": "Meghalaya",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 56
+  },
+  {
+    "id": 270,
+    "state": "Meghalaya",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 12
+  },
+  {
+    "id": 271,
+    "state": "Meghalaya",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 34
+  },
+  {
+    "id": 272,
+    "state": "Meghalaya",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 2
+  },
+  {
+    "id": 273,
+    "state": "Meghalaya",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 274,
+    "state": "Mizoram",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 275,
+    "state": "Mizoram",
+    "training_type": "Earthquake",
+    "year": 2013,
+    "count": 11
+  },
+  {
+    "id": 276,
+    "state": "Mizoram",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 10
+  },
+  {
+    "id": 277,
+    "state": "Mizoram",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 23
+  },
+  {
+    "id": 278,
+    "state": "Mizoram",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 17
+  },
+  {
+    "id": 279,
+    "state": "Mizoram",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 52
+  },
+  {
+    "id": 280,
+    "state": "Mizoram",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 20
+  },
+  {
+    "id": 281,
+    "state": "Mizoram",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 2
+  },
+  {
+    "id": 282,
+    "state": "Nagaland",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 2
+  },
+  {
+    "id": 283,
+    "state": "Nagaland",
+    "training_type": "Earthquake",
+    "year": 2011,
+    "count": 3
+  },
+  {
+    "id": 284,
+    "state": "Nagaland",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 6
+  },
+  {
+    "id": 285,
+    "state": "Nagaland",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 35
+  },
+  {
+    "id": 286,
+    "state": "Nagaland",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 12
+  },
+  {
+    "id": 287,
+    "state": "Nagaland",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 18
+  },
+  {
+    "id": 288,
+    "state": "Nagaland",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 14
+  },
+  {
+    "id": 289,
+    "state": "Nagaland",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 17
+  },
+  {
+    "id": 290,
+    "state": "Nagaland",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 28
+  },
+  {
+    "id": 291,
+    "state": "Nagaland",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 3
+  },
+  {
+    "id": 292,
+    "state": "Nagaland",
+    "training_type": "Landslide",
+    "year": 2013,
+    "count": 25
+  },
+  {
+    "id": 293,
+    "state": "Odisha",
+    "training_type": "Cyclone",
+    "year": 2010,
+    "count": 41
+  },
+  {
+    "id": 294,
+    "state": "Odisha",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 4
+  },
+  {
+    "id": 295,
+    "state": "Odisha",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 2
+  },
+  {
+    "id": 296,
+    "state": "Odisha",
+    "training_type": "Drought",
+    "year": 2014,
+    "count": 4
+  },
+  {
+    "id": 297,
+    "state": "Odisha",
+    "training_type": "Earthquake",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 298,
+    "state": "Odisha",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 299,
+    "state": "Odisha",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 4
+  },
+  {
+    "id": 300,
+    "state": "Odisha",
+    "training_type": "Flood",
+    "year": 2014,
+    "count": 1
+  },
+  {
+    "id": 301,
+    "state": "Odisha",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 5
+  },
+  {
+    "id": 302,
+    "state": "Odisha",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 84
+  },
+  {
+    "id": 303,
+    "state": "Odisha",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 44
+  },
+  {
+    "id": 304,
+    "state": "Odisha",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 42
+  },
+  {
+    "id": 305,
+    "state": "Odisha",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 64
+  },
+  {
+    "id": 306,
+    "state": "Odisha",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 58
+  },
+  {
+    "id": 307,
+    "state": "Odisha",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 6
+  },
+  {
+    "id": 308,
+    "state": "Odisha",
+    "training_type": "Landslide",
+    "year": 2014,
+    "count": 1
+  },
+  {
+    "id": 309,
+    "state": "Odisha",
+    "training_type": "Tsunami",
+    "year": 2010,
+    "count": 4
+  },
+  {
+    "id": 310,
+    "state": "Puducherry",
+    "training_type": "Cyclone",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 311,
+    "state": "Puducherry",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 1
+  },
+  {
+    "id": 312,
+    "state": "Puducherry",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 2
+  },
+  {
+    "id": 313,
+    "state": "Puducherry",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 9
+  },
+  {
+    "id": 314,
+    "state": "Puducherry",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 8
+  },
+  {
+    "id": 315,
+    "state": "Puducherry",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 2
+  },
+  {
+    "id": 316,
+    "state": "Puducherry",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 2
+  },
+  {
+    "id": 317,
+    "state": "Puducherry",
+    "training_type": "Landslide",
+    "year": 2014,
+    "count": 5
+  },
+  {
+    "id": 318,
+    "state": "Puducherry",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 1
+  },
+  {
+    "id": 319,
+    "state": "Puducherry",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 3
+  },
+  {
+    "id": 320,
+    "state": "Puducherry",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 4
+  },
+  {
+    "id": 321,
+    "state": "Puducherry",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 3
+  },
+  {
+    "id": 322,
+    "state": "Punjab",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 323,
+    "state": "Punjab",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 324,
+    "state": "Punjab",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 3
+  },
+  {
+    "id": 325,
+    "state": "Punjab",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 53
+  },
+  {
+    "id": 326,
+    "state": "Punjab",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 21
+  },
+  {
+    "id": 327,
+    "state": "Punjab",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 65
+  },
+  {
+    "id": 328,
+    "state": "Punjab",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 58
+  },
+  {
+    "id": 329,
+    "state": "Punjab",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 115
+  },
+  {
+    "id": 330,
+    "state": "Punjab",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 12
+  },
+  {
+    "id": 331,
+    "state": "Punjab",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 332,
+    "state": "Punjab",
+    "training_type": "Landslide",
+    "year": 2014,
+    "count": 1
+  },
+  {
+    "id": 333,
+    "state": "Rajasthan",
+    "training_type": "Drought",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 334,
+    "state": "Rajasthan",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 1
+  },
+  {
+    "id": 335,
+    "state": "Rajasthan",
+    "training_type": "Drought",
+    "year": 2014,
+    "count": 19
+  },
+  {
+    "id": 336,
+    "state": "Rajasthan",
+    "training_type": "Earthquake",
+    "year": 2011,
+    "count": 3
+  },
+  {
+    "id": 337,
+    "state": "Rajasthan",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 1
+  },
+  {
+    "id": 338,
+    "state": "Rajasthan",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 3
+  },
+  {
+    "id": 339,
+    "state": "Rajasthan",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 1
+  },
+  {
+    "id": 340,
+    "state": "Rajasthan",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 1
+  },
+  {
+    "id": 341,
+    "state": "Rajasthan",
+    "training_type": "Flood",
+    "year": 2014,
+    "count": 2
+  },
+  {
+    "id": 342,
+    "state": "Rajasthan",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 53
+  },
+  {
+    "id": 343,
+    "state": "Rajasthan",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 68
+  },
+  {
+    "id": 344,
+    "state": "Rajasthan",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 22
+  },
+  {
+    "id": 345,
+    "state": "Rajasthan",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 4
+  },
+  {
+    "id": 346,
+    "state": "Rajasthan",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 15
+  },
+  {
+    "id": 347,
+    "state": "Rajasthan",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 79
+  },
+  {
+    "id": 348,
+    "state": "Rajasthan",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 8
+  },
+  {
+    "id": 349,
+    "state": "Rajasthan",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 1
+  },
+  {
+    "id": 350,
+    "state": "Sikkim",
+    "training_type": "Earthquake",
+    "year": 2010,
+    "count": 106
+  },
+  {
+    "id": 351,
+    "state": "Sikkim",
+    "training_type": "Earthquake",
+    "year": 2011,
+    "count": 29
+  },
+  {
+    "id": 352,
+    "state": "Sikkim",
+    "training_type": "Earthquake",
+    "year": 2012,
+    "count": 20
+  },
+  {
+    "id": 353,
+    "state": "Sikkim",
+    "training_type": "Flood; Landslide",
+    "year": 2013,
+    "count": 36
+  },
+  {
+    "id": 354,
+    "state": "Sikkim",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 9
+  },
+  {
+    "id": 355,
+    "state": "Sikkim",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 8
+  },
+  {
+    "id": 356,
+    "state": "Sikkim",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 22
+  },
+  {
+    "id": 357,
+    "state": "Sikkim",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 117
+  },
+  {
+    "id": 358,
+    "state": "Sikkim",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 11
+  },
+  {
+    "id": 359,
+    "state": "Sikkim",
+    "training_type": "Landslide",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 360,
+    "state": "Sikkim",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 4
+  },
+  {
+    "id": 361,
+    "state": "Sikkim",
+    "training_type": "Landslide",
+    "year": 2013,
+    "count": 45
+  },
+  {
+    "id": 362,
+    "state": "Tamil Nadu",
+    "training_type": "Cyclone",
+    "year": 2010,
+    "count": 7
+  },
+  {
+    "id": 363,
+    "state": "Tamil Nadu",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 7
+  },
+  {
+    "id": 364,
+    "state": "Tamil Nadu",
+    "training_type": "Drought",
+    "year": 2014,
+    "count": 1
+  },
+  {
+    "id": 365,
+    "state": "Tamil Nadu",
+    "training_type": "Earthquake",
+    "year": 2011,
+    "count": 4
+  },
+  {
+    "id": 366,
+    "state": "Tamil Nadu",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 3
+  },
+  {
+    "id": 367,
+    "state": "Tamil Nadu",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 18
+  },
+  {
+    "id": 368,
+    "state": "Tamil Nadu",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 7
+  },
+  {
+    "id": 369,
+    "state": "Tamil Nadu",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 1
+  },
+  {
+    "id": 370,
+    "state": "Tamil Nadu",
+    "training_type": "Flood",
+    "year": 2014,
+    "count": 2
+  },
+  {
+    "id": 371,
+    "state": "Tamil Nadu",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 4
+  },
+  {
+    "id": 372,
+    "state": "Tamil Nadu",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 51
+  },
+  {
+    "id": 373,
+    "state": "Tamil Nadu",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 72
+  },
+  {
+    "id": 374,
+    "state": "Tamil Nadu",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 66
+  },
+  {
+    "id": 375,
+    "state": "Tamil Nadu",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 132
+  },
+  {
+    "id": 376,
+    "state": "Tamil Nadu",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 36
+  },
+  {
+    "id": 377,
+    "state": "Tamil Nadu",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 8
+  },
+  {
+    "id": 378,
+    "state": "Tamil Nadu",
+    "training_type": "Landslide",
+    "year": 2010,
+    "count": 5
+  },
+  {
+    "id": 379,
+    "state": "Tamil Nadu",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 380,
+    "state": "Tamil Nadu",
+    "training_type": "Landslide",
+    "year": 2014,
+    "count": 28
+  },
+  {
+    "id": 381,
+    "state": "Telangana",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 3
+  },
+  {
+    "id": 382,
+    "state": "Tripura",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 1
+  },
+  {
+    "id": 383,
+    "state": "Tripura",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 8
+  },
+  {
+    "id": 384,
+    "state": "Tripura",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 65
+  },
+  {
+    "id": 385,
+    "state": "Tripura",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 11
+  },
+  {
+    "id": 386,
+    "state": "Tripura",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 2
+  },
+  {
+    "id": 387,
+    "state": "Tripura",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 16
+  },
+  {
+    "id": 388,
+    "state": "Tripura",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 6
+  },
+  {
+    "id": 389,
+    "state": "Uttar Pradesh",
+    "training_type": "Drought",
+    "year": 2010,
+    "count": 4
+  },
+  {
+    "id": 390,
+    "state": "Uttar Pradesh",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 391,
+    "state": "Uttar Pradesh",
+    "training_type": "Drought",
+    "year": 2012,
+    "count": 2
+  },
+  {
+    "id": 392,
+    "state": "Uttar Pradesh",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 35
+  },
+  {
+    "id": 393,
+    "state": "Uttar Pradesh",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 3
+  },
+  {
+    "id": 394,
+    "state": "Uttar Pradesh",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 47
+  },
+  {
+    "id": 395,
+    "state": "Uttar Pradesh",
+    "training_type": "Flood",
+    "year": 2013,
+    "count": 7
+  },
+  {
+    "id": 396,
+    "state": "Uttar Pradesh",
+    "training_type": "Flood",
+    "year": 2014,
+    "count": 5
+  },
+  {
+    "id": 397,
+    "state": "Uttar Pradesh",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 2
+  },
+  {
+    "id": 398,
+    "state": "Uttar Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 110
+  },
+  {
+    "id": 399,
+    "state": "Uttar Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 77
+  },
+  {
+    "id": 400,
+    "state": "Uttar Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 31
+  },
+  {
+    "id": 401,
+    "state": "Uttar Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 262
+  },
+  {
+    "id": 402,
+    "state": "Uttar Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 206
+  },
+  {
+    "id": 403,
+    "state": "Uttar Pradesh",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 10
+  },
+  {
+    "id": 404,
+    "state": "Uttar Pradesh",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 3
+  },
+  {
+    "id": 405,
+    "state": "Uttar Pradesh",
+    "training_type": "Tsunami",
+    "year": 2010,
+    "count": 1
+  },
+  {
+    "id": 406,
+    "state": "Uttarakhand",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 1
+  },
+  {
+    "id": 407,
+    "state": "Uttarakhand",
+    "training_type": "Drought",
+    "year": 2014,
+    "count": 6
+  },
+  {
+    "id": 408,
+    "state": "Uttarakhand",
+    "training_type": "Earthquake",
+    "year": 2010,
+    "count": 69
+  },
+  {
+    "id": 409,
+    "state": "Uttarakhand",
+    "training_type": "Earthquake",
+    "year": 2012,
+    "count": 62
+  },
+  {
+    "id": 410,
+    "state": "Uttarakhand",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 5
+  },
+  {
+    "id": 411,
+    "state": "Uttarakhand",
+    "training_type": "Flood",
+    "year": 2014,
+    "count": 40
+  },
+  {
+    "id": 412,
+    "state": "Uttarakhand",
+    "training_type": "Flood",
+    "year": 2015,
+    "count": 2
+  },
+  {
+    "id": 413,
+    "state": "Uttarakhand",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 26
+  },
+  {
+    "id": 414,
+    "state": "Uttarakhand",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 63
+  },
+  {
+    "id": 415,
+    "state": "Uttarakhand",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 43
+  },
+  {
+    "id": 416,
+    "state": "Uttarakhand",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 115
+  },
+  {
+    "id": 417,
+    "state": "Uttarakhand",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 37
+  },
+  {
+    "id": 418,
+    "state": "Uttarakhand",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 12
+  },
+  {
+    "id": 419,
+    "state": "Uttarakhand",
+    "training_type": "Landslide",
+    "year": 2010,
+    "count": 24
+  },
+  {
+    "id": 420,
+    "state": "Uttarakhand",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 15
+  },
+  {
+    "id": 421,
+    "state": "Uttarakhand",
+    "training_type": "Landslide",
+    "year": 2014,
+    "count": 16
+  },
+  {
+    "id": 422,
+    "state": "West Bengal",
+    "training_type": "Cyclone",
+    "year": 2010,
+    "count": 1
+  },
+  {
+    "id": 423,
+    "state": "West Bengal",
+    "training_type": "Cyclone",
+    "year": 2012,
+    "count": 21
+  },
+  {
+    "id": 424,
+    "state": "West Bengal",
+    "training_type": "Drought",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 425,
+    "state": "West Bengal",
+    "training_type": "Drought",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 426,
+    "state": "West Bengal",
+    "training_type": "Earthquake",
+    "year": 2010,
+    "count": 17
+  },
+  {
+    "id": 427,
+    "state": "West Bengal",
+    "training_type": "Earthquake",
+    "year": 2011,
+    "count": 4
+  },
+  {
+    "id": 428,
+    "state": "West Bengal",
+    "training_type": "Earthquake",
+    "year": 2014,
+    "count": 24
+  },
+  {
+    "id": 429,
+    "state": "West Bengal",
+    "training_type": "Flood",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 430,
+    "state": "West Bengal",
+    "training_type": "Flood",
+    "year": 2011,
+    "count": 4
+  },
+  {
+    "id": 431,
+    "state": "West Bengal",
+    "training_type": "Flood",
+    "year": 2012,
+    "count": 16
+  },
+  {
+    "id": 432,
+    "state": "West Bengal",
+    "training_type": "Flood",
+    "year": 2014,
+    "count": 24
+  },
+  {
+    "id": 433,
+    "state": "West Bengal",
+    "training_type": "General Disaster Management",
+    "year": 2010,
+    "count": 44
+  },
+  {
+    "id": 434,
+    "state": "West Bengal",
+    "training_type": "General Disaster Management",
+    "year": 2011,
+    "count": 43
+  },
+  {
+    "id": 435,
+    "state": "West Bengal",
+    "training_type": "General Disaster Management",
+    "year": 2012,
+    "count": 33
+  },
+  {
+    "id": 436,
+    "state": "West Bengal",
+    "training_type": "General Disaster Management",
+    "year": 2013,
+    "count": 40
+  },
+  {
+    "id": 437,
+    "state": "West Bengal",
+    "training_type": "General Disaster Management",
+    "year": 2014,
+    "count": 66
+  },
+  {
+    "id": 438,
+    "state": "West Bengal",
+    "training_type": "General Disaster Management",
+    "year": 2015,
+    "count": 7
+  },
+  {
+    "id": 439,
+    "state": "West Bengal",
+    "training_type": "Landslide",
+    "year": 2010,
+    "count": 2
+  },
+  {
+    "id": 440,
+    "state": "West Bengal",
+    "training_type": "Landslide",
+    "year": 2011,
+    "count": 2
+  },
+  {
+    "id": 441,
+    "state": "West Bengal",
+    "training_type": "Landslide",
+    "year": 2014,
+    "count": 24
+  }
+]

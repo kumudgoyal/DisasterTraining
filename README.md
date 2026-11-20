@@ -22,10 +22,11 @@ $$\text{Preparedness} \longrightarrow \text{Training} \longrightarrow \text{Earl
 
 | Member Name | University Roll No | Architectural Role | Core Contributions |
 |---|---|---|---|
+| **Hardik Manchanda** | `23BIS70001` | **GIS Systems, Real-Time Synchronization & EOC Analytics** | Leaflet GIS interactive map, training spread visualization, Recharts analytics, Socket.IO live sync, State SITREP generator |
 | **Kumud Goyal** | `23BDA70133` | **Lead Full-Stack Architect & System Coordinator** | Platform architecture, API pipeline design, database modeling, multi-agency data workflows, Vercel/Render deployment |
-| **Hardik Manchanda** | `23BIS70002` | **GIS Systems, Real-Time Synchronization & EOC Analytics** | Leaflet GIS interactive map, training spread visualization, Recharts analytics, Socket.IO live sync, State SITREP generator |
+| **Neha** | `23BDA70128` | **Impact Assessment, Thematic Analytics & Relief Modeling** | Thematic disaster coverage models, needs assessment calculation workflows, multi-hazard impact metrics, community demographic reach analytics |
 | **Nitin Verma** | `23IBD70002` | **Mobile Interface, UI/UX & Responsive Engineering** | Apple SF Pro design system, mobile field data entry interface, GPS capture & offline caching, tactical KPI dashboards |
-| **Sahil Kumar** | `23BIS70067` | **RBAC Security, Systems Integration & Audit Engine** | 8-tier RBAC access control, immutable security audit logs, NDMA/SDMA integration schemas, in-browser mock engine parity |
+| **Sahil Kumar** | `23BIS70008` | **RBAC Security, Systems Integration & Audit Engine** | 8-tier RBAC access control, immutable security audit logs, NDMA/SDMA integration schemas, in-browser mock engine parity |
 
 ---
 

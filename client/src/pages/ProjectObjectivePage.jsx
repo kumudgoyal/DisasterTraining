@@ -23,6 +23,21 @@ import {
 export default function ProjectObjectivePage() {
   const teamMembers = [
     {
+      name: 'Hardik Manchanda',
+      rollNo: '23BIS70001',
+      role: 'GIS Systems, Real-Time Synchronization & EOC Analytics',
+      badge: 'GIS & Real-Time Engine',
+      badgeColor: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+      initials: 'HM',
+      contributions: [
+        'Interactive Leaflet GIS map with multi-layer disaster and training spread',
+        'Dynamic data visualizers for thematic coverage, drills, and impact tracking',
+        'Socket.IO live operational event feed and simulated client event bus',
+        'Official State SITREP executive report generator and CSV export tools'
+      ],
+      email: 'hardikmanchanda2007@gmail.com'
+    },
+    {
       name: 'Kumud Goyal',
       rollNo: '23BDA70133',
       role: 'Lead Full-Stack Architect & System Coordinator',
@@ -38,19 +53,19 @@ export default function ProjectObjectivePage() {
       email: 'kumudgoyal@users.noreply.github.com'
     },
     {
-      name: 'Hardik Manchanda',
-      rollNo: '23BIS70002',
-      role: 'GIS Systems, Real-Time Synchronization & EOC Analytics',
-      badge: 'GIS & Real-Time Engine',
-      badgeColor: 'bg-indigo-50 text-indigo-700 border-indigo-200',
-      initials: 'HM',
+      name: 'Neha',
+      rollNo: '23BDA70128',
+      role: 'Impact Assessment, Thematic Analytics & Relief Modeling',
+      badge: 'Impact & Thematic Analytics',
+      badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
+      initials: 'NH',
       contributions: [
-        'Interactive Leaflet GIS map with multi-layer disaster and training spread',
-        'Dynamic data visualizers for thematic coverage, drills, and impact tracking',
-        'Socket.IO live operational event feed and simulated client event bus',
-        'Official State SITREP executive report generator and CSV export tools'
+        'Thematic disaster coverage models: Flood, Earthquake, Fire & Cyclone drills',
+        'Post-disaster damage and needs assessment calculation workflows',
+        'Multi-hazard impact metrics, casualty estimation, and relief allocation tracking',
+        'Participant category evaluation and community demographic reach analytics'
       ],
-      email: 'hardikmanchanda2007@gmail.com'
+      email: 'neha@disastermonitor.gov.in'
     },
     {
       name: 'Nitin Verma',
@@ -69,7 +84,7 @@ export default function ProjectObjectivePage() {
     },
     {
       name: 'Sahil Kumar',
-      rollNo: '23BIS70067',
+      rollNo: '23BIS70008',
       role: 'RBAC Security, Systems Integration & Audit Engine',
       badge: 'RBAC & NDMA Integration',
       badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
@@ -263,10 +278,10 @@ export default function ProjectObjectivePage() {
               Project Engineering Team
             </h2>
           </div>
-          <span className="text-xs text-slate-500 font-mono">4 Core Contributors</span>
+          <span className="text-xs text-slate-500 font-mono">5 Core Contributors</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {teamMembers.map((member) => (
             <div
               key={member.name}

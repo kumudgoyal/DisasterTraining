@@ -1,4 +1,5 @@
 // Realistic Seed Data for In-Browser Fallback & Static Hosting (Vercel)
+import { NATIONAL_TRAINING_RECORDS } from '../data/nationalTrainingData';
 
 export function getInitialData() {
   const now = new Date().toISOString();
@@ -187,6 +188,8 @@ export function getInitialData() {
       { id: 3, category: 'critical', title: 'Industrial Fire at Panipat', message: 'Critical fire incident reported at Panipat Refinery Complex. 3 casualties, 28 injured.', is_read: false, created_at: hoursAgo(18) },
       { id: 4, category: 'critical', title: 'Building Collapse in Faridabad', message: 'Critical: Multi-storey building collapsed in Sector 37. 7 casualties, 15 missing.', is_read: false, created_at: hoursAgo(8) },
     ],
+
+    national_training_records: NATIONAL_TRAINING_RECORDS,
   };
 }
 
